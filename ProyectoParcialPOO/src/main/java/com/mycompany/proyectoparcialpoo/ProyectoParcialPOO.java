@@ -13,8 +13,10 @@ public class ProyectoParcialPOO {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        System.out.println("Prueba de commit");
-        System.out.println("Hola");
-        System.out.println("adfasdfadf");                
+        System.out.println("Prueba de commit");        
+        System.out.println("adfasdfadf");
+        for(int i=0; i<9;i++){
+            System.out.println(i);
+        }
     }
 }

@@ -19,5 +19,6 @@ public class ProyectoParcialPOO {
             System.out.println(i);
             System.out.println("hola");
         }
+        System.out.println("");
     }
 }

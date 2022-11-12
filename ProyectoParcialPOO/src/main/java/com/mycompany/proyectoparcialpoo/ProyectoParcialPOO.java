@@ -14,5 +14,6 @@ public class ProyectoParcialPOO {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         System.out.println("Prueba de commit");
+        System.out.println("Hola");
     }
 }

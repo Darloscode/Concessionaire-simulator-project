@@ -9,11 +9,9 @@ public class Vendedor extends Usuario{
     private int ID;
     
     
-   public  Vendedor( String password, String usuario, String nombre,String apellido){
+   public  Vendedor(String password, String usuario, String nombre,String apellido, int ID){
        super(password,usuario,nombre,apellido);
-       this.ID=ID;
-       
-       
+       this.ID=ID;              
    }
 
     public int getID() {

@@ -1,0 +1,21 @@
+Usuarios
+Jefe Taller,Marcos Cristhian,Napa Lopez,MNapa,Lop0Cr
+Vendedor,Cristhian Obed,Moran Guerreo,CMoran,Gue1Ob
+Supervisor,Aaron Jostin,Esterlla Guerreo,AEsterlla,Gue2Jo
+Vendedor,Jostin Obed,Estrada Escamilla,JEstrada,Esc3Ob
+Vendedor,Carlos Jair,Rodriguez Moran,CRodriguez,Mor4Ja
+Vendedor,Javier Marcos,Gonzalez Veliz,JGonzalez,Vel5Ma
+Jefe Taller,Andersson Manuel,Napa Coronel,ANapa,Cor6Ma
+Jefe Taller,Cristhian Javier,Gonzalez Lopez,CGonzalez,Lop7Ja
+Supervisor,Andres Carlos,Moran Veliz,AMoran,Vel8Ca
+Vendedor,Jair Manuel,Zamora Rodriguez,JZamora,Rod9Ma
+Jefe Taller,Carlos Fabricio,Gonzalez Napa,CGonzalez,Nap10Fa
+Jefe Taller,Jair Carlos,Coronel Escamilla,JCoronel,Esc11Ca
+Cliente,Manuel Cristhian,Coronel Napa,MCoronel,Nap12Cr
+Cliente,Carlos Marcos,Moran Zamora,CMoran,Zam13Ma
+Cliente,Jair Andersson,Estrada Zamora,JEstrada,Zam14An
+Cliente,Obed Cristhian,Cabezas Moran,OCabezas,Mor15Cr
+Vendedor,Andres Andersson,Flores Esterlla,AFlores,Est16An
+Vendedor,Jostin Cristhian,Lopez Flores,JLopez,Flo17Cr
+Jefe Taller,Javier Cristhian,Rodriguez Veliz,JRodriguez,Vel18Cr
+Vendedor,Cristhian Jair,Rodriguez Napa,CRodriguez,Nap19Ja

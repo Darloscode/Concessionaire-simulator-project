@@ -1,4 +1,4 @@
-package com.mycompany.model.supclass;
+package com.mycompany.model;
 
 public class Vehiculo {
     private String  marca;

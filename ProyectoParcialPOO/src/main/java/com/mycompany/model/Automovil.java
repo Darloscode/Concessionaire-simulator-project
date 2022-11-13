@@ -1,6 +1,6 @@
-package com.mycompany.model.subclass;
+package com.mycompany.model;
 
-import com.mycompany.model.supclass.*;
+import com.mycompany.model.Vehiculo;
 
 public class Automovil extends Vehiculo{
 

@@ -1,6 +1,6 @@
-package com.mycompany.model.subclass;
+package com.mycompany.model;
 
-import com.mycompany.model.supclass.Vehiculo;
+import com.mycompany.model.Vehiculo;
 
 public class Camion extends Vehiculo{
     private double capacidad;

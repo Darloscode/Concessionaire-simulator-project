@@ -1,11 +1,11 @@
-package com.mycompany.model.subclass;
+package com.mycompany.model;
 
-import com.mycompany.model.supclass.Vehiculo;
+import com.mycompany.model.Vehiculo;
 
 public class Tractor extends Vehiculo{
     private boolean agricola;
     private String transmision;
-
+    
     public Tractor(String ma, String mod, int year, boolean agricola, double precio, String transmision){
         super(ma, mod, year, "Diesel", 4, precio);
         this.agricola = agricola;

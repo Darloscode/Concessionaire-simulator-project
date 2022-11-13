@@ -6,14 +6,16 @@ public class Vehiculo {
     private int año;
     private String motor;
     private int llantas;
+    private double precio;
     
-    public Vehiculo(String ma, String mod, int year,  String mot, int lla){
+    public Vehiculo(String ma, String mod, int year,  String mot, int lla, double precio){
         this.marca = ma;
         this.modelo = mod;
         this.año = year;
         this.motor = mot;
         this.llantas = lla;
-    }
+        this.precio = precio;
+    }    
 
     public String getMarca() {
         return marca;        
@@ -55,8 +57,12 @@ public class Vehiculo {
         this.llantas = lla;
     }
 
+    public double getPrecio() {
+        return precio;
+    }
+
     @Override
     public String toString() {
-        return "Vehiculo : " + "Marca=" + marca + ", Modelo=" + modelo + ", Año=" + año +", Motor=" + motor + ", Llantas=" + llantas +'';
+        return "Vehiculo : " + "Marca=" + marca + ", Modelo=" + modelo + ", Año=" + año +", Motor=" + motor + ", Llantas=" + llantas;
     }     
 }

@@ -8,8 +8,8 @@ public class Automovil extends Vehiculo{
     private boolean convertible;
     private boolean camara;
 
-    public Automovil(String ma, String mod, int year,  String mot, int lla, int asi, boolean conv, boolean cam){
-        super(ma, mod, year, mot, lla);
+    public Automovil(String ma, String mod, int year,  String mot, double precio, int asi, boolean conv, boolean cam){
+        super(ma, mod, year, mot, 4, precio);
         this.asientos = asi;
         this.convertible = conv;
         this.camara = cam;
@@ -40,6 +40,6 @@ public class Automovil extends Vehiculo{
     }
 
     public String toString(){    
-        return super.toString() + "Asientos=" + asientos + "Convertible=" + convertible + "Camara trasera=" + camara;    
+        return super.toString() + ", Asientos=" + asientos + ", Convertible=" + convertible + ", Camara trasera=" + camara;    
     }
 }

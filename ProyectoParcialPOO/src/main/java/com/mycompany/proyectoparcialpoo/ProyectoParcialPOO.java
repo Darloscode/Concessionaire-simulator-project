@@ -18,7 +18,6 @@ public class ProyectoParcialPOO {
         System.out.println(m1);
         System.out.println(t1);
         System.out.println(a1);
-        System.out.println(c1);
-    }
-        
+        System.out.println(c1.getModelo());
+    }        
 }

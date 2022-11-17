@@ -10,12 +10,12 @@ package com.mycompany.model;
  */
 public class Cliente extends Usuario{    
     private String Categoria;
-    private int Cedula;
+    private String Cedula;
     private String Ocupacion;
-    private int Ingresos; 
+    private double Ingresos; 
     
     
-    public Cliente(String password, String usuario,  String nombre, String apellido, String Categoria, int Cedula, String Ocupacion, int Ingresos){
+    public Cliente(String password, String usuario,  String nombre, String apellido, String Categoria, String Cedula, String Ocupacion, double Ingresos){
         super(password,usuario, nombre,apellido);
         this.Categoria= Categoria; 
         this.Cedula=Cedula;
@@ -29,7 +29,7 @@ public class Cliente extends Usuario{
         return Categoria;
     }
 
-    public int getCedula() {
+    public String getCedula() {
         return Cedula;
     }
 
@@ -37,7 +37,7 @@ public class Cliente extends Usuario{
         return Ocupacion;
     }
 
-    public int getIngresos() {
+    public double getIngresos() {
         return Ingresos;
     }
 
@@ -45,7 +45,7 @@ public class Cliente extends Usuario{
         this.Categoria = Categoria;
     }
 
-    public void setCedula(int Cedula) {
+    public void setCedula(String Cedula) {
         this.Cedula = Cedula;
     }
 

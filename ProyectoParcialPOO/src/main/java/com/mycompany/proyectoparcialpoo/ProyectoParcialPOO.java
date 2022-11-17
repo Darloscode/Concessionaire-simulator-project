@@ -5,6 +5,7 @@
 
 package com.mycompany.proyectoparcialpoo;
 import java.io.*;
+import java.net.SocketTimeoutException;
 import java.util.Scanner;
 
 /**
@@ -20,29 +21,65 @@ public class ProyectoParcialPOO {
         String usuario;
         String contraseña;
     
-        while(!salir){            
+        while(!salir){
+            System.out.println("*********************************");   
             System.out.println("**Bienvenido**");
             System.out.println("1. Cliente ");
             System.out.println("2. Vendedor");
             System.out.println("3. Supervisor");
             System.out.println("4. Jefe de taller");
-            System.out.println("5. Salir");
+            System.out.println("5. Salir\n");
             
             System.out.print("Elija una opcion: ");
             opcion = entrada.nextInt();
-            entrada.nextLine();            
+            entrada.nextLine();
+            System.out.println("*********************************");   
             
             switch(opcion){
-                case 1:   
+                case 1:
                     System.out.println("***Cliente***");
                     System.out.print("Usuario: ");
                     usuario = entrada.nextLine();
                     
                     System.out.print("Contraseña: ");
                     contraseña = entrada.nextLine();
-                    login(usuario, contraseña);
-                    break;
+
+                    boolean verificar = login(usuario, contraseña);
+
+                    String op = "";
+
+                    while((!verificar)){
+
+                        System.out.println("¿Quiere volver a intentarlo?");
+                        System.out.println("1. Reintentar");
+                        System.out.println("2. Salir\n");
+                        System.out.print("Elija una opcion: ");
+                        op = entrada.nextLine();
+
+                        if(op.equals("1")){ 
+                            System.out.println("--------------------------------");
+                            System.out.println("***Cliente***");
+
+                            System.out.print("Usuario: ");
+                            usuario = entrada.nextLine();
                     
+                            System.out.print("Contraseña: ");
+                            contraseña = entrada.nextLine();
+
+                            verificar = login(usuario, contraseña);
+                        }else if(op.equals("2")){
+                            break;
+                        }else{
+                            System.out.println("Elija una opción correcta");
+                        }
+                    }
+                    
+                    if(verificar){
+
+                    }
+                    
+                    break;
+                /*
                 case 2:
                     System.out.println("***Vendedor***");
                     System.out.print("Usuario: ");
@@ -69,7 +106,7 @@ public class ProyectoParcialPOO {
                     System.out.print("Contraseña: ");
                     contraseña = entrada.nextLine();  
                     break;
-                    
+                 */                
                 case 5:
                     salir = true;
                     break;
@@ -81,15 +118,25 @@ public class ProyectoParcialPOO {
     }
 
     private static boolean login(String user, String password){
-        File archivo = new File("..\\files\\usuarios.txt");
+        File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\usuarios.txt");
         
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivo));
-            String lectura = entrada.readLine();                        
+            String lectura = entrada.readLine();                                           
+            lectura = entrada.readLine(); 
+
             while (lectura != null){
-                System.out.println(lectura);
+                
+                String[] datos = lectura.split(",");                
+
+                if((datos[3].equals(user)) & (datos[4].equals(password))){                    
+                    System.out.println("\nHas iniciado sección\n");
+                    entrada.close();
+                    return true;
+                }                              
                 lectura = entrada.readLine();
             }
+            System.out.println("\nSu usuario o contraseña estan incorrectos\n");
             entrada.close();
             
         } catch (FileNotFoundException ex) {
@@ -97,7 +144,11 @@ public class ProyectoParcialPOO {
         } catch (IOException ex) {
             ex.printStackTrace(System.out);
         }                    
-
-        return true;        
+        return false;
     }
+
+    public static void inicializarSistema(){
+        
+    }
+
 }

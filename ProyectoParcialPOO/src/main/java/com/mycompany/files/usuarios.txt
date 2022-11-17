@@ -1,4 +1,5 @@
 Usuarios
+Jefe Taller,Marcos Cristhian,Napa Lopez,as,as
 Jefe Taller,Marcos Cristhian,Napa Lopez,MNapa,Lop0Cr
 Vendedor,Cristhian Obed,Moran Guerreo,CMoran,Gue1Ob
 Supervisor,Aaron Jostin,Esterlla Guerreo,AEsterlla,Gue2Jo
@@ -19,3 +20,5 @@ Vendedor,Andres Andersson,Flores Esterlla,AFlores,Est16An
 Vendedor,Jostin Cristhian,Lopez Flores,JLopez,Flo17Cr
 Jefe Taller,Javier Cristhian,Rodriguez Veliz,JRodriguez,Vel18Cr
 Vendedor,Cristhian Jair,Rodriguez Napa,CRodriguez,Nap19Ja
+CarlosFlores
+Carlos,Flores;[Vehiculo : Marca=null, Modelo=null, Año=0, Motor=null, Llantas=0, Capacidad de carga=0.0, Número de ejes=0.0, Vehiculo : Marca=null, Modelo=null, Año=0, Motor=null, Llantas=0, Capacidad de carga=0.0, Número de ejes=0.0, Vehiculo : Marca=null, Modelo=null, Año=0, Motor=null, Llantas=0, Capacidad de carga=0.0, Número de ejes=0.0, Vehiculo : Marca=null, Modelo=null, Año=0, Motor=null, Llantas=0, Capacidad de carga=0.0, Número de ejes=0.0, Vehiculo : Marca=null, Modelo=null, Año=0, Motor=null, Llantas=0, Capacidad de carga=0.0, Número de ejes=0.0]

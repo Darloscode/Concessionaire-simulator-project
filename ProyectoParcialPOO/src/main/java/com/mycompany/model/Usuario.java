@@ -10,6 +10,7 @@ import java.util.Objects;
  *
  * @author Aaroncito
  */
+
 public class Usuario {
     private String password;
     private String usuario; 
@@ -17,9 +18,9 @@ public class Usuario {
     private String apellido; 
 
     
-    public Usuario( String password, String usuario,  String nombre, String apellido){   
-        this.password=password; 
+    public Usuario(String usuario, String password, String nombre, String apellido){   
         this.nombre=nombre;
+        this.password=password;         
         this.apellido=apellido;
         this.usuario=usuario;
     }

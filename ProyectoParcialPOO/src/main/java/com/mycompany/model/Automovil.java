@@ -1,14 +1,12 @@
 package com.mycompany.model;
 
-import com.mycompany.model.Vehiculo;
-
 public class Automovil extends Vehiculo{
 
     private int asientos;
     private boolean convertible;
     private boolean camara;
 
-    public Automovil(String ma, String mod, int year,  String mot, double precio, int asi, boolean conv, boolean cam){
+    public Automovil(String ma, String mod, int year,  String mot, int asi, boolean conv, boolean cam, double precio){
         super(ma, mod, year, mot, 4, precio);
         this.asientos = asi;
         this.convertible = conv;

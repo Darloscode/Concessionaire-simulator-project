@@ -8,13 +8,14 @@ package com.mycompany.model;
  *
  * @author Sexto
  */
-public class Cliente extends Usuario{
+public class Cliente extends Usuario{    
     private String Categoria;
     private int Cedula;
     private String Ocupacion;
     private int Ingresos; 
     
-    public Cliente(String password, String usuario,  String nombre, String apellido){
+    
+    public Cliente(String password, String usuario,  String nombre, String apellido, String Categoria, int Cedula, String Ocupacion, int Ingresos){
         super(password,usuario, nombre,apellido);
         this.Categoria= Categoria; 
         this.Cedula=Cedula;
@@ -23,8 +24,7 @@ public class Cliente extends Usuario{
         
         
         
-    }
-
+    }    
     public String getCategoria() {
         return Categoria;
     }

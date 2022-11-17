@@ -1,7 +1,5 @@
 package com.mycompany.model;
 
-import com.mycompany.model.Vehiculo;
-
 public class Motocicleta extends Vehiculo{
 
     private String tipo;

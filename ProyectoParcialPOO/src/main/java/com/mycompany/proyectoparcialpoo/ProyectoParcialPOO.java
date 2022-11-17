@@ -4,20 +4,100 @@
  */
 
 package com.mycompany.proyectoparcialpoo;
-import com.mycompany.model.*;
+import java.io.*;
+import java.util.Scanner;
+
 /**
  *
  * @author ander
  */
 public class ProyectoParcialPOO {
     public static void main(String[] args) {
-        Motocicleta m1 = new Motocicleta(null, null, 0, null, null, 0);
-        Tractor t1 = new Tractor(null, null, 0, false, 0, null);
-        Automovil a1 = new Automovil(null, null, 0, null, 0, 0, false, false);
-        Camion c1 = new Camion(null, null, 0, null, 0, 0, 0, 0);
-        System.out.println(m1);
-        System.out.println(t1);
-        System.out.println(a1);
-        System.out.println(c1.getModelo());
-    }        
+
+        Scanner entrada = new Scanner(System.in);
+        boolean salir = false;
+        int opcion;
+        String usuario;
+        String contraseña;
+    
+        while(!salir){            
+            System.out.println("**Bienvenido**");
+            System.out.println("1. Cliente ");
+            System.out.println("2. Vendedor");
+            System.out.println("3. Supervisor");
+            System.out.println("4. Jefe de taller");
+            System.out.println("5. Salir");
+            
+            System.out.print("Elija una opcion: ");
+            opcion = entrada.nextInt();
+            entrada.nextLine();            
+            
+            switch(opcion){
+                case 1:   
+                    System.out.println("***Cliente***");
+                    System.out.print("Usuario: ");
+                    usuario = entrada.nextLine();
+                    
+                    System.out.print("Contraseña: ");
+                    contraseña = entrada.nextLine();
+                    login(usuario, contraseña);
+                    break;
+                    
+                case 2:
+                    System.out.println("***Vendedor***");
+                    System.out.print("Usuario: ");
+                    usuario = entrada.nextLine();
+                    
+                    System.out.print("Contraseña: ");
+                    contraseña = entrada.nextLine();    
+                    break;
+                    
+                case 3:
+                    System.out.println("***Supervisor***");
+                    System.out.print("Usuario: ");
+                    usuario = entrada.nextLine();
+                    
+                    System.out.print("Contraseña: ");
+                    contraseña = entrada.nextLine();  
+                    break;
+                    
+                case 4:
+                    System.out.println("***Jefe de Taller***");
+                    System.out.print("Usuario: ");
+                    usuario = entrada.nextLine();
+                    
+                    System.out.print("Contraseña: ");
+                    contraseña = entrada.nextLine();  
+                    break;
+                    
+                case 5:
+                    salir = true;
+                    break;
+
+                default:
+                    System.out.println("Fuera de rango");
+            }
+        }
+    }
+
+    private static boolean login(String user, String password){
+        File archivo = new File("..\\files\\usuarios.txt");
+        
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
+            String lectura = entrada.readLine();                        
+            while (lectura != null){
+                System.out.println(lectura);
+                lectura = entrada.readLine();
+            }
+            entrada.close();
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }                    
+
+        return true;        
+    }
 }

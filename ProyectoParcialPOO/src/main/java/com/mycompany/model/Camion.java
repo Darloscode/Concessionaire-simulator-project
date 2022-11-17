@@ -1,12 +1,10 @@
 package com.mycompany.model;
 
-import com.mycompany.model.Vehiculo;
-
 public class Camion extends Vehiculo{
     private double capacidad;
     private double ejes;
 
-    public Camion(String ma, String mod, int year,  String mot, int lla, double precio, double capacidad, double ejes){
+    public Camion(String ma, String mod, int year,  String mot, int lla, double capacidad, double ejes, double precio){
         super(ma, mod, year, mot, lla, precio);
         this.capacidad = capacidad;
         this.ejes = ejes;

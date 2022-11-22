@@ -4,9 +4,11 @@
  */
 
 package com.mycompany.proyectoparcialpoo;
-import java.io.*;
-import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+//import java.io.*;
 import java.util.Scanner;
+
+import com.mycompany.model.Usuario;
 
 /**
  *
@@ -14,10 +16,10 @@ import java.util.Scanner;
  */
 public class ProyectoParcialPOO {
     public static void main(String[] args) {
-
+        
         Scanner entrada = new Scanner(System.in);
         boolean salir = false;
-        int opcion;
+        String opcion;
         String usuario;
         String contraseña;
     
@@ -31,13 +33,12 @@ public class ProyectoParcialPOO {
             System.out.println("5. Salir\n");
             
             System.out.print("Elija una opcion: ");
-            opcion = entrada.nextInt();
-            entrada.nextLine();
+            opcion = entrada.nextLine();            
             System.out.println("*********************************");   
             
             switch(opcion){
-                case 1:
-                    System.out.println("***Cliente***");
+                case "1":
+                    System.out.println("********Cliente********");
                     System.out.print("Usuario: ");
                     usuario = entrada.nextLine();
                     
@@ -72,11 +73,7 @@ public class ProyectoParcialPOO {
                         }else{
                             System.out.println("Elija una opción correcta");
                         }
-                    }
-                    
-                    if(verificar){
-
-                    }
+                    }                  
                     
                     break;
                 /*
@@ -107,16 +104,32 @@ public class ProyectoParcialPOO {
                     contraseña = entrada.nextLine();  
                     break;
                  */                
-                case 5:
+                case "5":
                     salir = true;
                     break;
 
                 default:
-                    System.out.println("Fuera de rango");
+                    System.out.println("Ingrese una opción valida");
             }
         }
     }
 
+
+    private static boolean login(String user, String password){
+
+        return true;
+
+    }
+    
+    private static ArrayList<Usuario> inicializarSistema(){
+        ArrayList<Usuario> arreglo = new ArrayList<>();
+        arreglo.add(null);
+
+        return new ArrayList<Usuario>();
+    }
+
+
+    /*
     private static boolean login(String user, String password){
         File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\usuarios.txt");
         
@@ -146,9 +159,5 @@ public class ProyectoParcialPOO {
         }                    
         return false;
     }
-
-    public static void inicializarSistema(){
-        
-    }
-
+    */    
 }

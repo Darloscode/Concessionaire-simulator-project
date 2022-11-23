@@ -1,29 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.mycompany.model;
+package com.mycompany.model.Usuarios;
 
-import java.util.Objects;
+public abstract class Usuario {
 
-/**
- *
- * @author Aaroncito
- */
-
-public class Usuario {
-    private String password;
-    private String usuario; 
+    private String usuario;
+    private String password;     
     private String nombre;
     private String apellido; 
 
-    
-    public Usuario(String usuario, String password, String nombre, String apellido){   
-        this.nombre=nombre;
-        this.password=password;         
-        this.apellido=apellido;
+    public Usuario(String nombre, String apellido, String usuario, String password){ 
         this.usuario=usuario;
+        this.password=password;
+        this.nombre=nombre;        
+        this.apellido=apellido;        
     }
+    
+    public String mostrarDatos(){
+        return "Nombre: "+nombre+"\nApellido: "+apellido+"\nUsuario: "+usuario;
+    }
+
+    /*
+    @Override
+    public String toString(){
+        return "Usuario{" + "password=" + password + ", usuario=" + usuario + ", nombre=" + nombre + ", apellido=" + apellido + '}';
+    }
+
 
     public String getPassword() {
         return password;
@@ -86,12 +86,5 @@ public class Usuario {
         }
         return Objects.equals(this.apellido, other.apellido);
     }
-    
-    
-    @Override
-    public String toString() {
-        return "Usuario{" + "password=" + password + ", usuario=" + usuario + ", nombre=" + nombre + ", apellido=" + apellido + '}';
-    }
-   
-    
+     */    
 }

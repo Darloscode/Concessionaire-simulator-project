@@ -7,8 +7,8 @@ package com.mycompany.proyectoparcialpoo;
 import java.util.ArrayList;
 //import java.io.*;
 import java.util.Scanner;
-
-import com.mycompany.model.Usuario;
+import com.mycompany.model.Usuarios.*;
+import com.mycompany.model.Vehiculos.*;
 
 /**
  *
@@ -122,9 +122,7 @@ public class ProyectoParcialPOO {
     }
     
     private static ArrayList<Usuario> inicializarSistema(){
-        ArrayList<Usuario> arreglo = new ArrayList<>();
-        arreglo.add(null);
-
+        ArrayList<Usuario> arreglo = new ArrayList<>();        
         return new ArrayList<Usuario>();
     }
 

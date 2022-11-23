@@ -1,29 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.mycompany.model;
+package com.mycompany.model.Usuarios;
 import java.util.ArrayList; 
-import java.util.Objects;
-/**
- *
- * @author Sexto
- */
+
 public class JefedeTaller extends Usuario{
-        ArrayList<JefedeTaller>MantenimientoVehiculos;
-        ArrayList<JefedeTaller>CertifiacionesTecnicas;
-         ArrayList<JefedeTaller>EntregarVehiculos;
-        
-        
-        
-    
-    public JefedeTaller(String password, String usuario,  String nombre, String apellido){
-        super(password,usuario,nombre,apellido);
-        this.MantenimientoVehiculos=new ArrayList<>();
-        this.CertifiacionesTecnicas= new ArrayList<>();
-        this.EntregarVehiculos= new ArrayList<>();
+
+    private String tipo = "Jefe de Taller";
+
+    ArrayList<JefedeTaller>MantenimientoVehiculos;
+    ArrayList<JefedeTaller>CertifiacionesTecnicas;
+    ArrayList<JefedeTaller>EntregarVehiculos;
+                            
+    public JefedeTaller(String nombre, String apellido, String usuario, String password){
+        super(nombre, apellido, usuario, password);        
     }
 
+    public String mostrarDatos(){
+        return "Usuario: "+tipo+super.mostrarDatos();
+    }
+
+    /*
     public ArrayList<JefedeTaller> getMantenimientoVehiculos() {
         return MantenimientoVehiculos;
     }
@@ -74,8 +68,5 @@ public class JefedeTaller extends Usuario{
         }
         return Objects.equals(this.EntregarVehiculos, other.EntregarVehiculos);
     }
-
-   
-    
-    
+    */   
 }

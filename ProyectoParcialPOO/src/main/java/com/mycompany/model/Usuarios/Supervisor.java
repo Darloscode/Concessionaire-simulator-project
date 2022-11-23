@@ -1,23 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.mycompany.model;
-import  java.util.ArrayList;
-import java.util.Objects;
-/**
- *
- * @author Sexto
- */
+package com.mycompany.model.Usuarios;
+
 public class Supervisor extends Usuario{
-    private ArrayList<Supervisor>Certificaciones;
-    
-    
-    public Supervisor(String password, String usuario,  String nombre, String apellido){
-        super(password,usuario,nombre,apellido);
-        this.Certificaciones=new ArrayList<>();
+
+    private String tipo = "Supervisor";
+            
+    public Supervisor(String nombre, String apellido, String usuario, String password){
+        super(nombre, apellido,usuario, password);        
     }
 
+    public String mostrarDatos(){
+        return "Usuario: "+tipo+super.mostrarDatos();
+    }
+
+    /*
     public ArrayList<Supervisor> getCertificaciones() {
         return Certificaciones;
     }
@@ -57,6 +52,7 @@ public class Supervisor extends Usuario{
         
        return false ;  
     }
+     */
 }
        
         

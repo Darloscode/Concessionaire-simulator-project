@@ -2,7 +2,7 @@ package com.mycompany.proyectoparcialpoo;
 
 import java.util.ArrayList;
 
-import com.mycompany.model.*;
+import com.mycompany.model.Vehiculos.*;
 import java.io.*;
 /**
  *
@@ -38,7 +38,7 @@ public class Prueba {
                     System.out.println(d);
 
                 }
-                ArrayList<Vehiculo> carros = new ArrayList<Vehiculo>();                
+                //ArrayList<Vehiculo> carros = new ArrayList<Vehiculo>();                
                 
                 System.out.println(datos);
                                

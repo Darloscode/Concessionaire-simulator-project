@@ -19,10 +19,10 @@ public class ProyectoParcialPOO {
     public static void main(String[] args) {
         
         Scanner entrada = new Scanner(System.in);
+
         boolean salir = false;
-        String opcion;
-        String usuario;
-        String contraseña;
+
+        String opcion, usuario, password;        
 
         ArrayList<Usuario> usuarios = inicializarSistema();
         for(Usuario a:usuarios){
@@ -35,6 +35,7 @@ public class ProyectoParcialPOO {
             System.out.println(v.mostrarDatos());
             System.out.println();
         }
+        
 
         while(!salir){
             System.out.println("*********************************");   
@@ -56,9 +57,9 @@ public class ProyectoParcialPOO {
                     usuario = entrada.nextLine();
                     
                     System.out.print("Contraseña: ");
-                    contraseña = entrada.nextLine();
+                    password = entrada.nextLine();
 
-                    boolean verificar = login(usuario, contraseña);
+                    boolean verificar = login(usuario, password, "Cliente");
 
                     String op = "";
 
@@ -78,9 +79,9 @@ public class ProyectoParcialPOO {
                             usuario = entrada.nextLine();
                     
                             System.out.print("Contraseña: ");
-                            contraseña = entrada.nextLine();
+                            password = entrada.nextLine();
 
-                            verificar = login(usuario, contraseña);
+                            verificar = login(usuario, password, "Cliente");
                         }else if(op.equals("2")){
                             break;
                         }else{
@@ -128,10 +129,16 @@ public class ProyectoParcialPOO {
     }
 
 
-    private static boolean login(String user, String password){
-
-        return true;
-
+    private static boolean login(String user, String password, String tipo){
+        ArrayList<Usuario> usuarios = inicializarSistema();
+        for(Usuario u : usuarios){
+            if((u.getUsuario().equals(user)) & (u.getPassword().equals(password))){
+                System.out.println("\nHas iniciado sección\n");                
+                return true;
+            }
+        }    
+        System.out.println("\nCredenciales incorrectas\n");
+        return false;
     }
     
     private static ArrayList<Usuario> inicializarSistema(){

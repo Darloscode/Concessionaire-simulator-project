@@ -1,5 +1,5 @@
 Usuarios
-Cliente,Manuel Carlos,Cabezas Guerreo,MCabezas,Gue0Ca,0912121116,Supervisor,1230
+Cliente,Manuel Carlos,Cabezas Guerreo,ca,ca,0912121116,Supervisor,1230
 Cliente,Fabricio Carlos,Lopez Coronel,FLopez,Cor1Ca,0911191819,Vendedor,739
 Vendedor,Carlos Manuel,Cabezas Esterlla,CCabezas,Est2Ma,849
 Cliente,Jair Andersson,Esterlla Cabezas,JEsterlla,Cab3An,0913122015,Jefe Taller,944

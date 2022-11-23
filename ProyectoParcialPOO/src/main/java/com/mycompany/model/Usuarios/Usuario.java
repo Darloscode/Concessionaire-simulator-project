@@ -14,17 +14,6 @@ public abstract class Usuario {
         this.apellido=apellido;        
     }
     
-    public String mostrarDatos(){
-        return "\nNombre: "+nombre+"\nApellido: "+apellido+"\nUsuario: "+usuario;
-    }
-
-    /*
-    @Override
-    public String toString(){
-        return "Usuario{" + "password=" + password + ", usuario=" + usuario + ", nombre=" + nombre + ", apellido=" + apellido + '}';
-    }
-
-
     public String getPassword() {
         return password;
     }
@@ -39,6 +28,18 @@ public abstract class Usuario {
 
     public String getApellido() {
         return apellido;
+    }
+
+    public String mostrarDatos(){
+        return "\nNombre: "+nombre+"\nApellido: "+apellido+"\nUsuario: "+usuario;
+    }
+
+
+
+    /*
+        @Override
+    public String toString(){
+        return "Usuario{" + "password=" + password + ", usuario=" + usuario + ", nombre=" + nombre + ", apellido=" + apellido + '}';
     }
 
     public void setPassword(String password) {
@@ -56,7 +57,6 @@ public abstract class Usuario {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
     @Override
     public int hashCode() {
         int hash = 3;

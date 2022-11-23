@@ -1,0 +1,21 @@
+Usuarios
+Cliente,Manuel Carlos,Cabezas Guerreo,MCabezas,Gue0Ca,0912121116,Supervisor,1230
+Cliente,Fabricio Carlos,Lopez Coronel,FLopez,Cor1Ca,0911191819,Vendedor,739
+Vendedor,Carlos Manuel,Cabezas Esterlla,CCabezas,Est2Ma,849
+Cliente,Jair Andersson,Esterlla Cabezas,JEsterlla,Cab3An,0913122015,Jefe Taller,944
+Supervisor,Marcos Jair,Estrada Napa,MEstrada,Nap4Ja
+Vendedor,Andersson Aaron,Rodriguez Moran,ARodriguez,Mor5Aa,495
+Jefe Taller,Andersson Andres,Rodriguez Moran,ARodriguez,Mor6An
+Cliente,Carlos Andres,Coronel Veliz,CCoronel,Vel7An,0915191919,Cliente,1739
+Supervisor,Javier Obed,Napa Zamora,JNapa,Zam8Ob
+Vendedor,Manuel Carlos,Escamilla Veliz,MEscamilla,Vel9Ca,253
+Supervisor,Javier Cristhian,Coronel Zamora,JCoronel,Zam10Cr
+Cliente,Javier Obed,Guerreo Estrada,JGuerreo,Est11Ob,0910161620,Jefe Taller,1012
+Jefe Taller,Jair Cristhian,Lopez Napa,JLopez,Nap12Cr
+Vendedor,Manuel Obed,Lopez Cabezas,MLopez,Cab13Ob,762
+Vendedor,Aaron Cristhian,Napa Zamora,ANapa,Zam14Cr,740
+Vendedor,Marcos Fabricio,Napa Escamilla,MNapa,Esc15Fa,414
+Jefe Taller,Jostin Andres,Zamora Esterlla,JZamora,Est16An
+Supervisor,Andres Cristhian,Zamora Flores,AZamora,Flo17Cr
+Jefe Taller,Andersson Jostin,Rodriguez Flores,ARodriguez,Flo18Jo
+Vendedor,Andersson Carlos,Gonzalez Veliz,AGonzalez,Vel19Ca,565

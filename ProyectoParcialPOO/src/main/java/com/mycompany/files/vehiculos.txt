@@ -1,82 +1,82 @@
-Vehiculo
-Tractor,Deutz,TC60,2001,Diesel,4,True,Mecanica
-Automovil,Dongfend,B13,2005,Diesel,4,3,True,False
-Automovil,BMW,A19,2002,Diesel,4,6,False,False
-Camion,Western Star,C27,2009,Gasolina,4,25000,2.0
-Automovil,Toyota,A14,2015,Diesel,4,3,False,False
-Motocicleta,Triumph,A5,2016,Gasolina,4,Todo terreno
-Tractor,Valtra,TC60,2013,Diesel,4,False,Mecanica
-Camion,Renault,B22,2002,Diesel,8,19000,4.0
-Motocicleta,Harley Davidson,C4,2018,Gasolina,8,Scooter
-Automovil,SAIC,E13,2000,Gasolina,4,2,False,True
-Automovil,Dongfend,A7,2005,Diesel,4,2,False,True
-Camion,Renault,E24,2003,Diesel,4,25000,2.0
-Camion,Mercedez,E25,2006,Diesel,8,19000,4.0
-Camion,Benz,A20,2004,Gasolina,8,20000,4.0
-Motocicleta,Yamaha,C6,2013,Diesel,8,Deportiva
-Tractor,Fendt,TD60,2007,Diesel,4,True,Hidraulica
-Camion,Benz,E15,2008,Diesel,4,24000,2.0
-Tractor,Massey Ferguson,TD53,2011,Diesel,4,True,Hidraulica
-Camion,DAF,D23,2009,Diesel,4,24000,2.0
-Tractor,Kubota,TD40,2004,Diesel,4,True,Mecanica
-Automovil,Toyota,A16,2013,Gasolina,4,6,True,False
-Camion,Iveco,B26,2011,Gasolina,8,24000,4.0
-Tractor,Lamborghini,TD48,2014,Diesel,4,True,Mecanica
-Camion,International,C27,2011,Gasolina,4,22000,2.0
-Camion,Trucks,E26,2007,Diesel,4,24000,2.0
-Motocicleta,Yamaha,C4,2015,Gasolina,4,Deportiva
-Automovil,Toyota,E13,2007,Diesel,4,4,True,False
-Camion,Volvo,A17,2007,Diesel,4,20000,2.0
-Automovil,SAIC,A16,2005,Diesel,4,5,False,False
-Automovil,Suzuki,D17,2008,Gasolina,4,2,False,True
-Automovil,Nissan,B13,2008,Gasolina,4,5,False,False
-Camion,Benz,B15,2010,Diesel,8,20000,4.0
-Tractor,Kubota,TD60,2001,Diesel,4,True,Mecanica
-Camion,Volkswagen,A17,2018,Diesel,4,21000,2.0
-Automovil,Hyndai,A15,2002,Gasolina,4,4,True,True
-Motocicleta,Victoria,A5,2009,Gasolina,4,Scooter
-Tractor,Same,TE48,2008,Diesel,4,False,Mecanica
-Tractor,Ebro,TA55,2010,Diesel,4,False,Mecanica
-Motocicleta,BMW,C6,2016,Gasolina,4,Deportiva
-Motocicleta,Ducati,A9,2018,Diesel,4,Todo terreno
-Tractor,Ford,TA55,2014,Diesel,4,False,Hidraulica
-Camion,Volkswagen,E23,2012,Diesel,4,24000,2.0
-Camion,Trucks,E24,2013,Gasolina,8,23000,4.0
-Camion,Renault,E16,2002,Gasolina,4,21000,2.0
-Motocicleta,Bultaco,A6,2016,Diesel,4,Scooter
-Automovil,Daimler,D5,2009,Diesel,4,6,True,True
-Camion,Peterbilt,C26,2012,Diesel,4,18000,2.0
-Motocicleta,Torrot,C6,2016,Diesel,4,Deportiva
-Motocicleta,BMW,C6,2002,Diesel,4,Deportiva
-Camion,Freightliner,B29,2016,Diesel,8,19000,4.0
-Tractor,New Holland,TE54,2017,Diesel,4,False,Mecanica
-Motocicleta,Torrot,A9,2018,Diesel,4,Todo terreno
-Automovil,Hyndai,A15,2012,Gasolina,4,6,True,False
-Camion,Mack,E15,2003,Gasolina,8,22000,4.0
-Motocicleta,Honda,C7,2012,Diesel,8,Deportiva
-Camion,Scania,A17,2004,Gasolina,8,20000,4.0
-Tractor,Case,TE56,2011,Diesel,4,False,Hidraulica
-Camion,Mack,B22,2016,Gasolina,4,22000,2.0
-Camion,Freightliner,A17,2016,Gasolina,4,18000,2.0
-Tractor,Valtra,TC60,2011,Diesel,4,True,Mecanica
-Automovil,volkswagen,A15,2010,Diesel,4,2,True,True
-Tractor,Deutz,TB55,2017,Diesel,4,True,Hidraulica
-Automovil,Nissan,B6,2017,Gasolina,4,6,True,False
-Motocicleta,Yamaha,A6,2015,Diesel,4,Deportiva
-Automovil,Toyota,E10,2016,Diesel,4,2,True,False
-Motocicleta,Rieju,A5,2000,Diesel,4,Scooter
-Automovil,volkswagen,B6,2014,Diesel,4,5,False,True
-Camion,Freightliner,A20,2005,Diesel,4,24000,2.0
-Motocicleta,Torrot,C6,2001,Diesel,4,Todo terreno
-Camion,Kenworth,B15,2004,Gasolina,4,24000,2.0
-Automovil,Suzuki,A16,2005,Gasolina,4,6,True,False
-Tractor,Deutz,TA51,2009,Diesel,4,False,Mecanica
-Tractor,Deutz,TD60,2007,Diesel,4,False,Hidraulica
-Motocicleta,Kawasaki,A5,2000,Gasolina,4,Deportiva
-Tractor,Ebro,TD48,2017,Diesel,4,True,Mecanica
-Tractor,Fendt,TC56,2010,Diesel,4,True,Hidraulica
-Camion,DAF,E24,2011,Gasolina,8,18000,4.0
-Automovil,Nissan,A15,2017,Diesel,4,5,True,False
-Motocicleta,Torrot,C8,2006,Diesel,8,Deportiva
-Tractor,Deutz,TE54,2015,Diesel,4,False,Mecanica
-Automovil,Daimler,E13,2010,Diesel,4,5,True,True
+Vehiculos
+Automovil,Subaru,D11,2013,Diesel,4,4,true,true
+Automovil,Subaru,B8,2002,Diesel,4,3,true,false
+Tractor,Lamborghini,TC54,2001,Diesel,4,true,Hidraulica
+Tractor,Ebro,TB58,2001,Diesel,4,false,Hidraulica
+Tractor,Kubota,TB43,2008,Diesel,4,true,Mecanica
+Automovil,General Motors,D3,2018,Gasolina,4,3,true,false
+Tractor,Kubota,TE48,2014,Diesel,4,true,Hidraulica
+Automovil,Nissan,D3,2016,Diesel,4,2,true,true
+Motocicleta,Suzuki,C7,2001,Gasolina,4,Todo terreno
+Automovil,SAIC,D18,2000,Diesel,4,2,false,false
+Motocicleta,Harley Davidson,C8,2011,Diesel,4,Todo terreno
+Tractor,Claas,TE52,2009,Diesel,4,false,Mecanica
+Camion,Mack,D22,2012,Gasolina,8,23000,4.0
+Motocicleta,Kawasaki,A7,2015,Diesel,8,Deportiva
+Tractor,Lanz Bulldog,TC55,2009,Diesel,4,true,Mecanica
+Camion,Iveco,A18,2011,Diesel,4,25000,2.0
+Motocicleta,Bultaco,C7,2004,Diesel,4,Todo terreno
+Automovil,Mazda,B20,2004,Diesel,4,3,false,false
+Motocicleta,Harley Davidson,C7,2013,Gasolina,4,Deportiva
+Camion,Mercedez,E24,2018,Gasolina,4,20000,2.0
+Camion,Peterbilt,E21,2015,Gasolina,4,18000,2.0
+Motocicleta,Suzuki,A5,2012,Diesel,4,Deportiva
+Tractor,Case,TC48,2009,Diesel,4,false,Hidraulica
+Automovil,Nissan,D11,2011,Gasolina,4,6,false,true
+Automovil,Ford,D10,2002,Gasolina,4,3,false,true
+Automovil,SAIC,B12,2015,Gasolina,4,3,false,true
+Tractor,Deutz,TE52,2017,Diesel,4,false,Hidraulica
+Tractor,Lanz Bulldog,TB58,2000,Diesel,4,true,Hidraulica
+Tractor,Kubota,TB50,2017,Diesel,4,true,Mecanica
+Automovil,Ford,B2,2010,Gasolina,4,6,false,false
+Motocicleta,Kymico,A5,2016,Gasolina,4,Todo terreno
+Camion,Volvo,E21,2005,Gasolina,4,20000,2.0
+Motocicleta,Triumph,A7,2001,Diesel,4,Scooter
+Automovil,Daimler,D18,2003,Gasolina,4,4,true,false
+Motocicleta,Honda,C7,2011,Diesel,4,Todo terreno
+Camion,Mercedez,E26,2013,Gasolina,4,20000,2.0
+Tractor,Same,TA52,2016,Diesel,4,true,Hidraulica
+Tractor,Deutz,TC46,2004,Diesel,4,true,Mecanica
+Camion,Scania,A23,2013,Diesel,8,19000,4.0
+Automovil,SAIC,D3,2016,Gasolina,4,2,false,false
+Automovil,Daimler,D18,2013,Diesel,4,2,false,true
+Camion,Volkswagen,C21,2009,Diesel,8,21000,4.0
+Automovil,volkswagen,C20,2016,Diesel,4,3,true,true
+Camion,Benz,C21,2012,Diesel,4,25000,2.0
+Motocicleta,KTM,A7,2007,Diesel,4,Scooter
+Tractor,Fendt,TD40,2004,Diesel,4,false,Hidraulica
+Camion,Freightliner,B21,2009,Diesel,4,20000,2.0
+Camion,Mercedez,E24,2015,Gasolina,8,18000,4.0
+Automovil,Grupo FAW,C20,2001,Gasolina,4,2,true,true
+Camion,Scania,E26,2009,Gasolina,8,20000,4.0
+Automovil,Honda,B20,2001,Diesel,4,2,true,true
+Motocicleta,BMW,A6,2001,Diesel,8,Todo terreno
+Motocicleta,BMW,A6,2013,Gasolina,8,Todo terreno
+Motocicleta,Yamaha,C8,2013,Diesel,8,Scooter
+Tractor,Claas,TD46,2003,Diesel,4,false,Mecanica
+Automovil,Toyota,B17,2002,Gasolina,4,6,false,true
+Tractor,International,TB43,2016,Diesel,4,true,Mecanica
+Automovil,Suzuki,E9,2005,Diesel,4,3,true,false
+Motocicleta,Harley Davidson,C8,2008,Gasolina,4,Deportiva
+Motocicleta,Honda,C8,2016,Diesel,4,Deportiva
+Automovil,General Motors,C4,2008,Gasolina,4,4,true,false
+Tractor,Fendt,TB45,2011,Diesel,4,true,Mecanica
+Tractor,Case,TB50,2004,Diesel,4,true,Hidraulica
+Tractor,Ford,TC46,2017,Diesel,4,false,Mecanica
+Automovil,Mazda,B2,2013,Gasolina,4,2,true,true
+Automovil,Nissan,B9,2014,Gasolina,4,3,true,true
+Motocicleta,Kymico,C7,2018,Gasolina,4,Todo terreno
+Automovil,Toyota,D18,2018,Diesel,4,5,true,true
+Tractor,Renault,TD46,2012,Diesel,4,true,Hidraulica
+Camion,Mack,D17,2002,Gasolina,4,18000,2.0
+Motocicleta,Honda,A4,2015,Gasolina,4,Deportiva
+Motocicleta,Honda,A5,2013,Gasolina,4,Todo terreno
+Automovil,General Motors,B8,2004,Diesel,4,4,true,false
+Automovil,Ford,C4,2007,Gasolina,4,4,false,false
+Tractor,Massey Ferguson,TC55,2015,Diesel,4,true,Mecanica
+Automovil,Honda,B8,2016,Gasolina,4,4,true,false
+Camion,Volkswagen,D15,2013,Diesel,8,22000,4.0
+Tractor,Massey Ferguson,TC45,2016,Diesel,4,true,Mecanica
+Tractor,New Holland,TA47,2004,Diesel,4,true,Mecanica
+Camion,Renault,A26,2014,Gasolina,4,19000,2.0
+Tractor,Case,TC54,2018,Diesel,4,false,Hidraulica

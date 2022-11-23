@@ -15,7 +15,7 @@ public abstract class Usuario {
     }
     
     public String mostrarDatos(){
-        return "Nombre: "+nombre+"\nApellido: "+apellido+"\nUsuario: "+usuario;
+        return "\nNombre: "+nombre+"\nApellido: "+apellido+"\nUsuario: "+usuario;
     }
 
     /*

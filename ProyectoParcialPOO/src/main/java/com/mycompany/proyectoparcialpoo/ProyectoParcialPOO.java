@@ -4,11 +4,12 @@
  */
 
 package com.mycompany.proyectoparcialpoo;
+import java.io.*;
 import java.util.ArrayList;
-//import java.io.*;
 import java.util.Scanner;
 import com.mycompany.model.Usuarios.*;
 import com.mycompany.model.Vehiculos.*;
+
 
 /**
  *
@@ -22,7 +23,19 @@ public class ProyectoParcialPOO {
         String opcion;
         String usuario;
         String contraseña;
-    
+
+        ArrayList<Usuario> usuarios = inicializarSistema();
+        for(Usuario a:usuarios){
+            System.out.println(a.mostrarDatos());
+            System.out.println();
+        }
+
+        ArrayList<Vehiculo> vehiculos = cargarVehiculos();
+        for(Vehiculo v:vehiculos){
+            System.out.println(v.mostrarDatos());
+            System.out.println();
+        }
+
         while(!salir){
             System.out.println("*********************************");   
             System.out.println("**Bienvenido**");
@@ -122,10 +135,92 @@ public class ProyectoParcialPOO {
     }
     
     private static ArrayList<Usuario> inicializarSistema(){
+
         ArrayList<Usuario> arreglo = new ArrayList<>();        
-        return new ArrayList<Usuario>();
+
+        File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\usuarios2.txt");
+        
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
+            String lectura = entrada.readLine();          
+            lectura = entrada.readLine(); 
+
+            while (lectura != null){
+                
+                String[] datos = lectura.split(",");
+
+                if(datos[0].equals("Cliente")){                                    
+                    double ingresos = Double.parseDouble(datos[7]);
+                    arreglo.add(new Cliente(datos[1], datos[2], datos[3], datos[4], datos[5], datos[6], ingresos));
+                }else if(datos[0].equals("Vendendor")){                    
+                    int iden = Integer.parseInt(datos[5]);
+                    arreglo.add(new Vendedor(datos[1], datos[2], datos[3], datos[4], iden));
+                }else if(datos[0].equals("Jefe Taller")){
+                    arreglo.add(new JefedeTaller(datos[1], datos[2], datos[3], datos[4]));
+                }else if(datos[0].equals("Supervisor")){
+                    arreglo.add(new Supervisor(datos[1], datos[2], datos[3], datos[4]));
+
+                }                
+                lectura = entrada.readLine();
+            }
+            
+            entrada.close();
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }                    
+        return arreglo;
     }
 
+    private static ArrayList<Vehiculo> cargarVehiculos(){
+        
+        ArrayList<Vehiculo> arreglo = new ArrayList<>();        
+
+        File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\vehiculos.txt");
+        
+        try {
+            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
+            String lectura = entrada.readLine();          
+            lectura = entrada.readLine(); 
+
+            while (lectura != null){
+                
+                String[] datos = lectura.split(",");
+
+                if(datos[0].equals("Automovil")){                    
+                    int year = Integer.parseInt(datos[3]);
+                    int asientos = Integer.parseInt(datos[5]);
+                    boolean conv = Boolean.parseBoolean(datos[6]);
+                    boolean cam = Boolean.parseBoolean(datos[7]);
+                    arreglo.add(new Automovil(datos[1], datos[2], year, datos[4], asientos, conv, cam, 34444));
+                }else if(datos[0].equals("Camion")){                    
+                    int year = Integer.parseInt(datos[3]);
+                    int llantas = Integer.parseInt(datos[5]);
+                    double capacidad = Double.parseDouble(datos[6]);
+                    double ejes = Double.parseDouble(datos[7]);                    
+                    arreglo.add(new Camion(datos[1], datos[2], year, datos[4], llantas, capacidad, ejes, 35555));
+                }else if(datos[0].equals("Motocicleta")){
+                    int year = Integer.parseInt(datos[3]);                    
+                    arreglo.add(new Motocicleta(datos[1], datos[2], year, datos[4], datos[6], 34344));
+                }else if(datos[0].equals("Tractor")){
+                    int year = Integer.parseInt(datos[3]);
+                    Boolean agri = Boolean.parseBoolean(datos[6]);                                        
+                    arreglo.add(new Tractor(datos[1], datos[2], year, agri, datos[7], 78787));
+
+                }                
+                lectura = entrada.readLine();
+            }
+            
+            entrada.close();            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }                    
+        return arreglo;            
+    }
 
     /*
     private static boolean login(String user, String password){

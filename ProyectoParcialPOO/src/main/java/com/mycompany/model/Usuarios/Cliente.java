@@ -1,11 +1,16 @@
 package com.mycompany.model.Usuarios;
 
+import java.util.ArrayList;
+
+import com.mycompany.model.Vehiculos.Vehiculo;
+
 public class Cliente extends Usuario{ 
 
     private String tipo = "Cliente";
     private String cedula;
     private String ocupacion;
-    private double ingresos; 
+    private double ingresos;
+    private ArrayList<Vehiculo> vehiculos;
     
     
     public Cliente(String nombre, String apellido, String usuario, String password, String cedula, String ocupacion, double ingresos){
@@ -20,6 +25,14 @@ public class Cliente extends Usuario{
         return "Usuario: "+tipo+super.mostrarDatos()+"\nCedula: "+cedula+"\nOcupacion: "+ocupacion+"\nIngresos: "+ingresos;
     }
 
+
+    public void agregarVehiculo(Vehiculo auto){
+        vehiculos.add(auto);
+    }
+
+    public String getTipo(){
+        return tipo;
+    }
 
     /*
     public String getCategoria() {

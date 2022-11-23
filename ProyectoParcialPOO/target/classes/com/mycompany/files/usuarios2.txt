@@ -1,9 +1,9 @@
 Usuarios
 Cliente,Manuel Carlos,Cabezas Guerreo,ca,ca,0912121116,Supervisor,1230
 Cliente,Fabricio Carlos,Lopez Coronel,FLopez,Cor1Ca,0911191819,Vendedor,739
-Vendedor,Carlos Manuel,Cabezas Esterlla,CCabezas,Est2Ma,849
+Vendedor,Carlos Manuel,Cabezas Esterlla,ca,ca,849
 Cliente,Jair Andersson,Esterlla Cabezas,JEsterlla,Cab3An,0913122015,Jefe Taller,944
-Supervisor,Marcos Jair,Estrada Napa,MEstrada,Nap4Ja
+Supervisor,Marcos Jair,Estrada Napa,tr,tr
 Vendedor,Andersson Aaron,Rodriguez Moran,ARodriguez,Mor5Aa,495
 Jefe Taller,Andersson Andres,Rodriguez Moran,ARodriguez,Mor6An
 Cliente,Carlos Andres,Coronel Veliz,CCoronel,Vel7An,0915191919,Cliente,1739

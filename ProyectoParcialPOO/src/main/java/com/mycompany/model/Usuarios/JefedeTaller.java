@@ -16,6 +16,10 @@ public class JefedeTaller extends Usuario{
     public String mostrarDatos(){
         return "Usuario: "+tipo+super.mostrarDatos();
     }
+    
+    public String getTipo(){
+        return tipo;
+    }
 
     /*
     public ArrayList<JefedeTaller> getMantenimientoVehiculos() {

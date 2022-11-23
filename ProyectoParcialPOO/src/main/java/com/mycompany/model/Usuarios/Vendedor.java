@@ -14,6 +14,11 @@ public class Vendedor extends Usuario{
     public String mostrarDatos(){
         return "Usuario: "+tipo+super.mostrarDatos()+"\nID: "+id;
     }
+
+    public String getTipo(){
+        return tipo;
+    }
+    
     /*
     public int getID() {
         return ID;

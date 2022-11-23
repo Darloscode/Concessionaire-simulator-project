@@ -1,32 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
-
 package com.mycompany.proyectoparcialpoo;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import com.mycompany.model.Usuarios.*;
 import com.mycompany.model.Vehiculos.*;
 
-
-/**
- *
- * @author ander
- */
 public class ProyectoParcialPOO {
     public static void main(String[] args) {
         
         Scanner entrada = new Scanner(System.in);
 
-        boolean salir = false;
+        boolean salir = false, verificar;
 
-        String opcion, usuario, password;        
-
+        String opcion = "", usuario, password, tipo = "";
+        
+        String op ="";        
+        /*
         ArrayList<Usuario> usuarios = inicializarSistema();
         for(Usuario a:usuarios){
             System.out.println(a.mostrarDatos());
+            System.out.println(a.getTipo());
             System.out.println();
         }
 
@@ -35,8 +29,8 @@ public class ProyectoParcialPOO {
             System.out.println(v.mostrarDatos());
             System.out.println();
         }
+         */
         
-
         while(!salir){
             System.out.println("*********************************");   
             System.out.println("**Bienvenido**");
@@ -51,73 +45,26 @@ public class ProyectoParcialPOO {
             System.out.println("*********************************");   
             
             switch(opcion){
-                case "1":
-                    System.out.println("********Cliente********");
-                    System.out.print("Usuario: ");
-                    usuario = entrada.nextLine();
-                    
-                    System.out.print("Contraseña: ");
-                    password = entrada.nextLine();
-
-                    boolean verificar = login(usuario, password, "Cliente");
-
-                    String op = "";
-
-                    while((!verificar)){
-
-                        System.out.println("¿Quiere volver a intentarlo?");
-                        System.out.println("1. Reintentar");
-                        System.out.println("2. Salir\n");
-                        System.out.print("Elija una opcion: ");
-                        op = entrada.nextLine();
-
-                        if(op.equals("1")){ 
-                            System.out.println("--------------------------------");
-                            System.out.println("***Cliente***");
-
-                            System.out.print("Usuario: ");
-                            usuario = entrada.nextLine();
-                    
-                            System.out.print("Contraseña: ");
-                            password = entrada.nextLine();
-
-                            verificar = login(usuario, password, "Cliente");
-                        }else if(op.equals("2")){
-                            break;
-                        }else{
-                            System.out.println("Elija una opción correcta");
-                        }
-                    }                  
-                    
+                case "1":                
+                    System.out.println("************Cliente************");
+                    tipo = "Cliente";
                     break;
-                /*
-                case 2:
-                    System.out.println("***Vendedor***");
-                    System.out.print("Usuario: ");
-                    usuario = entrada.nextLine();
-                    
-                    System.out.print("Contraseña: ");
-                    contraseña = entrada.nextLine();    
+                
+                case "2":
+                    System.out.println("************Vendedor************");
+                    tipo = "Vendedor";                      
                     break;
                     
-                case 3:
-                    System.out.println("***Supervisor***");
-                    System.out.print("Usuario: ");
-                    usuario = entrada.nextLine();
-                    
-                    System.out.print("Contraseña: ");
-                    contraseña = entrada.nextLine();  
+                case "3":
+                    System.out.println("************Supervisor************");
+                    tipo = "Supervisor";                    
                     break;
-                    
-                case 4:
-                    System.out.println("***Jefe de Taller***");
-                    System.out.print("Usuario: ");
-                    usuario = entrada.nextLine();
-                    
-                    System.out.print("Contraseña: ");
-                    contraseña = entrada.nextLine();  
+                                        
+                case "4":
+                    System.out.println("***********Jefe de taller************");
+                    tipo = "Jefe Taller";
                     break;
-                 */                
+               
                 case "5":
                     salir = true;
                     break;
@@ -125,37 +72,63 @@ public class ProyectoParcialPOO {
                 default:
                     System.out.println("Ingrese una opción valida");
             }
-        }
-    }
 
+            if((opcion.equals("1")|(opcion.equals("2"))|(opcion.equals("3"))|(opcion.equals("4")))){
+                System.out.print("\nUsuario: ");
+                usuario = entrada.nextLine();
+                
+                System.out.print("Contraseña: ");
+                password = entrada.nextLine();
+
+                verificar = login(usuario, password, tipo);
+
+                while((!verificar)){
+                    System.out.println("\n¿Quiere volver a intentarlo?");
+                    System.out.println("1. Reintentar");
+                    System.out.println("2. Salir\n");
+                    System.out.print("Elija una opcion: ");
+                    op = entrada.nextLine();
+
+                    if(op.equals("1")){                                                 
+                        System.out.print("Usuario: ");
+                        usuario = entrada.nextLine();
+            
+                        System.out.print("Contraseña: ");
+                        password = entrada.nextLine();
+
+                        verificar = login(usuario, password, "Cliente");
+                    }else if(op.equals("2")){
+                        break;
+                    }else{
+                        System.out.println("Elija una opción correcta");
+                    }
+                }
+            }                                    
+        }        
+    }
+    
 
     private static boolean login(String user, String password, String tipo){
         ArrayList<Usuario> usuarios = inicializarSistema();
         for(Usuario u : usuarios){
-            if((u.getUsuario().equals(user)) & (u.getPassword().equals(password))){
+            if((u.getUsuario().equals(user)) & (u.getPassword().equals(password)) & (u.getTipo().equals(tipo))){
                 System.out.println("\nHas iniciado sección\n");                
                 return true;
-            }
-        }    
-        System.out.println("\nCredenciales incorrectas\n");
+            }            
+        }
+        System.out.println("\nCredenciales incorrectas\n");        
         return false;
     }
     
     private static ArrayList<Usuario> inicializarSistema(){
-
         ArrayList<Usuario> arreglo = new ArrayList<>();        
-
-        File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\usuarios2.txt");
-        
+        File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\usuarios2.txt");        
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivo));
             String lectura = entrada.readLine();          
             lectura = entrada.readLine(); 
-
-            while (lectura != null){
-                
+            while (lectura != null){                
                 String[] datos = lectura.split(",");
-
                 if(datos[0].equals("Cliente")){                                    
                     double ingresos = Double.parseDouble(datos[7]);
                     arreglo.add(new Cliente(datos[1], datos[2], datos[3], datos[4], datos[5], datos[6], ingresos));
@@ -166,13 +139,10 @@ public class ProyectoParcialPOO {
                     arreglo.add(new JefedeTaller(datos[1], datos[2], datos[3], datos[4]));
                 }else if(datos[0].equals("Supervisor")){
                     arreglo.add(new Supervisor(datos[1], datos[2], datos[3], datos[4]));
-
                 }                
                 lectura = entrada.readLine();
-            }
-            
-            entrada.close();
-            
+            }            
+            entrada.close();            
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.out);
         } catch (IOException ex) {
@@ -181,21 +151,15 @@ public class ProyectoParcialPOO {
         return arreglo;
     }
 
-    private static ArrayList<Vehiculo> cargarVehiculos(){
-        
+    private static ArrayList<Vehiculo> cargarVehiculos(){        
         ArrayList<Vehiculo> arreglo = new ArrayList<>();        
-
-        File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\vehiculos.txt");
-        
+        File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\vehiculos.txt");        
         try {
             BufferedReader entrada = new BufferedReader(new FileReader(archivo));
             String lectura = entrada.readLine();          
             lectura = entrada.readLine(); 
-
-            while (lectura != null){
-                
+            while (lectura != null){                
                 String[] datos = lectura.split(",");
-
                 if(datos[0].equals("Automovil")){                    
                     int year = Integer.parseInt(datos[3]);
                     int asientos = Integer.parseInt(datos[5]);
@@ -215,11 +179,9 @@ public class ProyectoParcialPOO {
                     int year = Integer.parseInt(datos[3]);
                     Boolean agri = Boolean.parseBoolean(datos[6]);                                        
                     arreglo.add(new Tractor(datos[1], datos[2], year, agri, datos[7], 78787));
-
                 }                
                 lectura = entrada.readLine();
-            }
-            
+            }            
             entrada.close();            
         } catch (FileNotFoundException ex) {
             ex.printStackTrace(System.out);
@@ -259,5 +221,19 @@ public class ProyectoParcialPOO {
         }                    
         return false;
     }
-    */    
+
+
+System.out.println("********Cliente********");
+                    System.out.print("Usuario: ");
+                    usuario = entrada.nextLine();
+                
+                    System.out.print("Contraseña: ");
+                    password = entrada.nextLine();
+
+                    verificar = login(usuario, password, "Cliente");
+
+                    op = "";
+
+                    
+    */
 }

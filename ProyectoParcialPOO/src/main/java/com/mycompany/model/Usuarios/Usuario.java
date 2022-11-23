@@ -2,6 +2,7 @@ package com.mycompany.model.Usuarios;
 
 public abstract class Usuario {
 
+    private String tipo;
     private String usuario;
     private String password;     
     private String nombre;
@@ -14,20 +15,24 @@ public abstract class Usuario {
         this.apellido=apellido;        
     }
     
-    public String getPassword() {
+    public String getPassword(){
         return password;
     }
 
-    public String getUsuario() {
+    public String getUsuario(){
         return usuario;
     }
 
-    public String getNombre() {
+    public String getNombre(){
         return nombre;
     }
 
-    public String getApellido() {
+    public String getApellido(){
         return apellido;
+    }
+
+    public String getTipo(){
+        return tipo;
     }
 
     public String mostrarDatos(){

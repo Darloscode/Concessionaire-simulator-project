@@ -12,6 +12,10 @@ public class Supervisor extends Usuario{
         return "Usuario: "+tipo+super.mostrarDatos();
     }
 
+    public String getTipo(){
+        return tipo;
+    }
+    
     /*
     public ArrayList<Supervisor> getCertificaciones() {
         return Certificaciones;

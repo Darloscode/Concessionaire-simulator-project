@@ -63,20 +63,33 @@ public class ProyectoParcialPOO {
                     System.out.print("Contraseña: ");
                     password = entrada.nextLine();
 
-                    user = login(usuario, password, tipo);
-
-                    Cliente cliente = (Cliente) user;   
+                    user = login(usuario, password, tipo);                     
 
                     if(user != null){
+                        Cliente usercliente = (Cliente) user;  
                         op = "";
-                        if((cliente.getVehiculos()!=null)){                            
+                        if((usercliente.getVehiculos()!=null)){                            
                             while(!op.equals("3")){
                                 System.out.print("1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar compra\n4. solicitar un mantenimiento preventivo o de emergencia\n5. Consultar mantenimiento\n6. Salir\nElija una opcion: ");
                                 op = entrada.nextLine();
                                 if(op.equals("1")){                                    
-                                    cliente.consultarStock(vehiculos);
+                                    usercliente.consultarStock(vehiculos);
                                 }else if(op.equals("2")){                                   
-    
+                                    String indvehiculo = "1";
+                                    while(!indvehiculo.equals("s")){                                        
+                                        System.out.print("\nElija un numero de la lista de vehiculos o escriba (s) para salir: ");
+                                        indvehiculo = entrada.nextLine();                                        
+                                        if(isNumeric(indvehiculo)){
+                                            int ind = Integer.parseInt(indvehiculo);
+                                            if((ind>0)&(ind<=vehiculos.size())){
+                                                Vehiculo cotiza = usercliente.solicitarCotizacion(ind, vehiculos);
+                                                enviarCotizacion(cotiza, usuarios, usercliente);
+                                                break;                    
+                                            }
+                                        }else if(indvehiculo.equals("s")){
+                                            break;
+                                        }                                        
+                                    }    
                                 }else if(op.equals("3")){
 
                                 }else if(op.equals("4")){
@@ -95,9 +108,23 @@ public class ProyectoParcialPOO {
                                 System.out.print("1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar compra\n4. Salir\nElija una opcion: ");
                                 op = entrada.nextLine();
                                 if(op.equals("1")){
-                                    cliente.consultarStock(vehiculos);    
+                                    usercliente.consultarStock(vehiculos);    
                                 }else if(op.equals("2")){
-    
+                                    String indvehiculo = "1";
+                                    while(!indvehiculo.equals("s")){                                        
+                                        System.out.print("\nElija un numero de la lista de vehiculos o escriba (s) para salir: ");
+                                        indvehiculo = entrada.nextLine();                                        
+                                        if(isNumeric(indvehiculo)){
+                                            int ind = Integer.parseInt(indvehiculo);
+                                            if((ind>0)&(ind<=vehiculos.size())){
+                                                Vehiculo cotiza = usercliente.solicitarCotizacion(ind, vehiculos);
+                                                enviarCotizacion(cotiza, usuarios, usercliente);
+                                                break;                    
+                                            }
+                                        }else if(indvehiculo.equals("s")){
+                                            break;
+                                        }                                        
+                                    }    
                                 }else if(op.equals("3")){
 
                                 }else if(op.equals("4")){
@@ -111,7 +138,7 @@ public class ProyectoParcialPOO {
                                 System.out.print("\n1. Consultar Stock\n2. Solicitar cotizacion\n3. Salir\nElija una opcion: ");
                                 op = entrada.nextLine();
                                 if(op.equals("1")){
-                                    cliente.consultarStock(vehiculos);   
+                                    usercliente.consultarStock(vehiculos);   
                                 }else if(op.equals("2")){
                                     String indvehiculo = "1";
                                     while(!indvehiculo.equals("s")){                                        
@@ -120,8 +147,8 @@ public class ProyectoParcialPOO {
                                         if(isNumeric(indvehiculo)){
                                             int ind = Integer.parseInt(indvehiculo);
                                             if((ind>0)&(ind<=vehiculos.size())){
-                                                Vehiculo cotiza = cliente.solicitarCotizacion(ind, vehiculos);
-                                                enviarCotizacion(cotiza, usuarios);
+                                                Vehiculo vhcotiza = usercliente.solicitarCotizacion(ind, vehiculos);
+                                                enviarCotizacion(vhcotiza, usuarios, usercliente);
                                                 break;                    
                                             }
                                         }else if(indvehiculo.equals("s")){
@@ -137,7 +164,7 @@ public class ProyectoParcialPOO {
                         }                                                 
                     }       
                     break;
-                
+
                 case "2":
                     System.out.println("************Vendedor************");
                     tipo = "Vendedor";
@@ -150,42 +177,16 @@ public class ProyectoParcialPOO {
 
                     user = login(usuario, password, tipo);
 
-                    if(!user.equals(null)){
+                    if(user != null){                        
+                        Vendedor uservendedor = (Vendedor) user;
+                        if((uservendedor.getCotizaciones().size())>0){
+                            System.out.println(uservendedor.getCotizaciones().size());
+                        }
+                        
                         
                     }
-                    break;
-                    
-                case "3":
-                    System.out.println("************Supervisor************");
-                    tipo = "Supervisor";  
-                    
-                    System.out.print("Usuario: ");
-                    usuario = entrada.nextLine();
-                
-                    System.out.print("Contraseña: ");
-                    password = entrada.nextLine();
+                    break;                          
 
-                    user = login(usuario, password, tipo);
-
-                    if(!user.equals(null)){
-                    }
-                    break;
-                                        
-                case "4":
-                    System.out.println("***********Jefe de taller************");
-                    tipo = "Jefe Taller";
-                    System.out.print("Usuario: ");
-                    usuario = entrada.nextLine();
-                
-                    System.out.print("Contraseña: ");
-                    password = entrada.nextLine();
-
-                    user = login(usuario, password, tipo);
-
-                    if(!user.equals(null)){
-                    }
-                    break;
-               
                 case "5":
                     salir = true;
                     break;
@@ -194,25 +195,21 @@ public class ProyectoParcialPOO {
                     System.out.println("\nIngrese una opción valida\n");
             }
         }
-
     }
 
-    private static void enviarCotizacion(Vehiculo vh, ArrayList<Usuario> arrayusuarios){
-        Random rnd = new Random();                
+    private static void enviarCotizacion(Vehiculo vh, ArrayList<Usuario> arrayusuarios, Cliente cl){
+        Random rnd = new Random();            
         boolean verificar = false;
-
         while(!verificar){
-            int indice = rnd.nextInt(arrayusuarios.size()+1)+1;            
-            if(arrayusuarios.get(indice).getTipo().equals("Vendendor")){
-                
-
-
-
-            }
-
-        }    
+            int indice = rnd.nextInt(arrayusuarios.size());
+            if(arrayusuarios.get(indice).getTipo().equals("Vendedor")){                                
+                Vendedor uservendedor = (Vendedor) arrayusuarios.get(indice);
+                uservendedor.agregarCotizacion(vh, cl);
+                //uservendedor.getVehiculos().add(vh); PUEDES USAR ESTO SIN NECESIDAD DEL METODO AGREGARVEHICULO                          
+                verificar = true;
+            }         
+        }
     }
-
 
     private static boolean isNumeric(String cadena){
         try {
@@ -285,7 +282,7 @@ public class ProyectoParcialPOO {
                 if(datos[0].equals("Cliente")){                                    
                     double ingresos = Double.parseDouble(datos[7]);
                     arreglo.add(new Cliente(datos[1], datos[2], datos[3], datos[4], datos[5], datos[6], ingresos));
-                }else if(datos[0].equals("Vendendor")){                    
+                }else if(datos[0].equals("Vendedor")){                    
                     int iden = Integer.parseInt(datos[5]);
                     arreglo.add(new Vendedor(datos[1], datos[2], datos[3], datos[4], iden));
                 }else if(datos[0].equals("Jefe Taller")){

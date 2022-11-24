@@ -1,9 +1,10 @@
 package com.mycompany.proyectoparcialpoo;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.random.*;
 
 import com.mycompany.model.Vehiculos.*;
-import java.io.*;
 /**
  *
  * @author ander
@@ -20,39 +21,44 @@ public class Prueba {
         arr.add(new Camion(null, null, 0, null, 0, 0, 0, 0));    
         System.out.println(arr);
 
-        //Cliente c1 = new Cliente("12333", "Darlos", "Carlos", "Flores", "AF", "0959447095", "Padre", 122);
-
-        File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\usuarios.txt");
+        //Cliente c1 = new Cliente("12333", "Darlos", "Carlos", "Flores", "AF", "0959447095", "Padre", 122);        
 
         //String contenido = c1.getNombre()+","+c1.getApellido()+","+arr;
+        
+        String asdds = "asdfa";
 
+        System.out.println(asdds==null);
+
+
+        String nombre = "Codi";
+        String apellido = "Facilito";
+        String a="adfasd";
+        String b="<sdfasdfa";
+        String nombreCompleto = String.format("%s %100s", b, a);
+        System.out.println(nombreCompleto);
+        System.out.println(String.format("%100s", b));
+        for(int i=0; i<=10; i++){
+            nombreCompleto = String.format("%s %s", nombre, apellido);
+            System.out.println(nombreCompleto);
+        }
+        
+        String s = "dfdf";
+        System.out.println(isNumeric(s));
+        Random rnd = new Random();
+        for(int i=0; i<=10; i++){
+            int ale = rnd.nextInt(100);
+            System.out.println(ale);
+
+        }
+        
+        
+    }
+    private static boolean isNumeric(String cadena){
         try {
-            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
-            String lectura = entrada.readLine();                                           
-            lectura = entrada.readLine(); 
-
-            while (lectura != null){
-                
-                String[] datos = lectura.split(";");
-                for(String d: datos){
-                    System.out.println(d);
-
-                }
-                //ArrayList<Vehiculo> carros = new ArrayList<Vehiculo>();                
-                
-                System.out.println(datos);
-                               
-                lectura = entrada.readLine();
-            }
-            
-            entrada.close();
-            
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace(System.out);
-        } catch (IOException ex) {
-            ex.printStackTrace(System.out);
-        } 
-        
-        
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe){
+            return false;
+        }
     }
 }

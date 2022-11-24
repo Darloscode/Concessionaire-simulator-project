@@ -9,9 +9,8 @@ public class Cliente extends Usuario{
     private String tipo = "Cliente";
     private String cedula;
     private String ocupacion;
-    private double ingresos;
+    private double ingresos;    
     private ArrayList<Vehiculo> vehiculos;
-    
     
     public Cliente(String nombre, String apellido, String usuario, String password, String cedula, String ocupacion, double ingresos){
         super(nombre, apellido,usuario, password);        
@@ -24,15 +23,33 @@ public class Cliente extends Usuario{
     public String mostrarDatos(){
         return "Usuario: "+tipo+super.mostrarDatos()+"\nCedula: "+cedula+"\nOcupacion: "+ocupacion+"\nIngresos: "+ingresos;
     }
-
-
+    
     public void agregarVehiculo(Vehiculo auto){
         vehiculos.add(auto);
+    }
+
+    public ArrayList<Vehiculo> getVehiculos(){
+        return vehiculos;
     }
 
     public String getTipo(){
         return tipo;
     }
+
+    public void consultarStock(ArrayList<Vehiculo> vehiculos){
+        int i = 1;
+        for(Vehiculo vh : vehiculos){
+            if(vh.getDisponible()){
+                System.out.println(i+". Marca: "+vh.getMarca()+", Modelo: "+vh.getModelo()+", Año: "+vh.getYear());
+            }
+            i++;
+        }
+    }
+
+    public Vehiculo solicitarCotizacion(int indice, ArrayList<Vehiculo> arreglo){        
+        return arreglo.get(indice-1);
+    }
+
 
     /*
     public String getCategoria() {

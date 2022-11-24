@@ -2,7 +2,9 @@ package com.mycompany.proyectoparcialpoo;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.random.*;
 import com.mycompany.model.Usuarios.*;
 import com.mycompany.model.Vehiculos.*;
 
@@ -11,11 +13,17 @@ public class ProyectoParcialPOO {
         
         Scanner entrada = new Scanner(System.in);
 
-        boolean salir = false, verificar;
+        boolean salir = false;
 
-        String opcion = "", usuario, password, tipo = "";
-        
-        String op ="";        
+        Usuario user = null;
+
+        String opcion = "", usuario, password, tipo = "", op ="";
+
+        boolean cotizar=false;
+
+        ArrayList<Vehiculo> vehiculos = cargarVehiculos();
+        ArrayList<Usuario> usuarios = inicializarSistema();
+
         /*
         ArrayList<Usuario> usuarios = inicializarSistema();
         for(Usuario a:usuarios){
@@ -23,14 +31,14 @@ public class ProyectoParcialPOO {
             System.out.println(a.getTipo());
             System.out.println();
         }
-
+        
         ArrayList<Vehiculo> vehiculos = cargarVehiculos();
         for(Vehiculo v:vehiculos){
             System.out.println(v.mostrarDatos());
-            System.out.println();
-        }
-         */
-        
+            System.out.println(v.getDisponible());
+        } 
+        */   
+
         while(!salir){
             System.out.println("*********************************");   
             System.out.println("**Bienvenido**");
@@ -48,21 +56,134 @@ public class ProyectoParcialPOO {
                 case "1":                
                     System.out.println("************Cliente************");
                     tipo = "Cliente";
+
+                    System.out.print("Usuario: ");
+                    usuario = entrada.nextLine();
+                
+                    System.out.print("Contraseña: ");
+                    password = entrada.nextLine();
+
+                    user = login(usuario, password, tipo);
+
+                    Cliente cliente = (Cliente) user;   
+
+                    if(user != null){
+                        op = "";
+                        if((cliente.getVehiculos()!=null)){                            
+                            while(!op.equals("3")){
+                                System.out.print("1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar compra\n4. solicitar un mantenimiento preventivo o de emergencia\n5. Consultar mantenimiento\n6. Salir\nElija una opcion: ");
+                                op = entrada.nextLine();
+                                if(op.equals("1")){                                    
+                                    cliente.consultarStock(vehiculos);
+                                }else if(op.equals("2")){                                   
+    
+                                }else if(op.equals("3")){
+
+                                }else if(op.equals("4")){
+
+                                }else if(op.equals("5")){
+
+                                }else if(op.equals("6")){
+                                    break;
+                                }else{
+                                    System.out.println("\nEscoja una opcion correcta\n");
+                                }
+                            }
+                        }else if(cotizar){
+                            op = "";
+                            while(!op.equals("3")){
+                                System.out.print("1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar compra\n4. Salir\nElija una opcion: ");
+                                op = entrada.nextLine();
+                                if(op.equals("1")){
+                                    cliente.consultarStock(vehiculos);    
+                                }else if(op.equals("2")){
+    
+                                }else if(op.equals("3")){
+
+                                }else if(op.equals("4")){
+                                    break;
+                                }else{
+                                    System.out.println("\nEscoja una opcion correcta\n");
+                                }
+                            }
+                        }else{
+                            while(!op.equals("3")){
+                                System.out.print("\n1. Consultar Stock\n2. Solicitar cotizacion\n3. Salir\nElija una opcion: ");
+                                op = entrada.nextLine();
+                                if(op.equals("1")){
+                                    cliente.consultarStock(vehiculos);   
+                                }else if(op.equals("2")){
+                                    String indvehiculo = "1";
+                                    while(!indvehiculo.equals("s")){                                        
+                                        System.out.print("\nElija un numero de la lista de vehiculos o escriba (s) para salir: ");
+                                        indvehiculo = entrada.nextLine();                                        
+                                        if(isNumeric(indvehiculo)){
+                                            int ind = Integer.parseInt(indvehiculo);
+                                            if((ind>0)&(ind<=vehiculos.size())){
+                                                Vehiculo cotiza = cliente.solicitarCotizacion(ind, vehiculos);
+                                                enviarCotizacion(cotiza, usuarios);
+                                                break;                    
+                                            }
+                                        }else if(indvehiculo.equals("s")){
+                                            break;
+                                        }                                        
+                                    }
+                                }else if(op.equals("3")){
+                                    break;
+                                }else{
+                                    System.out.println("\nEscoja una opcion correcta\n");
+                                }
+                            }
+                        }                                                 
+                    }       
                     break;
                 
                 case "2":
                     System.out.println("************Vendedor************");
-                    tipo = "Vendedor";                      
+                    tipo = "Vendedor";
+                    
+                    System.out.print("Usuario: ");
+                    usuario = entrada.nextLine();
+                
+                    System.out.print("Contraseña: ");
+                    password = entrada.nextLine();
+
+                    user = login(usuario, password, tipo);
+
+                    if(!user.equals(null)){
+                        
+                    }
                     break;
                     
                 case "3":
                     System.out.println("************Supervisor************");
-                    tipo = "Supervisor";                    
+                    tipo = "Supervisor";  
+                    
+                    System.out.print("Usuario: ");
+                    usuario = entrada.nextLine();
+                
+                    System.out.print("Contraseña: ");
+                    password = entrada.nextLine();
+
+                    user = login(usuario, password, tipo);
+
+                    if(!user.equals(null)){
+                    }
                     break;
                                         
                 case "4":
                     System.out.println("***********Jefe de taller************");
                     tipo = "Jefe Taller";
+                    System.out.print("Usuario: ");
+                    usuario = entrada.nextLine();
+                
+                    System.out.print("Contraseña: ");
+                    password = entrada.nextLine();
+
+                    user = login(usuario, password, tipo);
+
+                    if(!user.equals(null)){
+                    }
                     break;
                
                 case "5":
@@ -70,56 +191,88 @@ public class ProyectoParcialPOO {
                     break;
 
                 default:
-                    System.out.println("Ingrese una opción valida");
+                    System.out.println("\nIngrese una opción valida\n");
+            }
+        }
+
+    }
+
+    private static void enviarCotizacion(Vehiculo vh, ArrayList<Usuario> arrayusuarios){
+        Random rnd = new Random();                
+        boolean verificar = false;
+
+        while(!verificar){
+            int indice = rnd.nextInt(arrayusuarios.size()+1)+1;            
+            if(arrayusuarios.get(indice).getTipo().equals("Vendendor")){
+                
+
+
+
             }
 
-            if((opcion.equals("1")|(opcion.equals("2"))|(opcion.equals("3"))|(opcion.equals("4")))){
-                System.out.print("\nUsuario: ");
-                usuario = entrada.nextLine();
-                
-                System.out.print("Contraseña: ");
-                password = entrada.nextLine();
-
-                verificar = login(usuario, password, tipo);
-
-                while((!verificar)){
-                    System.out.println("\n¿Quiere volver a intentarlo?");
-                    System.out.println("1. Reintentar");
-                    System.out.println("2. Salir\n");
-                    System.out.print("Elija una opcion: ");
-                    op = entrada.nextLine();
-
-                    if(op.equals("1")){                                                 
-                        System.out.print("Usuario: ");
-                        usuario = entrada.nextLine();
-            
-                        System.out.print("Contraseña: ");
-                        password = entrada.nextLine();
-
-                        verificar = login(usuario, password, "Cliente");
-                    }else if(op.equals("2")){
-                        break;
-                    }else{
-                        System.out.println("Elija una opción correcta");
-                    }
-                }
-            }                                    
-        }        
+        }    
     }
-    
 
-    private static boolean login(String user, String password, String tipo){
-        ArrayList<Usuario> usuarios = inicializarSistema();
-        for(Usuario u : usuarios){
-            if((u.getUsuario().equals(user)) & (u.getPassword().equals(password)) & (u.getTipo().equals(tipo))){
-                System.out.println("\nHas iniciado sección\n");                
-                return true;
-            }            
+
+    private static boolean isNumeric(String cadena){
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe){
+            return false;
         }
-        System.out.println("\nCredenciales incorrectas\n");        
-        return false;
     }
+
+    private static Usuario login(String user, String password, String tipo){
+        ArrayList<Usuario> usuarios = inicializarSistema();
+        Scanner rd = new Scanner(System.in);
+        String op="";
+        Usuario verificar=verificarLogin(user, password, tipo, usuarios);
+        
+        if(!(verificar == null)){
+            System.out.println("\nHas iniciado sección\n");
+            return verificar;
+        }else{
+            while((verificar == null)){
+                System.out.println("\n¿Quiere volver a intentarlo?");
+                System.out.println("1. Reintentar");
+                System.out.println("2. Salir\n");
+                System.out.print("Elija una opcion: ");
+                op = rd.nextLine();
     
+                if(op.equals("1")){                                                
+                    System.out.print("Usuario: ");
+                    String usuario = rd.nextLine();
+        
+                    System.out.print("Contraseña: ");
+                    String passw = rd.nextLine();
+    
+                    verificar=verificarLogin(usuario, passw, tipo, usuarios);
+
+                    if(!(verificar == null)){
+                        System.out.println("\nHas iniciado sección\n");
+                        return verificar;
+                    }
+                }else if(op.equals("2")){
+                    return null;
+                }else{
+                    System.out.println("Elija una opción correcta");
+                }
+            }
+        }
+        return null;
+    }
+
+    private static Usuario verificarLogin(String user, String passw, String tipo, ArrayList<Usuario> usuarios){
+        for(Usuario u : usuarios){
+            if((u.getUsuario().equals(user)) & (u.getPassword().equals(passw)) & (u.getTipo().equals(tipo))){                        
+                return u;
+            }
+        }
+        System.out.println("\nCredenciales Incorrectas\n");
+        return null;
+    }
+
     private static ArrayList<Usuario> inicializarSistema(){
         ArrayList<Usuario> arreglo = new ArrayList<>();        
         File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\usuarios2.txt");        
@@ -190,50 +343,4 @@ public class ProyectoParcialPOO {
         }                    
         return arreglo;            
     }
-
-    /*
-    private static boolean login(String user, String password){
-        File archivo = new File("ProyectoParcialPOO\\src\\main\\java\\com\\mycompany\\files\\usuarios.txt");
-        
-        try {
-            BufferedReader entrada = new BufferedReader(new FileReader(archivo));
-            String lectura = entrada.readLine();                                           
-            lectura = entrada.readLine(); 
-
-            while (lectura != null){
-                
-                String[] datos = lectura.split(",");                
-
-                if((datos[3].equals(user)) & (datos[4].equals(password))){                    
-                    System.out.println("\nHas iniciado sección\n");
-                    entrada.close();
-                    return true;
-                }                              
-                lectura = entrada.readLine();
-            }
-            System.out.println("\nSu usuario o contraseña estan incorrectos\n");
-            entrada.close();
-            
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace(System.out);
-        } catch (IOException ex) {
-            ex.printStackTrace(System.out);
-        }                    
-        return false;
-    }
-
-
-System.out.println("********Cliente********");
-                    System.out.print("Usuario: ");
-                    usuario = entrada.nextLine();
-                
-                    System.out.print("Contraseña: ");
-                    password = entrada.nextLine();
-
-                    verificar = login(usuario, password, "Cliente");
-
-                    op = "";
-
-                    
-    */
 }

@@ -40,7 +40,6 @@ public abstract class Usuario {
     }
 
 
-
     /*
         @Override
     public String toString(){

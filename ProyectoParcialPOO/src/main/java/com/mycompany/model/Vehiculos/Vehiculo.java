@@ -8,7 +8,7 @@ public class Vehiculo {
     private String motor;
     private int llantas;
     private double precio;
-    private boolean disponible;
+    private Estado disponibilidad;
     
     public Vehiculo(String marca, String modelo, int year,  String motor, int llantas, double precio){
         this.marca = marca;
@@ -17,15 +17,15 @@ public class Vehiculo {
         this.motor = motor;
         this.llantas = llantas;
         this.precio = precio;
-        this.disponible = true;
+        this.disponibilidad = Estado.Disponible;
     }
     
-    public boolean getDisponible(){
-        return disponible;
+    public Estado getDisponibilidad(){
+        return disponibilidad;
     }
 
-    public void setDisponible(boolean disponible){
-        this.disponible = disponible;
+    public void setDisponible(Estado disponibilidad){
+        this.disponibilidad = disponibilidad;
     }
 
     public String getMarca() {
@@ -53,7 +53,7 @@ public class Vehiculo {
     }
     
     public String mostrarDatos(){
-        return "\nMarca: "+marca+"\nModelo: "+modelo+"\nAño: "+year+"\nMotor: "+motor+"\nLlantas: "+llantas+"\nPrecio: "+precio;
+        return "\nMarca: "+marca+"\nModelo: "+modelo+"\nAño: "+year+"\nMotor: "+motor+"\nLlantas: "+llantas+"\nPrecio: "+precio+"\nEstado: "+disponibilidad;
     }
 
     

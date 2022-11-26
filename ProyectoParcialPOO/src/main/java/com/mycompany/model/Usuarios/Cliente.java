@@ -2,6 +2,7 @@ package com.mycompany.model.Usuarios;
 
 import java.util.ArrayList;
 
+import com.mycompany.model.Vehiculos.Estado;
 import com.mycompany.model.Vehiculos.Vehiculo;
 
 public class Cliente extends Usuario{ 
@@ -36,10 +37,14 @@ public class Cliente extends Usuario{
         return tipo;
     }
 
+    public void setCedula(String cedula){
+        this.cedula = cedula; 
+    }
+
     public void consultarStock(ArrayList<Vehiculo> vehiculos){
         int i = 1;
         for(Vehiculo vh : vehiculos){
-            if(vh.getDisponible()){
+            if(vh.getDisponibilidad().equals(Estado.Disponible)){
                 System.out.println(i+". Marca: "+vh.getMarca()+", Modelo: "+vh.getModelo()+", Año: "+vh.getYear());
             }
             i++;

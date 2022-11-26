@@ -53,8 +53,8 @@ public class Vehiculo {
     }
     
     public String mostrarDatos(){
-        return "\nMarca: "+marca+"\nModelo: "+modelo+"\nAño: "+year+"\nMotor: "+motor+"\nLlantas: "+llantas+"\nPrecio: "+precio+"\nEstado: "+disponibilidad;
-    }
+        return "\nEstado: "+disponibilidad+"\nMarca: "+marca+"\nModelo: "+modelo+"\nAño: "+year+"\nMotor: "+motor+"\nLlantas: "+llantas+"\nPrecio: "+precio;
+    }    
 
     
 }

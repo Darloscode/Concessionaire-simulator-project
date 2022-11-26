@@ -12,6 +12,7 @@ public class Cliente extends Usuario{
     private String ocupacion;
     private double ingresos;    
     private ArrayList<Vehiculo> vehiculos;
+    public ArrayList<String> mensajes;
     
     public Cliente(String nombre, String apellido, String usuario, String password, String cedula, String ocupacion, double ingresos){
         super(nombre, apellido,usuario, password);        
@@ -43,6 +44,7 @@ public class Cliente extends Usuario{
 
     public void consultarStock(ArrayList<Vehiculo> vehiculos){
         int i = 1;
+        System.out.println();
         for(Vehiculo vh : vehiculos){
             if(vh.getDisponibilidad().equals(Estado.Disponible)){
                 System.out.println(i+". Marca: "+vh.getMarca()+", Modelo: "+vh.getModelo()+", Año: "+vh.getYear());
@@ -54,6 +56,13 @@ public class Cliente extends Usuario{
     public Vehiculo solicitarCotizacion(int indice, ArrayList<Vehiculo> arreglo){        
         return arreglo.get(indice-1);
     }
+    
+
+
+
+   
+    
+
 
 
     /*

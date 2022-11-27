@@ -5,8 +5,8 @@ public class Camion extends Vehiculo{
     private double capacidad;
     private double ejes;
 
-    public Camion(String marca, String modelo, int year,  String motor, int llantas, double capacidad, double ejes, double precio){
-        super(marca, modelo, year, motor, llantas, precio);
+    public Camion(String marca, String modelo, int year,  Motor mtr, int llantas, double capacidad, double ejes, double precio){
+        super(marca, modelo, year, mtr, llantas, precio);
         this.capacidad = capacidad;
         this.ejes = ejes;
     }

@@ -7,8 +7,8 @@ public class Automovil extends Vehiculo{
     private boolean convertible;
     private boolean camara;
 
-    public Automovil(String marca, String modelo, int year,  String motor, int asientos, boolean conv, boolean cam, double precio){
-        super(marca, modelo, year, motor, 4, precio);
+    public Automovil(String marca, String modelo, int year,  Motor mtr, int asientos, boolean conv, boolean cam, double precio){
+        super(marca, modelo, year, mtr, 4, precio);
         this.asientos = asientos;
         this.convertible = conv;
         this.camara = cam;

@@ -7,7 +7,7 @@ public class Tractor extends Vehiculo{
     private String transmision;
     
     public Tractor(String marca, String modelo, int year, boolean agricola, String transmision, double precio){
-        super(marca, modelo, year, "Diesel", 4, precio);
+        super(marca, modelo, year, Motor.Diesel, 4, precio);
         this.agricola = agricola;
         this.transmision = transmision;
     }

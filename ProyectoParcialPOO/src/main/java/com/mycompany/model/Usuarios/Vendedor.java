@@ -27,7 +27,7 @@ public class Vendedor extends Usuario{
         return tipo;
     }
 
-    public ArrayList getCotizaciones(){
+    public ArrayList<Vehiculo> getCotizaciones(){
         return cotizaciones;
     }
 
@@ -45,35 +45,59 @@ public class Vendedor extends Usuario{
     public void mostrarCotizaciones(){
         Scanner rd = new Scanner(System.in);
         System.out.println();
-        for(int i=0; i<cotizaciones.size(); i++){
-            System.out.println((i+1)+". "+clientes.get(i).getNombre()+" ha solicitado una cotazación del vehiculo de la marca " + cotizaciones.get(i).getMarca()+" y modelo "+cotizaciones.get(i).getModelo());
-        }
+
         String op = "";
         String opc = "";
 
-        while(!op.equals("s")){
-
-            System.out.print("Elija una cotización para responder, escriba (s) para salir: ");
-            op = rd.nextLine();
-
-            if(isNumeric(op)){
-                int indice = Integer.parseInt("op");
-                if((indice>0)&(indice<=cotizaciones.size())){
-                    System.out.println("¿Aprobar o Rechazar la solicitud?");
-                    System.out.println("1. Aprobar\n2. Rechazar");
-                    if(opc.equals("1")){
-                        System.out.println("Todo bien");
-
-                    }else if(opc.equals("2")){
-                        System.out.println("Estimado " + getNombre() +", escriba los motivos del rechazo de la solicitud");
-                        System.out.print("Respuesta: ");
-                        String respuesta = rd.nextLine();
-                    }
-
+        while(!op.equals("s")){            
+            if(cotizaciones.size()!=0){
+                for(int i=0; i<cotizaciones.size(); i++){
+                    System.out.println("\n"+(i+1)+". "+clientes.get(i).getNombre()+" ha solicitado una cotazación del vehiculo de la marca " + cotizaciones.get(i).getMarca()+" y modelo "+cotizaciones.get(i).getModelo());
                 }
+                System.out.print("\nElija una cotización para responder, escriba (s) para salir: ");
+                op = rd.nextLine();
+
+                if(isNumeric(op)){
+
+                    int indice = Integer.parseInt(op);
+
+                    if((indice>0)&(indice<=cotizaciones.size())){
+
+                        while(!(opc.equals("3"))){
+                            System.out.println("\n¿Aprobar o Rechazar la solicitud?");
+                            System.out.print("1. Aprobar\n2. Rechazar\n3. Salir\nElija una opcion: ");
+                            opc = rd.nextLine();
+
+                            if(opc.equals("1")){
+
+                                String informacion = cotizaciones.get(indice-1).mostrarDatos();
+                                clientes.get(indice-1).agregarMensaje(informacion);
+                                cotizaciones.remove(indice-1);
+                                clientes.remove(indice-1);
+                                break;                         
+
+                            }else if(opc.equals("2")){
+                                System.out.println("\nEstimado " + getNombre() +", escriba los motivos del rechazo de la solicitud");
+                                System.out.print("\nRespuesta: ");
+                                String respuesta = rd.nextLine();
+                                clientes.get(indice-1).agregarMensaje(respuesta);
+                                cotizaciones.remove(indice-1);
+                                clientes.remove(indice-1);
+                                break;
+                            }else{
+                                System.out.println("\nElija una opcion correcta\n");
+                            }                  
+                        }                        
+                    }
+                }else if(op.equals("s")){
+                    break;
+                }else{
+                    System.out.println("\nElija una opción correcta");
+                }
+            }else{
+                break;
             }            
-        }
-        rd.close();        
+        }                     
     }
 
     

@@ -12,7 +12,7 @@ public class Cliente extends Usuario{
     private String ocupacion;
     private double ingresos;    
     private ArrayList<Vehiculo> vehiculos;
-    public ArrayList<String> mensajes;
+    public ArrayList<String> mensajes = new ArrayList<>();
     
     public Cliente(String nombre, String apellido, String usuario, String password, String cedula, String ocupacion, double ingresos){
         super(nombre, apellido,usuario, password);        
@@ -57,6 +57,13 @@ public class Cliente extends Usuario{
         return arreglo.get(indice-1);
     }
     
+    public ArrayList<String> getMensajes(){
+        return mensajes;
+    }
+
+    public void agregarMensaje(String mensaje){
+        mensajes.add(mensaje);
+    }
 
 
 

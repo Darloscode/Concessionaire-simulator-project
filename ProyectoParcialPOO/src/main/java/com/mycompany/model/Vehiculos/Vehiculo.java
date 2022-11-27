@@ -5,16 +5,16 @@ public class Vehiculo {
     private String  marca;
     private String modelo;
     private int year;
-    private String motor;
+    private Motor mtr;
     private int llantas;
     private double precio;
     private Estado disponibilidad;
     
-    public Vehiculo(String marca, String modelo, int year,  String motor, int llantas, double precio){
+    public Vehiculo(String marca, String modelo, int year, Motor mtr, int llantas, double precio){
         this.marca = marca;
         this.modelo = modelo;
         this.year = year;
-        this.motor = motor;
+        this.mtr = mtr;
         this.llantas = llantas;
         this.precio = precio;
         this.disponibilidad = Estado.Disponible;
@@ -28,6 +28,15 @@ public class Vehiculo {
         this.disponibilidad = disponibilidad;
     }
 
+    public Motor getMotor(){
+        return mtr;
+    }
+    
+    public void setMotor(Motor mtr){
+        this.mtr = mtr;
+    }
+
+
     public String getMarca() {
         return marca;        
     }
@@ -40,10 +49,6 @@ public class Vehiculo {
         return year;
     }
 
-    public String getMotor() {
-        return motor;        
-    }
-    
     public int getLlanta() {
         return llantas;
     }
@@ -53,8 +58,6 @@ public class Vehiculo {
     }
     
     public String mostrarDatos(){
-        return "\nEstado: "+disponibilidad+"\nMarca: "+marca+"\nModelo: "+modelo+"\nAño: "+year+"\nMotor: "+motor+"\nLlantas: "+llantas+"\nPrecio: "+precio;
-    }    
-
-    
+        return "\nEstado: "+disponibilidad+"\nMarca: "+marca+"\nModelo: "+modelo+"\nAño: "+year+"\nMotor: "+mtr+"\nLlantas: "+llantas+"\nPrecio: "+precio;
+    }        
 }

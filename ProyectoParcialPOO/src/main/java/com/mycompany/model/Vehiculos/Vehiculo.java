@@ -60,4 +60,9 @@ public class Vehiculo {
     public String mostrarDatos(){
         return "\nEstado: "+disponibilidad+"\nMarca: "+marca+"\nModelo: "+modelo+"\nAño: "+year+"\nMotor: "+mtr+"\nLlantas: "+llantas+"\nPrecio: "+precio;
     }        
+
+    @Override
+    public String toString(){
+        return "Marca: "+marca+", Modelo: "+modelo+", Año: "+year+", Motor: "+mtr+", Llantas: "+llantas;
+    }    
 }

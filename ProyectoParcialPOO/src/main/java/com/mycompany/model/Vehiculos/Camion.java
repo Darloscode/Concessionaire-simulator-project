@@ -22,5 +22,8 @@ public class Camion extends Vehiculo{
     @Override
     public String mostrarDatos(){
         return "Vehiculo: "+tipo+super.mostrarDatos()+"\nCapacidad: "+capacidad+"\nEjes: "+ejes;
-    }    
+    }
+    public String toString(){
+        return "Tipo: "+tipo+", "+super.toString()+", Capacidad: "+capacidad+", N° de ejes: "+ejes+", Precio: "+getPrecio();
+    }
 }

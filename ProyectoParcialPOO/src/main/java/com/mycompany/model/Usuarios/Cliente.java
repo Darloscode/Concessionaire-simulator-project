@@ -11,8 +11,9 @@ public class Cliente extends Usuario{
     private String cedula;
     private String ocupacion;
     private double ingresos;    
-    private ArrayList<Vehiculo> vehiculos;
+    private ArrayList<Vehiculo> vehiculos = new ArrayList<>();
     public ArrayList<String> mensajes = new ArrayList<>();
+    private ArrayList<Vehiculo> cotizaciones = new ArrayList<>();
     
     public Cliente(String nombre, String apellido, String usuario, String password, String cedula, String ocupacion, double ingresos){
         super(nombre, apellido,usuario, password);        
@@ -55,7 +56,7 @@ public class Cliente extends Usuario{
 
     public Vehiculo solicitarCotizacion(int indice, ArrayList<Vehiculo> arreglo){        
         return arreglo.get(indice-1);
-    }
+    }    
     
     public ArrayList<String> getMensajes(){
         return mensajes;
@@ -65,6 +66,13 @@ public class Cliente extends Usuario{
         mensajes.add(mensaje);
     }
 
+    public ArrayList<Vehiculo> getCotizaciones(){
+        return cotizaciones;
+    }
+
+    public void cotizacionesAprobadas(Vehiculo vh){
+        cotizaciones.add(vh);
+    }
 
 
    

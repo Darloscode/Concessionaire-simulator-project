@@ -18,4 +18,8 @@ public class Motocicleta extends Vehiculo{
     public String mostrarDatos(){
         return "Vehiculo: "+tipo+"\nCategoría: "+ctg+super.mostrarDatos();
     }    
+
+    public String toString(){
+        return "Tipo: "+tipo+", "+super.toString()+", Categoria: "+ctg+", Precio: "+getPrecio();
+    }
 }

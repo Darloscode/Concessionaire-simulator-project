@@ -39,6 +39,7 @@ public class Vendedor extends Usuario{
     public void consultarStock(ArrayList<Vehiculo> vehiculos){                
         for(Vehiculo vh : vehiculos){            
             System.out.println(vh.mostrarDatos());
+            System.out.println();
         }
     }
 
@@ -69,9 +70,7 @@ public class Vendedor extends Usuario{
                             opc = rd.nextLine();
 
                             if(opc.equals("1")){
-
-                                String informacion = cotizaciones.get(indice-1).mostrarDatos();
-                                clientes.get(indice-1).agregarMensaje(informacion);
+                                clientes.get(indice-1).cotizacionesAprobadas(cotizaciones.get(indice-1));
                                 cotizaciones.remove(indice-1);
                                 clientes.remove(indice-1);
                                 break;                         
@@ -88,15 +87,15 @@ public class Vendedor extends Usuario{
                                 System.out.println("\nElija una opcion correcta\n");
                             }                  
                         }                        
+                    }else{
+                        System.out.println("\nElija una opción de la lista de cotizaciones\n");
                     }
                 }else if(op.equals("s")){
                     break;
                 }else{
-                    System.out.println("\nElija una opción correcta");
+                    System.out.println("\nElija una opción correcta\n");
                 }
-            }else{
-                break;
-            }            
+            }        
         }                     
     }
 

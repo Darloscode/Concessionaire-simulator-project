@@ -23,5 +23,9 @@ public class Tractor extends Vehiculo{
     @Override
     public String mostrarDatos(){
         return "Vehiculo: "+tipo+super.mostrarDatos()+"\nAgricola: "+agricola+"\nTransmision: "+transmision;
-    }    
+    }
+
+    public String toString(){
+        return "Tipo: "+tipo+", "+super.toString()+", Agricola: "+agricola+", Transmision: "+transmision+", Precio: "+getPrecio();
+    }
 }

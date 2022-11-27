@@ -30,4 +30,9 @@ public class Automovil extends Vehiculo{
     public String mostrarDatos(){
         return "Vehiculo: "+tipo+super.mostrarDatos()+"\nAsiento: "+asientos+"\nConvertible: "+convertible+"\nCamara: "+camara;
     }
+    
+    public String toString(){
+        return "Tipo: "+tipo+", "+super.toString()+", Asientos: "+asientos+", Convertible: "+convertible+", Camara: "+camara+", Precio: "+getPrecio();
+    }
 }
+

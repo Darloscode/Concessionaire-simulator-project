@@ -74,13 +74,52 @@ public class ProyectoParcialPOO {
                     user = login(usuario, password, tipo);                      
                     
                     
-                    if(user != -1){        
+                    if(user != -1){                        
                         Usuario cl = usuarios.get(user);                    
                         Cliente usercliente = (Cliente) cl;                        
-                        op = "";
-                        if((usercliente.getVehiculos()!=null)){
-                            while(!op.equals("3")){
-                                System.out.print("1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar compra\n4. solicitar un mantenimiento preventivo o de emergencia\n5. Consultar mantenimiento\n6. Salir\nElija una opcion: ");
+                        usercliente.agregarVehiculo(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, true, false, 940));
+                        usercliente.agregarVehiculo(new Motocicleta("Tuczoo", "Epica", 2008, Motor.Diesel, Categoria.Deportiva, 400));        
+                        op = "";                        
+
+                        if(usercliente.getMensajes().size()>0){
+                            System.out.println("\nTiene mensajes por leer\n");
+                            for(String msj : usercliente.getMensajes()){
+                                System.out.println(msj);
+                            }
+                            System.out.println();
+                            String continuar = "";
+                            while (!continuar.equals("c")){
+                                System.out.print("Escriba (c) para continuar: ");
+                                continuar = entrada.nextLine();
+                            }                            
+                        }
+                        
+                        if(usercliente.getCotizaciones().size()>0){
+                            int i = 1;
+                            String opc = "";
+                            System.out.println("\nSolicitudes aprobadas");
+                            while(!opc.equals("s")){
+                                System.out.println();
+                                for(Vehiculo vh : usercliente.getCotizaciones()){
+                                    System.out.println((i)+". "+vh.toString());
+                                }
+                                System.out.print("\nElija el vehiculo que quiere comprar, para salir escriba (s): ");
+                                opc = entrada.nextLine();
+                                if(isNumeric(opc)){
+                                    System.out.println("Todo bien");
+                                }else if(op.equals("s")){
+                                    
+                                }else{
+                                    System.out.println("\nElija una opcion correcta\n");
+                                }
+                            }
+                            
+                        }
+
+                        if((usercliente.getVehiculos().size()!=0)){
+                            op = "";
+                            while(!op.equals("5")){
+                                System.out.print("\n1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar un mantenimiento preventivo o de emergencia\n4. Consultar mantenimiento\n5. Salir\nElija una opcion: ");
                                 op = entrada.nextLine();
                                 if(op.equals("1")){                                    
                                     usercliente.consultarStock(vehiculos);                                    
@@ -96,57 +135,47 @@ public class ProyectoParcialPOO {
                                                 Vehiculo vhcotiza = usercliente.solicitarCotizacion(ind, vehiculos);                                                
                                                 enviarCotizacion(vhcotiza, usuarios, usercliente);                                                 
                                                 System.out.println("Su cotización ha sido enviado");
-                                                break;                                                                 
+                                                                                                                 
                                             }
                                         }else if(indvehiculo.equals("s")){
-                                            break;
+                                            
                                         }else{
                                             System.out.println("\nElija una opción correcta\n");
                                         }                                      
-                                    }                                    
+                                    }                                  
                                 }else if(op.equals("3")){
+                                    String opc = "";
+                                    while(!opc.equals("s")){
+                                        System.out.println("\nSus vehiculos son:\n");
+                                        for(int i=0; i<usercliente.getVehiculos().size(); i++){
+                                            System.out.println((i+1)+". "+usercliente.getVehiculos().get(i).toString());
+                                        }
+                                        System.out.print("\nElija una cotización para responder, escriba (s) para salir: ");
+                                        opc = entrada.nextLine();    
+                                        if(isNumeric(opc)){
+                                            int indice = Integer.parseInt(opc);
+                                            if((indice>0)&(indice<=usercliente.getVehiculos().size())){
+                                                
 
+
+
+
+
+                                                
+                                            } else{
+                                                System.out.println("\nElija un numero de la lista de sus vehiculos\n");
+                                            }                                           
+                                        }
+                                        if(opc.equals("s")){
+                                            
+                                        }else{
+                                            System.out.println("\nElija una opción correcta\n");
+                                        }
+                                    }
                                 }else if(op.equals("4")){
 
                                 }else if(op.equals("5")){
-
-                                }else if(op.equals("6")){
-                                    break;
-                                }else{
-                                    System.out.println("\nEscoja una opcion correcta\n");
-                                }
-                            }
-                        }else if(cotizar){
-                            op = "";
-                            while(!op.equals("3")){
-                                System.out.print("1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar compra\n4. Salir\nElija una opcion: ");
-                                op = entrada.nextLine();
-                                if(op.equals("1")){
-                                    usercliente.consultarStock(vehiculos);    
-                                }else if(op.equals("2")){
-                                    String indvehiculo = "";
-                                    while(!indvehiculo.equals("s")){
-                                        System.out.println("\nSi no ha revisado el stock, le aconsejamos escribir s y elegir la opción 1");
-                                        System.out.print("\nElija un numero del stock de vehiculos o escriba (s) para salir: ");
-                                        indvehiculo = entrada.nextLine();                                        
-                                        if(isNumeric(indvehiculo)){
-                                            int ind = Integer.parseInt(indvehiculo);
-                                            if((ind>0)&(ind<=vehiculos.size())){
-                                                Vehiculo vhcotiza = usercliente.solicitarCotizacion(ind, vehiculos);                                                
-                                                enviarCotizacion(vhcotiza, usuarios, usercliente);                                                 
-                                                System.out.println("Su cotización ha sido enviado");
-                                                break;                                                                 
-                                            }
-                                        }else if(indvehiculo.equals("s")){
-                                            break;
-                                        }else{
-                                            System.out.println("\nElija una opción correcta\n");
-                                        }                                      
-                                    }
-                                }else if(op.equals("3")){
-
-                                }else if(op.equals("4")){
-                                    break;
+                                                                
                                 }else{
                                     System.out.println("\nEscoja una opcion correcta\n");
                                 }
@@ -170,7 +199,7 @@ public class ProyectoParcialPOO {
                                                 Vehiculo vhcotiza = usercliente.solicitarCotizacion(ind, vehiculos);                                                
                                                 enviarCotizacion(vhcotiza, usuarios, usercliente);                                                 
                                                 System.out.println("Su cotización ha sido enviado");
-                                                break;                                                                 
+                                                break;
                                             }
                                         }else if(indvehiculo.equals("s")){
                                             break;
@@ -179,7 +208,7 @@ public class ProyectoParcialPOO {
                                         }                                      
                                     }
                                 }else if(op.equals("3")){
-                                    break;
+
                                 }else{
                                     System.out.println("\nEscoja una opcion correcta\n");
                                 }

@@ -1,6 +1,8 @@
 package com.mycompany.model.Usuarios;
 
+import java.util.random.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.mycompany.model.Vehiculos.Estado;
 import com.mycompany.model.Vehiculos.Vehiculo;
@@ -53,9 +55,37 @@ public class Cliente extends Usuario{
             i++;
         }
     }
+    
+    public void enviarCotizacion(Vehiculo vh, ArrayList<Usuario> arrayusuarios, Cliente cl){
+        Random rnd = new Random();
+        boolean verificar = false;
+        while(!verificar){
+            int indice = rnd.nextInt(arrayusuarios.size());
+            if(arrayusuarios.get(indice).getTipo().equals("Vendedor")){                                
+                Vendedor uservendedor = (Vendedor) arrayusuarios.get(indice);
+                uservendedor.agregarCotizacion(vh, cl);                
+                //uservendedor.getVehiculos().add(vh); PUEDES USAR ESTO SIN NECESIDAD DEL METODO AGREGARVEHICULO                          
+                verificar = true;
+            }         
+        }
+    }
+
+    public void enviarCompra(Vehiculo vh, ArrayList<Usuario> arrayusuarios, Cliente cl){
+        for(Usuario us : arrayusuarios){
+            if(us.getTipo().equals("Supervisor")){
+                Supervisor spvisor = (Supervisor) us;
+                spvisor.agregarSolicitud(vh, cl);
+            }
+        }
+    }
 
     public Vehiculo solicitarCotizacion(int indice, ArrayList<Vehiculo> arreglo){        
         return arreglo.get(indice-1);
+    }
+    
+    public Vehiculo solicitarCompra(Vehiculo vh, ArrayList<Vehiculo> arreglo){
+        int indice = arreglo.indexOf(vh);
+        return arreglo.get(indice);
     }    
     
     public ArrayList<String> getMensajes(){

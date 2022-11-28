@@ -1,8 +1,13 @@
 package com.mycompany.model.Usuarios;
 
+import com.mycompany.model.Vehiculos.Vehiculo;
+import java.util.ArrayList;
+
 public class Supervisor extends Usuario{
 
     private String tipo = "Supervisor";
+    private ArrayList<Vehiculo> solicitudes = new ArrayList<>();
+    private ArrayList<Cliente> clientes = new ArrayList<>();
             
     public Supervisor(String nombre, String apellido, String usuario, String password){
         super(nombre, apellido,usuario, password);        
@@ -16,6 +21,17 @@ public class Supervisor extends Usuario{
         return tipo;
     }
     
+
+    public void agregarSolicitud(Vehiculo vh, Cliente cl){
+        solicitudes.add(vh);
+        clientes.add(cl);
+    }
+
+    public ArrayList<Vehiculo> getSolicitudes() {
+        return solicitudes;
+    }
+
+
     /*
     public ArrayList<Supervisor> getCertificaciones() {
         return Certificaciones;

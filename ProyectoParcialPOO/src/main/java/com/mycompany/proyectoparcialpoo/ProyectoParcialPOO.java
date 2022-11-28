@@ -89,32 +89,42 @@ public class ProyectoParcialPOO {
                             int i = 1;
                             for(String msj : usercliente.getMensajes()){
                                 System.out.println(i+". "+msj);
+                                i++;
                             }
                             System.out.println();
                             String continuar = "";
                             while (!continuar.equals("c")){
-                                System.out.print("Escriba (c) para continuar: ");
+                                System.out.print("\nEscriba (c) para continuar: ");
                                 continuar = entrada.nextLine();
-                            }                            
+                            }     
+                            usercliente.getMensajes().clear();
                         }
                         
                         if(usercliente.getCotizaciones().size()>0){
-                            int i = 1;
-                            String opc = "";
-                            System.out.println("\nSolicitudes aprobadas");
-                            while(!opc.equals("s")){
+                            
+                            String indi = "";
+                            System.out.println("\nCotizaciones aprobadas");
+                            while(!indi.equals("s")){
+                                int i = 1;
                                 System.out.println();
                                 for(Vehiculo vh : usercliente.getCotizaciones()){
-                                    System.out.println((i)+". "+vh.toString());
+                                    System.out.println(i+". "+vh.toString());
+                                    i++;
                                 }
                                 System.out.print("\nElija el vehiculo que quiere comprar, para salir escriba (s): ");
-                                opc = entrada.nextLine();
-                                if(isNumeric(opc)){
-                                    System.out.println("Todo bien");
-
+                                indi = entrada.nextLine();
+                                if(isNumeric(indi)){
+                                    int indicoti = Integer.parseInt(indi);
+                                    if((indicoti>0)&(indicoti<=usercliente.getCotizaciones().size())){                                                                                                                                                                                                        
+                                        Vehiculo compra = usercliente.solicitarCompra(usercliente.getCotizaciones().get(indicoti-1), vehiculos);
+                                        usercliente.enviarCompra(compra, usuarios, usercliente);
+                                        System.out.println("Su solicitud ha sido enviada");
+                                    }else{
+                                        System.out.println("\nElija un vehiculo de la lista\n");
+                                    }
                                     //Comprar vehiculo
-
                                 }else if(op.equals("s")){
+                                    break;
                                     
                                 }else{
                                     System.out.println("\nElija una opcion correcta\n");
@@ -140,7 +150,7 @@ public class ProyectoParcialPOO {
                                             int ind = Integer.parseInt(indvehiculo);
                                             if((ind>0)&(ind<=vehiculos.size())){
                                                 Vehiculo vhcotiza = usercliente.solicitarCotizacion(ind, vehiculos);                                                
-                                                enviarCotizacion(vhcotiza, usuarios, usercliente);                                                 
+                                                usercliente.enviarCotizacion(vhcotiza, usuarios, usercliente);                                                 
                                                 System.out.println("Su cotización ha sido enviado");
                                                                                                                  
                                             }
@@ -200,8 +210,8 @@ public class ProyectoParcialPOO {
                                             int ind = Integer.parseInt(indvehiculo);
                                             if((ind>0)&(ind<=vehiculos.size())){
                                                 Vehiculo vhcotiza = usercliente.solicitarCotizacion(ind, vehiculos);                                                
-                                                enviarCotizacion(vhcotiza, usuarios, usercliente);                                                 
-                                                System.out.println("Su cotización ha sido enviado");
+                                                usercliente.enviarCotizacion(vhcotiza, usuarios, usercliente);                                                 
+                                                System.out.println("\nSu cotización ha sido enviado\n");
                                                 break;
                                             }
                                         }else if(indvehiculo.equals("s")){
@@ -249,8 +259,7 @@ public class ProyectoParcialPOO {
                             }else if(op.equals("2")){
                                 if(uservendedor.getCotizaciones().size()>0){                               
                                     System.out.println();   
-                                    uservendedor.mostrarCotizaciones();
-                                    break;                                                                    
+                                    uservendedor.mostrarCotizaciones();                                                                                                      
                                 }else{
                                     System.out.println("\nPor ahora, no tiene cotizaciones solicitadas\n");
                                 }
@@ -299,9 +308,11 @@ public class ProyectoParcialPOO {
                     break;
                 case "l":                    
                     for(Usuario a:usuarios){
-                        if(a instanceof Cliente){
-                            Cliente c = (Cliente) a;
-                            System.out.println(c.getMensajes().get(0));
+                        if(a instanceof Supervisor){
+                            Supervisor c = (Supervisor) a;
+                            for(Vehiculo vh : c.getSolicitudes()){
+                                vh.mostrarDatos();
+                            }
                         }
                         System.out.println();            
                         System.out.println();
@@ -315,22 +326,7 @@ public class ProyectoParcialPOO {
                     System.out.println("\nIngrese una opción valida\n");
             }
         }
-    }
-
-    private static void enviarCotizacion(Vehiculo vh, ArrayList<Usuario> arrayusuarios, Cliente cl){
-        Random rnd = new Random();            
-        boolean verificar = false;
-        while(!verificar){
-            int indice = rnd.nextInt(arrayusuarios.size());
-            if(arrayusuarios.get(indice).getTipo().equals("Vendedor")){                                
-                Vendedor uservendedor = (Vendedor) arrayusuarios.get(indice);
-                uservendedor.agregarCotizacion(vh, cl);
-                vh.setDisponible(Estado.Solicitado);
-                //uservendedor.getVehiculos().add(vh); PUEDES USAR ESTO SIN NECESIDAD DEL METODO AGREGARVEHICULO                          
-                verificar = true;
-            }         
-        }
-    }
+    }  
 
     public static boolean isNumeric(String cadena){
         try {
@@ -393,6 +389,7 @@ public class ProyectoParcialPOO {
     private static void inicializarSistema(){
         usuarios.add(new Cliente("Marcos", "Veliz", "ca", "ca", "0123456789", "Administrador de empresas", 900));
         usuarios.add(new Vendedor("Alejandro", "Muñoz", "ta", "ta", 001));        
+        usuarios.add(new Supervisor("Michel", "Michelina", "mi", "mi"));        
         vehiculos.add(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, true, false, 940));        
         vehiculos.add(new Motocicleta("Tuczoo", "Epica", 2008, Motor.Diesel, Categoria.Deportiva, 400));
     }

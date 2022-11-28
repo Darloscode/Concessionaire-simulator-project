@@ -24,7 +24,7 @@ public class Vehiculo {
         return disponibilidad;
     }
 
-    public void setDisponible(Estado disponibilidad){
+    public void setDisponibilidad(Estado disponibilidad){
         this.disponibilidad = disponibilidad;
     }
 

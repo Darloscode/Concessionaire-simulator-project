@@ -80,7 +80,8 @@ public class Vendedor extends Usuario{
                                 System.out.println("\nEstimado " + getNombre() +", escriba los motivos del rechazo de la solicitud");
                                 System.out.print("\nRespuesta: ");
                                 String respuesta = rd.nextLine();
-                                clientes.get(indice-1).agregarMensaje(respuesta);
+                                String mensaje = "Estimado "+clientes.get(indice-1).getNombre()+" su cotización del vehiculo "+cotizaciones.get(indice-1).getMarca()+" ha sido rechazada debido a que: ";
+                                clientes.get(indice-1).agregarMensaje(mensaje+respuesta);
                                 cotizaciones.remove(indice-1);
                                 clientes.remove(indice-1);
                                 break;

@@ -118,7 +118,7 @@ public class ProyectoParcialPOO {
                                     if((indicoti>0)&(indicoti<=usercliente.getCotizaciones().size())){                                                                                                                                                                                                        
                                         Vehiculo compra = usercliente.solicitarCompra(usercliente.getCotizaciones().get(indicoti-1), vehiculos);
                                         usercliente.enviarCompra(compra, usuarios, usercliente);
-                                        System.out.println("Su solicitud ha sido enviada");
+                                        System.out.println("Su solicitud de compra ha sido enviada");
                                     }else{
                                         System.out.println("\nElija un vehiculo de la lista\n");
                                     }

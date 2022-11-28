@@ -74,6 +74,7 @@ public class Cliente extends Usuario{
         for(Usuario us : arrayusuarios){
             if(us.getTipo().equals("Supervisor")){
                 Supervisor spvisor = (Supervisor) us;
+                System.out.println("Se ha añadido al arreglo de supervisor");
                 spvisor.agregarSolicitud(vh, cl);
             }
         }

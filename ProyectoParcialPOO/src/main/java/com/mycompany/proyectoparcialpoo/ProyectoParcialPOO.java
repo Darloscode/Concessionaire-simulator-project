@@ -76,15 +76,19 @@ public class ProyectoParcialPOO {
                     
                     if(user != -1){                        
                         Usuario cl = usuarios.get(user);                    
-                        Cliente usercliente = (Cliente) cl;                        
+                        Cliente usercliente = (Cliente) cl;  
+                        
+                        //Quitar esto
                         usercliente.agregarVehiculo(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, true, false, 940));
                         usercliente.agregarVehiculo(new Motocicleta("Tuczoo", "Epica", 2008, Motor.Diesel, Categoria.Deportiva, 400));        
+
                         op = "";                        
 
                         if(usercliente.getMensajes().size()>0){
                             System.out.println("\nTiene mensajes por leer\n");
+                            int i = 1;
                             for(String msj : usercliente.getMensajes()){
-                                System.out.println(msj);
+                                System.out.println(i+". "+msj);
                             }
                             System.out.println();
                             String continuar = "";
@@ -107,6 +111,9 @@ public class ProyectoParcialPOO {
                                 opc = entrada.nextLine();
                                 if(isNumeric(opc)){
                                     System.out.println("Todo bien");
+
+                                    //Comprar vehiculo
+
                                 }else if(op.equals("s")){
                                     
                                 }else{
@@ -156,10 +163,6 @@ public class ProyectoParcialPOO {
                                             int indice = Integer.parseInt(opc);
                                             if((indice>0)&(indice<=usercliente.getVehiculos().size())){
                                                 
-
-
-
-
 
                                                 
                                             } else{
@@ -246,7 +249,8 @@ public class ProyectoParcialPOO {
                             }else if(op.equals("2")){
                                 if(uservendedor.getCotizaciones().size()>0){                               
                                     System.out.println();   
-                                    uservendedor.mostrarCotizaciones();                                                                     
+                                    uservendedor.mostrarCotizaciones();
+                                    break;                                                                    
                                 }else{
                                     System.out.println("\nPor ahora, no tiene cotizaciones solicitadas\n");
                                 }

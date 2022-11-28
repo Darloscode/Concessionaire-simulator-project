@@ -50,8 +50,9 @@ public class Vendedor extends Usuario{
         String op = "";
         String opc = "";
 
-        while(!op.equals("s")){            
+        while(!op.equals("s")){
             if(cotizaciones.size()!=0){
+                opc = "";
                 for(int i=0; i<cotizaciones.size(); i++){
                     System.out.println("\n"+(i+1)+". "+clientes.get(i).getNombre()+" ha solicitado una cotazación del vehiculo de la marca " + cotizaciones.get(i).getMarca()+" y modelo "+cotizaciones.get(i).getModelo());
                 }
@@ -63,7 +64,7 @@ public class Vendedor extends Usuario{
                     int indice = Integer.parseInt(op);
 
                     if((indice>0)&(indice<=cotizaciones.size())){
-
+                        opc = "";
                         while(!(opc.equals("3"))){
                             System.out.println("\n¿Aprobar o Rechazar la solicitud?");
                             System.out.print("1. Aprobar\n2. Rechazar\n3. Salir\nElija una opcion: ");
@@ -73,7 +74,7 @@ public class Vendedor extends Usuario{
                                 clientes.get(indice-1).cotizacionesAprobadas(cotizaciones.get(indice-1));
                                 cotizaciones.remove(indice-1);
                                 clientes.remove(indice-1);
-                                break;                         
+                                break;                                               
 
                             }else if(opc.equals("2")){
                                 System.out.println("\nEstimado " + getNombre() +", escriba los motivos del rechazo de la solicitud");
@@ -95,6 +96,8 @@ public class Vendedor extends Usuario{
                 }else{
                     System.out.println("\nElija una opción correcta\n");
                 }
+            }else{
+                break;
             }        
         }                     
     }

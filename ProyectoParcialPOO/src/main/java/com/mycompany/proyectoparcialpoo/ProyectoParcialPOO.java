@@ -426,7 +426,8 @@ public class ProyectoParcialPOO {
 
     private static void inicializarSistema(){
         usuarios.add(new Cliente("Marcos", "Veliz", "ca", "ca", "0123456789", "Administrador de empresas", 900));
-        usuarios.add(new Vendedor("Alejandro", "Muñoz", "ta", "ta", 001));        
+        usuarios.add(new Vendedor("Alejandro", "Muñoz", "ta", "ta", 001));
+        usuarios.add(new JefedeTaller("Jose", "Alvarez", "je", "je"));
         usuarios.add(new Supervisor("Michel", "Michelina", "mi", "mi"));        
         vehiculos.add(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, true, false, 940));        
         vehiculos.add(new Motocicleta("Tuczoo", "Epica", 2008, Motor.Diesel, Categoria.Deportiva, 400));

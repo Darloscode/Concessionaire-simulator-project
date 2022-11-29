@@ -2,6 +2,7 @@ package com.mycompany.model.Usuarios;
 import java.util.ArrayList;
 
 import com.mycompany.model.Vehiculos.Vehiculo; 
+import java.util.Scanner;
 
 public class JefedeTaller extends Usuario{
 
@@ -29,6 +30,11 @@ public class JefedeTaller extends Usuario{
         return tipo;
     }
 
+    public ArrayList<Vehiculo> getEntregarvehiculos() {
+        return entregarvehiculos;
+    }
+    
+
     public void agregarEntregas(Vehiculo auto, Cliente cl){        
         entregarvehiculos.add(auto);
         clientesentregar.add(cl);
@@ -38,19 +44,51 @@ public class JefedeTaller extends Usuario{
         mantenimientoVehiculos.add(auto);
         clientesmantenimiento.add(cl);
     }
-
     
-
-
     
+    public void mostrarEntregas( ArrayList<Vehiculo>vehiculos){
+         Scanner sc = new Scanner ( System.in);
 
+        String op= "";
+        String opc= "";
 
-    private ArrayList<Vehiculo> Ventas= new ArrayList<>();
-    private ArrayList<Supervisor> clientes = new ArrayList<>();    
-    public void agregarSolicitud(Vehiculo vh, Supervisor sp){
-        Ventas.add(vh);
-        clientes.add(sp);    
+        while(!op.equals("s")){
+            if(clientesentregar.size()>0){                
+                for( int i=0 ; i<clientesentregar.size(); i++){
+                
+                    System.out.println((i+1)+ ". a El cliente "+clientesentregar.get(i).getNombre()+" Se le ha aprobado la comprar un vehiculo de la marca "+ entregarvehiculos.get(i).getMarca()+" y modelo "+entregarvehiculos.get(i).getModelo());
+                    while(!(opc.equals("2"))){
+                
+                            System.out.print("\n1. entregar vehiculo\n2. Salir\nElija una opcion: ");
+                            opc = sc.nextLine();
+                            if(opc.equals("1")){
+                            System.out.println("El vehiculo ha sido entregado");
+                            
+                            for( int a=0 ; a<vehiculos.size(); a++){
+                                if (vehiculos.get(a).equals(entregarvehiculos.get(i))){
+                                    vehiculos.remove(a);
+                                }
+                            }       
+                            break;
+                            }
+                            
+                    
+                    
+                         }   
+        
+                  } break;
+            }
+        }
     }
+
+    
+
+
+    
+
+
+       
+    
 
     /*
     public ArrayList<JefedeTaller> getMantenimientoVehiculos() {

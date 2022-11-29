@@ -23,13 +23,19 @@ public class Supervisor extends Usuario{
     }
     
 
-    public void agregarSolicitud(Vehiculo vh, Cliente cl){
-        solicitudes.add(vh);
-        clientes.add(cl);
-    }
-
     public ArrayList<Vehiculo> getSolicitudes() {
         return solicitudes;
+    }
+    
+    public ArrayList<Cliente> getClientes(){
+        return clientes;
+    }
+    
+    
+     public void agregarSolicitud(Vehiculo vh, Cliente cl){  // agrega las solicitudes que son enviadas desde clientes en 
+                                                             // el metodo  compra
+        solicitudes.add(vh);
+        clientes.add(cl);
     }
 
     public void mostrarSolicitudes(ArrayList<Usuario> usuarios){         
@@ -97,31 +103,14 @@ public class Supervisor extends Usuario{
 
 
 
-
-
-    
-    
-
-
-
-
-    public ArrayList<Cliente> getClientes(){
-        return clientes;
-    }
+  
 
 
     public Vehiculo solicitarSolicitudes(int indice, ArrayList<Vehiculo>arreglo){
         return arreglo.get(indice-1);
     }
     
-    public void enviarSolicitudAprobada(Vehiculo vh , ArrayList<Usuario>arrayusuarios,Supervisor sp){
-        for(Usuario us: arrayusuarios){
-            if(us.getTipo().equals("Jefe de Taller"));
-                JefedeTaller jtaller= (JefedeTaller)us;
-                System.out.println("se ha enviado al taller la solicitud de compra");
-                jtaller.agregarSolicitud(vh, sp);                        
-        }      
-    }
+   
                 
     
 

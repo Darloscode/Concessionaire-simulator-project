@@ -291,10 +291,7 @@ public class ProyectoParcialPOO {
                             usersupervisor.mostrarSolicitudes(usuarios);
                         }
 
-                        while(!op.equals("3")){
-                            System.out.println("\n1. Entregar vehiculos\n2. Vehiculos en mantenimiento\n3. Salir\nElija una opcion: ");
-                            op = entrada.nextLine();
-                        }
+                       
                         
                         
                         
@@ -313,7 +310,29 @@ public class ProyectoParcialPOO {
                     System.out.print("Contraseña: ");
                     password = entrada.nextLine();
                     
-                    user = login(usuario, password, tipo);    
+                    user = login(usuario, password, tipo);   
+                    
+                     if(user!=-1){
+                        Usuario spv = usuarios.get(user);
+                        JefedeTaller userjfdetaller = (JefedeTaller) spv;
+                        op = "";
+                    while(!op.equals("3")){
+                            System.out.println("\n1. mostrar entregas\n2. Vehiculos en mantenimiento\n3. Salir\nElija una opcion: ");
+                            op = entrada.nextLine();
+                        if (op.equals("1")){
+                            
+                            if(userjfdetaller.getEntregarvehiculos().size()>0){
+                               userjfdetaller.mostrarEntregas(vehiculos);
+                            }
+                            
+                        }
+                        else if (op.equals("2")){
+                        
+                        }
+                         
+                    }
+                 }
+                        
                 
                     break;
 

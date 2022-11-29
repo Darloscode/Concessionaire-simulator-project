@@ -44,7 +44,31 @@ public class Cliente extends Usuario{
         this.cedula = cedula; 
     }
 
-    public void consultarStock(ArrayList<Vehiculo> vehiculos){
+   
+    
+     public ArrayList<String> getMensajes(){
+        return mensajes;
+    }
+
+ 
+    public ArrayList<Vehiculo> getCotizaciones(){
+        return cotizaciones;
+    }
+
+    public void cotizacionesAprobadas(Vehiculo vh){
+        cotizaciones.add(vh);
+    }
+    
+     public void agregarMensaje(String mensaje){
+        mensajes.add(mensaje);
+    }
+
+    public void agregarCompra (Vehiculo vh){  // agrega el vehiculo con las carateristicas de la solicitud de compra aceptada a la lista
+        vehiculos.add(vh);
+    }
+    
+    
+     public void consultarStock(ArrayList<Vehiculo> vehiculos){
         int i = 1;
         System.out.println();
         for(Vehiculo vh : vehiculos){
@@ -69,7 +93,7 @@ public class Cliente extends Usuario{
         }
     }
 
-    public void enviarCompra(Vehiculo vh, ArrayList<Usuario> arrayusuarios, Cliente cl){
+    public void enviarCompra(Vehiculo vh, ArrayList<Usuario> arrayusuarios, Cliente cl){   // envia desde el main la compra hacia l supervisor
         for(Usuario us : arrayusuarios){
             if(us.getTipo().equals("Supervisor")){
                 Supervisor spvisor = (Supervisor) us;                
@@ -147,34 +171,7 @@ public class Cliente extends Usuario{
         }
     }
     
-    public ArrayList<String> getMensajes(){
-        return mensajes;
-    }
-
-    public void agregarMensaje(String mensaje){
-        mensajes.add(mensaje);
-    }
-
-    public ArrayList<Vehiculo> getCotizaciones(){
-        return cotizaciones;
-    }
-
-    public void cotizacionesAprobadas(Vehiculo vh){
-        cotizaciones.add(vh);
-    }
-
-
    
-    
-
-
-
-
-
-
-    public void agregarCompra (Vehiculo vh){
-        vehiculos.add(vh);
-    }
     
 
     /*

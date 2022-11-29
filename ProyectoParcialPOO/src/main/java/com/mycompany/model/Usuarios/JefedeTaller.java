@@ -1,13 +1,21 @@
 package com.mycompany.model.Usuarios;
-import java.util.ArrayList; 
+import java.util.ArrayList;
+
+import com.mycompany.model.Vehiculos.Vehiculo; 
 
 public class JefedeTaller extends Usuario{
 
     private String tipo = "Jefe de Taller";
 
-    ArrayList<JefedeTaller>MantenimientoVehiculos;
-    ArrayList<JefedeTaller>CertifiacionesTecnicas;
-    ArrayList<JefedeTaller>EntregarVehiculos;
+    ArrayList<String>CertifiacionesTecnicas;
+
+
+    ArrayList<Vehiculo> mantenimientoVehiculos = new ArrayList<>();
+    ArrayList<Cliente> clientesmantenimiento = new ArrayList<>();
+
+    ArrayList<Vehiculo> entregarvehiculos = new ArrayList<>();
+    ArrayList<Cliente> clientesentregar = new ArrayList<>();
+
                             
     public JefedeTaller(String nombre, String apellido, String usuario, String password){
         super(nombre, apellido, usuario, password);        
@@ -19,6 +27,29 @@ public class JefedeTaller extends Usuario{
     
     public String getTipo(){
         return tipo;
+    }
+
+    public void agregarEntregas(Vehiculo auto, Cliente cl){        
+        entregarvehiculos.add(auto);
+        clientesentregar.add(cl);
+    }
+
+    public void agregarMantenimientos(Vehiculo auto, Cliente cl){
+        mantenimientoVehiculos.add(auto);
+        clientesmantenimiento.add(cl);
+    }
+
+    
+
+
+    
+
+
+    private ArrayList<Vehiculo> Ventas= new ArrayList<>();
+    private ArrayList<Supervisor> clientes = new ArrayList<>();    
+    public void agregarSolicitud(Vehiculo vh, Supervisor sp){
+        Ventas.add(vh);
+        clientes.add(sp);    
     }
 
     /*

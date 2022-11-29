@@ -9,6 +9,10 @@ public class Vehiculo {
     private int llantas;
     private double precio;
     private Estado disponibilidad;
+
+    private Mantenimiento mantenimiento;
+    private EstadoMantenimiento estadomant;
+
     
     public Vehiculo(String marca, String modelo, int year, Motor mtr, int llantas, double precio){
         this.marca = marca;
@@ -19,6 +23,25 @@ public class Vehiculo {
         this.precio = precio;
         this.disponibilidad = Estado.Disponible;
     }
+
+    public Mantenimiento getMantenimiento(){
+        return mantenimiento;
+    }
+
+    public void setMantenimiento(Mantenimiento mantenimiento){
+        this.mantenimiento = mantenimiento;
+    }
+
+    public EstadoMantenimiento getEstadoMantenimiento(){
+        return estadomant;
+    }
+
+    public void setEstadoMantenimiento(EstadoMantenimiento estadomant){
+        this.estadomant = estadomant;
+    }
+
+
+
     
     public Estado getDisponibilidad(){
         return disponibilidad;

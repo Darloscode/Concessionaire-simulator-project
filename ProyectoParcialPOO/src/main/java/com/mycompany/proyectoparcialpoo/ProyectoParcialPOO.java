@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.random.*;
 
 import javax.sound.midi.Soundbank;
+import javax.sound.sampled.SourceDataLine;
 
 import com.mycompany.model.Usuarios.*;
 import com.mycompany.model.Vehiculos.*;
@@ -145,6 +146,7 @@ public class ProyectoParcialPOO {
                                     String indvehiculo= "";
                                     System.out.print("************LISTA DE VEHICULOS************");
                                     usercliente.consultarStock(vehiculos);    // llama a la lista de vehiculos (STOCK)  
+                                    /*
                                     System.out.print("\nElija un numero del stock de vehiculos o escriba (s) para salir: ");
                                     indvehiculo = entrada.nextLine(); 
                                     if(isNumeric(indvehiculo) ){    
@@ -159,18 +161,35 @@ public class ProyectoParcialPOO {
                                                 System.out.println("Elija un vehiculo de la lista");
                                             }
                                          }
+                                    */
                                 }
                                 else if(op.equals("2")){
-                                    String indvehiculo = "";
-                                    System.out.println("\nConsulte el stock para mostrar la lista de vehiculos si desea realizar una cotizacion o escriba (s) para salir: ");
-                                    
-                                    while(!indvehiculo.equals("s")){
-                                       
-                                        indvehiculo = entrada.nextLine(); 
+                                    String indvehiculo = "";                                                                                                                                                
+                                    String indcoti = "";
+                                    while(!indcoti.equals("s")){
+                                        System.out.println("\nVehiculos disponibles para cotizar\n");
+                                        usercliente.consultarStock(vehiculos);
+                                        System.out.print("\nElija un numero del stock de vehiculos para cotizar o escriba (s) para salir: ");
+                                        indcoti = entrada.nextLine();
+                                        if(isNumeric(indcoti)){
+                                            int indicoti = Integer.parseInt(indcoti);
+                                            if((indicoti>0) & (indicoti<=vehiculos.size())){                                                    
+                                                Vehiculo vhcotiza = usercliente.solicitarCotizacion(indicoti, vehiculos);                                                
+                                                usercliente.enviarCotizacion(vhcotiza, usuarios, usercliente);                                                 
+                                                System.out.println("\nSu cotización ha sido enviada\n");    
+                                                break;                                                    
+                                            }else{
+                                                System.out.println("\nElija un vehiculo de la lista\n");
+                                            }
+                                        }else if(indcoti.equals("s")){
+                                                
+                                        }
+                                        
+                                        /*
                                         if(isNumeric(indvehiculo) && indvehiculo.equals("1")){
                                         usercliente.consultarStock(vehiculos); 
                                         System.out.print("\nElija un numero del stock de vehiculos o escriba (s) para salir: ");
-                                        indvehiculo = entrada.nextLine(); // pide que ingrese el valor
+                                        indcoti = entrada.nextLine(); // pide que ingrese el valor
                                            
                                                
                                             int ind = Integer.parseInt(indvehiculo);  
@@ -193,8 +212,9 @@ public class ProyectoParcialPOO {
                                         else{
                                             System.out.println("\nElija una opción correcta\n");
                                         }
-                                        
-                                    }                                 
+                                         */
+                                    }     
+                                                                
                                 }else if(op.equals("3")){
                                     String opc = "";
                                     while(!opc.equals("s")){                                        
@@ -322,7 +342,7 @@ public class ProyectoParcialPOO {
                         op = "";
 
                         if(usersupervisor.getSolicitudes().size()>0){                           
-                            usersupervisor.mostrarSolicitudes(usuarios);
+                            usersupervisor.mostrarSolicitudes(usuarios, vehiculos);
                         }else{
                             System.out.println("\nPor ahora no tiene solicitudes de compra\n");
                         }
@@ -355,10 +375,10 @@ public class ProyectoParcialPOO {
                     
                      if(user!=-1){
                         Usuario spv = usuarios.get(user);
-                        JefedeTaller userjfdetaller = (JefedeTaller) spv;
+                        JefedeTaller userjefetaller = (JefedeTaller) spv;
                         op = "";
                         while(!op.equals("4")){
-                            if(userjefetaller.getentregarVehiculos().size()>0){
+                            if(userjefetaller.getEntregarVehiculos().size()>0){
                                 System.out.println("\nTiene vehiculos por entregar, escoja la opcion 1 para revisar la lista de entregas\n");    
                             }
 

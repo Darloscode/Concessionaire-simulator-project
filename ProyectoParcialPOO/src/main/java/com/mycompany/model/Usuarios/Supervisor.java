@@ -1,6 +1,6 @@
 package com.mycompany.model.Usuarios;
 
-import com.mycompany.model.Vehiculos.Vehiculo;
+import com.mycompany.model.Vehiculos.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 

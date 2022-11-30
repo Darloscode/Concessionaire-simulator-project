@@ -1,7 +1,7 @@
 package com.mycompany.model.Usuarios;
 import java.util.ArrayList;
 
-import com.mycompany.model.Vehiculos.Vehiculo; 
+import com.mycompany.model.Vehiculos.*; 
 import java.util.Scanner;
 
 public class JefedeTaller extends Usuario{
@@ -29,8 +29,9 @@ public class JefedeTaller extends Usuario{
     public String getTipo(){
         return tipo;
     }
+    
 
-    public ArrayList<Vehiculo> getEntregarvehiculos() {
+    public ArrayList<Vehiculo> getEntregarVehiculos(){
         return entregarvehiculos;
     }
     

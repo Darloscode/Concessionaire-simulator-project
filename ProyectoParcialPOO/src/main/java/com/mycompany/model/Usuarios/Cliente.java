@@ -28,7 +28,7 @@ public class Cliente extends Usuario{
 
     @Override
     public String mostrarDatos(){
-        return "Usuario: "+tipo+super.mostrarDatos()+"\nCedula: "+cedula+"\nOcupacion: "+ocupacion+"\nIngresos: "+ingresos;
+        return "Usuario:\n " +tipo+super.mostrarDatos()+"\nCedula: "+cedula+"\nOcupacion: "+ocupacion+"\nIngresos: "+ingresos;
     }
        
 

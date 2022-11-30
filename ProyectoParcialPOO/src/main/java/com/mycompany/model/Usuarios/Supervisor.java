@@ -45,10 +45,12 @@ public class Supervisor extends Usuario{
         String opc= "";
 
         while(!op.equals("s")){
-            if(solicitudes.size()>0){                
+            if(solicitudes.size()>0){ 
+                
                 for( int i=0 ; i<solicitudes.size(); i++){
                     System.out.println((i+1)+ ". El cliente "+clientes.get(i).getNombre()+" ha solicitado comprar un vehiculo de la marca "+ solicitudes.get(i).getMarca()+" y modelo "+solicitudes.get(i).getModelo());
-                }
+                    System.out.println(clientes.get(i).mostrarDatos());
+                }   
 
                 System.out.print("\nElija una solicitud para responder o escriba (s) para salir: ");
                 op = sc.nextLine();
@@ -99,6 +101,9 @@ public class Supervisor extends Usuario{
             }
         }  
     }  
+    
+    
+    
 
 
 

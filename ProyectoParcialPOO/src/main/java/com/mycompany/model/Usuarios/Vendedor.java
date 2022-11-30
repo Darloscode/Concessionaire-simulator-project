@@ -74,6 +74,7 @@ public class Vendedor extends Usuario{
                                 clientes.get(indice-1).cotizacionesAprobadas(cotizaciones.get(indice-1));
                                 cotizaciones.remove(indice-1);
                                 clientes.remove(indice-1);
+                                System.out.println("Se ha enviado el mensaje al cliente");
                                 break;                                               
 
                             }else if(opc.equals("2")){
@@ -84,6 +85,7 @@ public class Vendedor extends Usuario{
                                 clientes.get(indice-1).agregarMensaje(mensaje+respuesta);
                                 cotizaciones.remove(indice-1);
                                 clientes.remove(indice-1);
+                                System.out.println("Se ha enviado el mensaje al cliente");
                                 break;
                             }else{
                                 System.out.println("\nElija una opcion correcta\n");

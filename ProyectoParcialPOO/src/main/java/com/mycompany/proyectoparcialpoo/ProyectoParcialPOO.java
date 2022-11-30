@@ -38,6 +38,7 @@ public class ProyectoParcialPOO {
             System.out.println(a.getClass());            
             System.out.println();
         }
+
         
         ArrayList<Vehiculo> vehiculos = cargarVehiculos();
         for(Vehiculo v:vehiculos){
@@ -98,9 +99,10 @@ public class ProyectoParcialPOO {
                             }     
                             usercliente.getMensajes().clear();
                         }
+                        else System.out.println("No tiene mesajes en su bandeja de mensajes");
                         
                         if(usercliente.getCotizaciones().size()>0){
-                            
+                            System.out.println("\nTiene mensajes por leer\n");
                             String indi = "";
                             System.out.println("\nCotizaciones aprobadas");
                             while(!indi.equals("s")){
@@ -131,35 +133,63 @@ public class ProyectoParcialPOO {
                             }
                             
                         }
+                        else System.out.println("No tiene solicitudes de cotizaciones\n");
 
                         if((usercliente.getVehiculos().size()!=0)){
                             op = "";
+                            System.out.print("Bienvenido Sr(a)"+" "+usercliente.getTipo()+": "+usercliente.getNombre()+" "+usercliente.getApellido()); // muestra los datos del cliente al iniciar el sistema
                             while(!op.equals("5")){
-                                System.out.print("\n1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar un mantenimiento\n4. Consultar mantenimiento\n5. Salir\nElija una opcion: ");
+                                System.out.print("\n1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar un mantenimiento\n4. Consultar mantenimiento\n5. Salir\n \nElija una opcion: ");
                                 op = entrada.nextLine();
-                                if(op.equals("1")){                                    
-                                    usercliente.consultarStock(vehiculos);                                    
+                                if(op.equals("1")){   
+                                    System.out.print("************LISTA DE VEHICULOS************");
+                                    usercliente.consultarStock(vehiculos);    // llama a la lista de vehiculos (STOCK)                                 
                                 }else if(op.equals("2")){
                                     String indvehiculo = "";
                                     while(!indvehiculo.equals("s")){
-                                        System.out.println("\nSi no ha revisado el stock, le aconsejamos escribir s y elegir la opción 1");
+                                       System.out.println("\nConsulte el stock para mostrar la lista de vehiculos si desea realizar una cotizacion o escriba (s) para salir: ");
+                                        
+                                        
+                                        indvehiculo = entrada.nextLine(); 
+                        
+                                           
+                                        if(isNumeric(indvehiculo) && indvehiculo.equals("1")){
+                                        System.out.println("\nConsulte el stock para mostrar la lista de vehiculos si desea realizar una cotizacion o escriba (s) para salir: ");
+                                        usercliente.consultarStock(vehiculos); 
                                         System.out.print("\nElija un numero del stock de vehiculos o escriba (s) para salir: ");
-                                        indvehiculo = entrada.nextLine();                                        
-                                        if(isNumeric(indvehiculo)){
-                                            int ind = Integer.parseInt(indvehiculo);
+                                        indvehiculo = entrada.nextLine(); // pide que ingrese el valor
+                                           
+                                               
+                                            int ind = Integer.parseInt(indvehiculo);  
                                             if((ind>0)&(ind<=vehiculos.size())){
                                                 Vehiculo vhcotiza = usercliente.solicitarCotizacion(ind, vehiculos);                                                
                                                 usercliente.enviarCotizacion(vhcotiza, usuarios, usercliente);                                                 
-                                                System.out.println("\nSu cotización ha sido enviado\n");                                                                                                                 
-                                            }else{
+                                                System.out.println("\nSu cotización ha sido enviada\n");                                                                                                                
+                                            }
+                                           
+                                            else{
                                                 System.out.println("Elija un vehiculo de la lista");
                                             }
-                                        }else if(indvehiculo.equals("s")){
+                                               
+                                           
+                                          
                                             
-                                        }else{
+                             
+                                            
+                                        }
+                                        
+                                        else if(indvehiculo.equals("s")){
+                                            
+                                            
+                                        }else if(indvehiculo.equals("2")){
+                                            System.out.println("");
+                                            System.out.println("Señor : "+usercliente.getNombre()+"  "+usercliente.getApellido()+"  "+"Por favor consulte primero el stock de vehiculo");
+                                        }
+                                        else{
                                             System.out.println("\nElija una opción correcta\n");
-                                        }                                      
-                                    }                                  
+                                        }
+                                        
+                                    }                                 
                                 }else if(op.equals("3")){
                                     String opc = "";
                                     while(!opc.equals("s")){                                        
@@ -301,7 +331,7 @@ public class ProyectoParcialPOO {
                     break;
                 case "4":
                     System.out.println("\n************Jefe de Taller************");
-                    tipo = "Vendedor";
+                    tipo = "Jefe de Taller";
                     
                     System.out.print("Usuario: ");
                     usuario = entrada.nextLine();

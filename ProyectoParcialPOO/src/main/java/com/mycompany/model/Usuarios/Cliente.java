@@ -120,6 +120,7 @@ public class Cliente extends Usuario{
         return arreglo.get(indice);
     }
     
+    /*
     public void solicitarMantenimiento(Cliente usercliente, int indice, ArrayList<Usuario> usuarios){
         Scanner rd = new Scanner(System.in);
         String mant = "";
@@ -169,6 +170,92 @@ public class Cliente extends Usuario{
                 System.out.println("Elija una opcion correcta");
             }   
         }
+    }
+    */
+
+    public void solicitarMantenimiento(Cliente usercliente, int indice, ArrayList<Usuario> usuarios){
+        Scanner rd = new Scanner(System.in);
+        String mant = "";
+        while(!mant.equals("3")){
+            System.out.print("\n1. Solicitar mantenimiento preventivo\n2. Solicitar mantenimiento de emergencia\n3. Salir\nElija una opcion: ");
+            mant = rd.nextLine();
+            if(mant.equals("1")){
+                boolean exit = true;
+                while(exit){
+                    System.out.print("\nIngrese los km recorridos del vehiculo(cada km costara 10 centavos): ");
+                    String km = rd.nextLine();
+                    if(isNumeric(km)){
+                        int ikm = Integer.parseInt(km);
+                        double total = ikm*0.10;
+                        System.out.println("\nEl valor a pagar por mantenimiento preventido es de: $"+total);
+                        String ext = "";
+                        while(!(ext.equals("2"))){
+                            System.out.print("\n1. Aceptar\n2. Salir\nElija una opcion: ");
+                            ext = rd.nextLine();
+                            if(ext.equals("1")){
+                                System.out.println("\nSu solicitud esta siendo enviada....");
+                                Vehiculo vh = usercliente.getVehiculos().get(indice-1);
+                                vh.setMantenimiento(Mantenimiento.Preventivo);
+                                usercliente.enviarMantenimiento(vh, usuarios, usercliente);
+                                System.out.println("\nSolicitud ha sido envida con exito!!");                                                                            
+                                exit = false;                                                                            
+                                break;                                                                                                                                                    
+                            }else if(ext.equals("2")){                                                                            
+                                System.out.println("\nHa cancelado la solicitud\n");                                                                            
+                                exit = false;                                                                        
+                            }else{                                                                            
+                                System.out.println("\nElija una opcion correcta\n");                                                                    
+                            }                                                                
+                        }                                                            
+                    }else{                                                                    
+                        System.out.println("\nIngrese los km correctos\n");                                                                                      
+                    }                                                                                                                                        
+                }                                                                                                                                        
+            }else if(mant.equals("2")){
+                System.out.println("El costo del mantenimiento lo validará el jefe de taller, le llegará el costo a su bandeja de mensajes");
+                Vehiculo vh = usercliente.getVehiculos().get(indice-1);
+                vh.setMantenimiento(Mantenimiento.Emergencia);
+                usercliente.enviarMantenimiento(vh, usuarios, usercliente);                
+            }else if(mant.equals("3")){                
+                
+            }else{
+                System.out.println("Elija una opcion correcta");
+            }   
+        }
+    }
+    
+    public void consultarMantenimiento(){
+        Scanner rd = new Scanner(System.in);
+        ArrayList<Vehiculo> mantenimiento = new ArrayList<>();
+        for(Vehiculo vh : vehiculos){
+            if(vh.getMantenimiento()!=Mantenimiento.Ninguno){
+                mantenimiento.add(vh);
+            }
+        }
+
+        if(mantenimiento.size()>0){            
+            String opc = "";
+            while(!opc.equals("s")){
+                System.out.println("\nSus vehiculos en mantenimiento son:\n");
+                for(int i=0; i<mantenimiento.size(); i++){                
+                    System.out.println((i+1)+mantenimiento.get(i).toString());                         
+                }
+                System.out.print("Elija un vehiculo para consultar mantenimiento: ");
+                opc = rd.nextLine();
+                if(isNumeric(opc)){
+                    int indice = Integer.parseInt(opc);
+                    if((indice>0) & (indice<=mantenimiento.size())){                    
+                        System.out.println("Su vehiculo esta en mantenimiento "+vehiculos.get(indice-1).getMantenimiento()+" y se encuentra "+vehiculos.get(indice-1).getEstadoMantenimiento());                
+                    }else{
+                        System.out.println("\nElija una opcion de la lista\n");
+                    }
+                }else{
+                    System.out.println("\nElija una opcion correcta\n");
+                }
+            }
+        }else{
+            System.out.println("\nNo tiene vehiculos en mantenimiento\n");
+        }        
     }
     
    

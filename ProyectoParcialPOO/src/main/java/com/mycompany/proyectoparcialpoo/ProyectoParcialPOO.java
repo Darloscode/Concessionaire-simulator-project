@@ -183,9 +183,7 @@ public class ProyectoParcialPOO {
                                             else{
                                                 System.out.println("Elija un vehiculo de la lista");
                                             }
-                                         }
-                                        
-                                        else if(indvehiculo.equals("s")){
+                                        }else if(indvehiculo.equals("s")){
                                             
                                             
                                         }else if(indvehiculo.equals("2")){
@@ -224,7 +222,7 @@ public class ProyectoParcialPOO {
                                         }
                                     }
                                 }else if(op.equals("4")){
-
+                                    usercliente.consultarMantenimiento();
                                 }else if(op.equals("5")){
                                                                 
                                 }else{
@@ -323,19 +321,25 @@ public class ProyectoParcialPOO {
                         Supervisor usersupervisor = (Supervisor) spv;
                         op = "";
 
-                        if(usersupervisor.getSolicitudes().size()>0){
-                           
+                        if(usersupervisor.getSolicitudes().size()>0){                           
                             usersupervisor.mostrarSolicitudes(usuarios);
+                        }else{
+                            System.out.println("\nPor ahora no tiene solicitudes de compra\n");
                         }
 
-                       
-                        
-                        
-                        
-                     }  
-                                                                 
-                    else  System.out.println("no tiene solicitudes de compra");
-                                          
+                        while(!op.equals("2")){
+                            System.out.print("\n1. Consultar Stock\n2. Salir\nElija una opcion: ");
+                            op = entrada.nextLine();                            
+                            if(op.equals("1")){
+                                System.out.println();
+                                usersupervisor.consultarStock(vehiculos);
+                            }else if(op.equals("2")){
+
+                            }else{
+                                System.out.println("\nElija una opcion valida\n");
+                            }
+                        }                                                                                                                     
+                    }                                                                                                                         
                     break;
                 case "4":
                     System.out.println("\n************Jefe de Taller************");
@@ -353,24 +357,33 @@ public class ProyectoParcialPOO {
                         Usuario spv = usuarios.get(user);
                         JefedeTaller userjfdetaller = (JefedeTaller) spv;
                         op = "";
-                    while(!op.equals("3")){
-                            System.out.println("\n1. mostrar entregas\n2. Vehiculos en mantenimiento\n3. Salir\nElija una opcion: ");
+                        while(!op.equals("4")){
+                            if(userjefetaller.getentregarVehiculos().size()>0){
+                                System.out.println("\nTiene vehiculos por entregar, escoja la opcion 1 para revisar la lista de entregas\n");    
+                            }
+
+                            System.out.print("\n1. Mostrar entregas\n2. Admitir vehiculos para mantenimiento\n3. Administrar mantenimiento\n4. Salir\nElija una opcion: ");
                             op = entrada.nextLine();
-                        if (op.equals("1")){
-                            
+
+                            if (op.equals("1")){
+                                userjefetaller.mostrarEntregas(vehiculos);
+                            }else if(op.equals("2")){
+                                userjefetaller.admitirVehiculos(); 
+                            }else if(op.equals("3")){
+                                userjefetaller.administrarVehiculos();
+                            }else if(op.equals("4")){
+
+                            }else{
+                                System.out.println("\nEscoja una opcion correcta\n");
+                            }
+
+                            /*
                             if(userjfdetaller.getEntregarvehiculos().size()>0){
                                userjfdetaller.mostrarEntregas(vehiculos);
                             }
-                            
-                        }
-                        else if (op.equals("2")){
-                        
-                        }
-                         
-                    }
-                 }
-                        
-                
+                            */
+                        }                         
+                    }                                                         
                     break;
 
                 case "9":
@@ -489,7 +502,5 @@ public class ProyectoParcialPOO {
         vehiculos.add(new Motocicleta("Tuczoo", "Epica", 2008, Motor.Diesel, Categoria.Deportiva, 400));
         usuarios.add(new Supervisor("juan","Maca", "ju","ju"));
         
-    }  
-    
-    
+    }          
 }

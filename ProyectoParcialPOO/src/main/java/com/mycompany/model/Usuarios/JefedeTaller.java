@@ -56,7 +56,9 @@ public class JefedeTaller extends Usuario{
             if(clientesentregar.size()>0){                
                 for( int i=0 ; i<clientesentregar.size(); i++){
                 
-                    System.out.println((i+1)+ ". a El cliente "+clientesentregar.get(i).getNombre()+" Se le ha aprobado la comprar un vehiculo de la marca "+ entregarvehiculos.get(i).getMarca()+" y modelo "+entregarvehiculos.get(i).getModelo());
+                    
+                    System.out.println((i+1)+ ". a El cliente "+clientesentregar.get(i).getNombre()+" "+clientesentregar.get(i).getApellido() +" Se le ha aprobado la comprar un vehiculo  "+ entregarvehiculos.get(i).mostrarDatos() ) ;
+                    
                     while(!(opc.equals("2"))){
                 
                             System.out.print("\n1. entregar vehiculo\n2. Salir\nElija una opcion: ");

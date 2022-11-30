@@ -140,26 +140,14 @@ public class ProyectoParcialPOO {
                             System.out.print("Bienvenido Sr(a)"+" "+usercliente.getTipo()+": "+usercliente.getNombre()+" "+usercliente.getApellido()); // muestra los datos del cliente al iniciar el sistema
                             while(!op.equals("5")){
                                 System.out.print("\n1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar un mantenimiento\n4. Consultar mantenimiento\n5. Salir\n \nElija una opcion: ");
-                                op = entrada.nextLine();
-                                if(op.equals("1")){   
+                                 op = entrada.nextLine();
+                                if(op.equals("1")){
+                                    String indvehiculo= "";
                                     System.out.print("************LISTA DE VEHICULOS************");
-                                    usercliente.consultarStock(vehiculos);    // llama a la lista de vehiculos (STOCK)                                 
-                                }else if(op.equals("2")){
-                                    String indvehiculo = "";
-                                    while(!indvehiculo.equals("s")){
-                                       System.out.println("\nConsulte el stock para mostrar la lista de vehiculos si desea realizar una cotizacion o escriba (s) para salir: ");
-                                        
-                                        
-                                        indvehiculo = entrada.nextLine(); 
-                        
-                                           
-                                        if(isNumeric(indvehiculo) && indvehiculo.equals("1")){
-                                        System.out.println("\nConsulte el stock para mostrar la lista de vehiculos si desea realizar una cotizacion o escriba (s) para salir: ");
-                                        usercliente.consultarStock(vehiculos); 
-                                        System.out.print("\nElija un numero del stock de vehiculos o escriba (s) para salir: ");
-                                        indvehiculo = entrada.nextLine(); // pide que ingrese el valor
-                                           
-                                               
+                                    usercliente.consultarStock(vehiculos);    // llama a la lista de vehiculos (STOCK)  
+                                    System.out.print("\nElija un numero del stock de vehiculos o escriba (s) para salir: ");
+                                    indvehiculo = entrada.nextLine(); 
+                                    if(isNumeric(indvehiculo) ){    
                                             int ind = Integer.parseInt(indvehiculo);  
                                             if((ind>0)&(ind<=vehiculos.size())){
                                                 Vehiculo vhcotiza = usercliente.solicitarCotizacion(ind, vehiculos);                                                
@@ -170,13 +158,32 @@ public class ProyectoParcialPOO {
                                             else{
                                                 System.out.println("Elija un vehiculo de la lista");
                                             }
-                                               
+                                         }
+                                }
+                                else if(op.equals("2")){
+                                    String indvehiculo = "";
+                                    System.out.println("\nConsulte el stock para mostrar la lista de vehiculos si desea realizar una cotizacion o escriba (s) para salir: ");
+                                    
+                                    while(!indvehiculo.equals("s")){
+                                       
+                                        indvehiculo = entrada.nextLine(); 
+                                        if(isNumeric(indvehiculo) && indvehiculo.equals("1")){
+                                        usercliente.consultarStock(vehiculos); 
+                                        System.out.print("\nElija un numero del stock de vehiculos o escriba (s) para salir: ");
+                                        indvehiculo = entrada.nextLine(); // pide que ingrese el valor
                                            
-                                          
-                                            
-                             
-                                            
-                                        }
+                                               
+                                            int ind = Integer.parseInt(indvehiculo);  
+                                            if((ind>0)&(ind<=vehiculos.size())){
+                                                Vehiculo vhcotiza = usercliente.solicitarCotizacion(ind, vehiculos);                                                
+                                                usercliente.enviarCotizacion(vhcotiza, usuarios, usercliente);                                                 
+                                                System.out.println("\nSu cotización ha sido enviada Presione s para salir \n");                                                                                         
+                                            }
+                                           
+                                            else{
+                                                System.out.println("Elija un vehiculo de la lista");
+                                            }
+                                         }
                                         
                                         else if(indvehiculo.equals("s")){
                                             
@@ -317,6 +324,7 @@ public class ProyectoParcialPOO {
                         op = "";
 
                         if(usersupervisor.getSolicitudes().size()>0){
+                           
                             usersupervisor.mostrarSolicitudes(usuarios);
                         }
 
@@ -479,5 +487,9 @@ public class ProyectoParcialPOO {
         usuarios.add(new Supervisor("Michel", "Michelina", "mi", "mi"));        
         vehiculos.add(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, true, false, 940));        
         vehiculos.add(new Motocicleta("Tuczoo", "Epica", 2008, Motor.Diesel, Categoria.Deportiva, 400));
-    }
+        usuarios.add(new Supervisor("juan","Maca", "ju","ju"));
+        
+    }  
+    
+    
 }

@@ -9,9 +9,13 @@ public class Supervisor extends Usuario{
     private String tipo = "Supervisor";
     private ArrayList<Vehiculo> solicitudes = new ArrayList<>();
     private ArrayList<Cliente> clientes = new ArrayList<>();
-            
+    
+    private ArrayList<String> certificaciones= new ArrayList<>();   
+
+    
     public Supervisor(String nombre, String apellido, String usuario, String password){
-        super(nombre, apellido,usuario, password);        
+        super(nombre, apellido,usuario, password); 
+        
     }
 
     public String mostrarDatos(){
@@ -30,8 +34,17 @@ public class Supervisor extends Usuario{
     public ArrayList<Cliente> getClientes(){
         return clientes;
     }
+
+    public ArrayList<String> getCertificaciones() {
+        return certificaciones;
+    }
+
+    public void setCertificaciones(ArrayList<String> certificaciones) {
+        this.certificaciones = certificaciones;
+    }
     
     
+  
      public void agregarSolicitud(Vehiculo vh, Cliente cl){  // agrega las solicitudes que son enviadas desde clientes en 
                                                              // el metodo  compra
         solicitudes.add(vh);
@@ -103,68 +116,27 @@ public class Supervisor extends Usuario{
     }  
     
     
-    
-
-
-
-
-  
-
-
-    public Vehiculo solicitarSolicitudes(int indice, ArrayList<Vehiculo>arreglo){
-        return arreglo.get(indice-1);
-    }
-    
+        
    
-                
+   
+   
     
-
-
-
-
-
-
-    /*
-    public ArrayList<Supervisor> getCertificaciones() {
-        return Certificaciones;
-    }
-
-    public void setCertificaciones(ArrayList<Supervisor> Certificaciones) {
-        this.Certificaciones = Certificaciones;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
         return hash;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Supervisor other = (Supervisor) obj;
-        return Objects.equals(this.Certificaciones, other.Certificaciones);
-    }
+    
 
     @Override
     public String toString() {
-        return "Supervisor{" + "Certificaciones=" + Certificaciones + '}';
+        return "Supervisor{" + "Certificaciones=" + certificaciones + '}';
     }
     
     
-    public boolean administrarSolicitudes(){
-        
-       return false ;  
-    }
-     */
+   
+     
 }
        
         

@@ -1,5 +1,5 @@
 package com.mycompany.model.Vehiculos;
 
 public enum Mantenimiento {
-    Preventivo, Emergencia;        
+    Preventivo, Emergencia, Ninguno;        
 }

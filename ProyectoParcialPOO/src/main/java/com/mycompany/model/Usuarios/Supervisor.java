@@ -65,8 +65,7 @@ public class Supervisor extends Usuario{
                             System.out.println("\n¿Aprobar o Rechazar la solicitud?");
                             System.out.print("\n1. Aprobar\n2. Rechazar\n3. Salir\nElija una opcion: ");
                             opc = sc.nextLine();
-                            if(opc.equals("1")){
-                                clientes.get(indice-1).agregarCompra(solicitudes.get(indice-1));
+                            if(opc.equals("1")){                                
                                 clientes.get(indice-1).agregarMensaje("Ha comprado el vehiculo: "+"\n"+solicitudes.get(indice-1).toString()+"\nPor favor, acerquese al taller para retirarlo");
                                 if(vehiculos.contains(solicitudes.get(indice-1))){
                                     int i = vehiculos.indexOf(solicitudes.get(indice-1));
@@ -86,6 +85,10 @@ public class Supervisor extends Usuario{
                                 String respuesta = sc.nextLine();
                                 String mensaje = "Estimado "+clientes.get(indice-1).getNombre()+" la solicitud de compra del vehiculo de la marca "+solicitudes.get(indice-1).getMarca()+" y modelo "+solicitudes.get(indice-1).getModelo()+" ha sido rechazada debido a que: ";
                                 clientes.get(indice-1).agregarMensaje(mensaje+respuesta);
+                                if(vehiculos.contains(solicitudes.get(indice-1))){
+                                    int indi = vehiculos.indexOf(solicitudes.get(indice-1));
+                                    vehiculos.get(indi).setDisponibilidad(Estado.Disponible);
+                                }
                                 solicitudes.remove(indice-1);
                                 clientes.remove(indice-1);                                
                             }else if(op.equals("3")){

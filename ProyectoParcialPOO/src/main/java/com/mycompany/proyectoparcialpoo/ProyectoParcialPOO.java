@@ -290,9 +290,9 @@ public class ProyectoParcialPOO {
                     }                                                                                                                               
                     break;
 
-                case "4":
+                case "4":                                                                
                     System.out.println("\n************Jefe de Taller************");
-                    tipo = "Vendedor";
+                    tipo = "Jefe de Taller";
                     
                     System.out.print("Usuario: ");
                     usuario = entrada.nextLine();
@@ -306,18 +306,21 @@ public class ProyectoParcialPOO {
                         JefedeTaller userjefetaller = (JefedeTaller) jdt;
                         op = "";                        
 
-                        while(!op.equals("3")){
+                        while(!op.equals("4")){
                             if(userjefetaller.getentregarVehiculos().size()>0){
                                 System.out.println("\nTiene vehiculos por entregar, escoja la opcion 1 para revisar la lista de entregas\n");    
                             }
-                            System.out.println("\n1. Mostrar entregas\n2. Vehiculos en mantenimiento\n3. Salir\nElija una opcion: ");
+                            
+
+                            System.out.print("\n1. Mostrar entregas\n2. Admitir vehiculos para mantenimiento\n3. Administrar mantenimiento\n4. Salir\nElija una opcion: ");
+                            op = entrada.nextLine();
                             if(op.equals("1")){
                                 userjefetaller.mostrarEntregas(vehiculos);
                             }else if(op.equals("2")){
-
-                                //VEHICULO EN MANTENIMIENTO
-
+                                userjefetaller.admitirVehiculos();                                
                             }else if(op.equals("3")){
+                                userjefetaller.administrarVehiculos();
+                            }else if(op.equals("4")){
 
                             }else{
                                 System.out.println("\nEscoja una opcion correcta\n");
@@ -345,13 +348,21 @@ public class ProyectoParcialPOO {
                     for(Usuario t: usuarios){
                         if(t instanceof Cliente){
                             Cliente cd = (Cliente) t;
-                            cd.setCedula("AVER");
+                            System.out.println(cd.getVehiculos().size());
+                            for(Vehiculo vh : cd.getVehiculos()){
+                                System.out.println(vh.getDisponibilidad());
+                                System.out.println(vh.getEstadoMantenimiento());
+                                System.out.println(vh.getMantenimiento());
+                            }
                         }
                     }
+                    /*
 
                     Cliente ddf = (Cliente) usuarios.get(0);
-                    ddf.setCedula("NUEVO");
-
+                    System.out.println(ddf.getVehiculos().get(0).getDisponibilidad());  
+                    System.out.println(ddf.getVehiculos().get(0).getEstadoMantenimiento());  
+                    System.out.println(ddf.getVehiculos().get(0).getMantenimiento());  
+                    */
                     break;
                 case "l":                    
                     for(Usuario a:usuarios){

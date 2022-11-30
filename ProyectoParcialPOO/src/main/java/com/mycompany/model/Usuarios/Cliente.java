@@ -93,6 +93,7 @@ public class Cliente extends Usuario{
     
     public Vehiculo solicitarCompra(Vehiculo vh, ArrayList<Vehiculo> arreglo){
         int indice = arreglo.indexOf(vh);
+        arreglo.get(indice).setDisponibilidad(Estado.Solicitado);
         return arreglo.get(indice);
     }
     
@@ -165,6 +166,40 @@ public class Cliente extends Usuario{
    
     public void agregarCompra (Vehiculo vh){
         vehiculos.add(vh);
+    }
+
+    public void consultarMantenimiento(){
+        Scanner rd = new Scanner(System.in);
+        ArrayList<Vehiculo> mantenimiento = new ArrayList<>();
+        for(Vehiculo vh : vehiculos){
+            if(vh.getMantenimiento()!=Mantenimiento.Ninguno){
+                mantenimiento.add(vh);
+            }
+        }
+
+        if(mantenimiento.size()>0){            
+            String opc = "";
+            while(!opc.equals("s")){
+                System.out.println("\nSus vehiculos en mantenimiento son:\n");
+                for(int i=0; i<mantenimiento.size(); i++){                
+                    System.out.println((i+1)+mantenimiento.get(i).toString());                         
+                }
+                System.out.print("Elija un vehiculo para consultar mantenimiento: ");
+                opc = rd.nextLine();
+                if(isNumeric(opc)){
+                    int indice = Integer.parseInt(opc);
+                    if((indice>0) & (indice<=mantenimiento.size())){                    
+                        System.out.println("Su vehiculo esta en mantenimiento "+vehiculos.get(indice-1).getMantenimiento()+" y se encuentra "+vehiculos.get(indice-1).getEstadoMantenimiento());                
+                    }else{
+                        System.out.println("\nElija una opcion de la lista\n");
+                    }
+                }else{
+                    System.out.println("\nElija una opcion correcta\n");
+                }
+            }
+        }else{
+            System.out.println("\nNo tiene vehiculos en mantenimiento\n");
+        }        
     }
     
 

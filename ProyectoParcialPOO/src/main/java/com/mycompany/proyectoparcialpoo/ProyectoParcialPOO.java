@@ -33,7 +33,7 @@ public class ProyectoParcialPOO {
         
         //ArrayList<Usuario> usuarios = inicializarSistema();
 
-        
+        /*
         //ArrayList<Usuario> usuarios = inicializarSistema();
         for(Usuario a:usuarios){
             System.out.println(a.getClass());            
@@ -46,7 +46,7 @@ public class ProyectoParcialPOO {
             System.out.println(v.mostrarDatos());
             System.out.println(v.getDisponible());
         } 
-           
+        */   
 
         while(!salir){
             System.out.println("*********************************");   

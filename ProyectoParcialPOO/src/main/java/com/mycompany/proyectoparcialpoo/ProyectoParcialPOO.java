@@ -28,25 +28,7 @@ public class ProyectoParcialPOO {
         String opcion = "", usuario, password, tipo = "", op ="";
 
         boolean cotizar=false;
-
-        
-        //ArrayList<Usuario> usuarios = inicializarSistema();
-
-        /*
-        //ArrayList<Usuario> usuarios = inicializarSistema();
-        for(Usuario a:usuarios){
-            System.out.println(a.getClass());            
-            System.out.println();
-        }
-
-        
-        ArrayList<Vehiculo> vehiculos = cargarVehiculos();
-        for(Vehiculo v:vehiculos){
-            System.out.println(v.mostrarDatos());
-            System.out.println(v.getDisponible());
-        } 
-        */   
-
+                
         while(!salir){
             System.out.println("*********************************");   
             System.out.println("**Bienvenido**");
@@ -288,21 +270,26 @@ public class ProyectoParcialPOO {
                         op = "";
 
                         if(usersupervisor.getSolicitudes().size()>0){
-                            usersupervisor.mostrarSolicitudes(usuarios);
+                            usersupervisor.mostrarSolicitudes(usuarios, vehiculos);
+                        }else{
+                            System.out.println("\nPor ahora no tiene solicitudes de compra\n");
                         }
 
-                        while(!op.equals("3")){
-                            System.out.println("\n1. Entregar vehiculos\n2. Vehiculos en mantenimiento\n3. Salir\nElija una opcion: ");
-                            op = entrada.nextLine();
-                        }
-                        
-                        
-                        
-                     }  
-                                                                 
-                    else  System.out.println("no tiene solicitudes de compra");
-                                          
+                        while(!op.equals("2")){
+                            System.out.print("\n1. Consultar Stock\n2. Salir\nElija una opcion: ");
+                            op = entrada.nextLine();                            
+                            if(op.equals("1")){
+                                System.out.println();
+                                usersupervisor.consultarStock(vehiculos);
+                            }else if(op.equals("2")){
+
+                            }else{
+                                System.out.println("\nElija una opcion valida\n");
+                            }
+                        }                                                                        
+                    }                                                                                                                               
                     break;
+
                 case "4":
                     System.out.println("\n************Jefe de Taller************");
                     tipo = "Vendedor";
@@ -314,7 +301,29 @@ public class ProyectoParcialPOO {
                     password = entrada.nextLine();
                     
                     user = login(usuario, password, tipo);    
-                
+                    if(user!=-1){
+                        Usuario jdt = usuarios.get(user);
+                        JefedeTaller userjefetaller = (JefedeTaller) jdt;
+                        op = "";                        
+
+                        while(!op.equals("3")){
+                            if(userjefetaller.getentregarVehiculos().size()>0){
+                                System.out.println("\nTiene vehiculos por entregar, escoja la opcion 1 para revisar la lista de entregas\n");    
+                            }
+                            System.out.println("\n1. Mostrar entregas\n2. Vehiculos en mantenimiento\n3. Salir\nElija una opcion: ");
+                            if(op.equals("1")){
+                                userjefetaller.mostrarEntregas(vehiculos);
+                            }else if(op.equals("2")){
+
+                                //VEHICULO EN MANTENIMIENTO
+
+                            }else if(op.equals("3")){
+
+                            }else{
+                                System.out.println("\nEscoja una opcion correcta\n");
+                            }
+                        }
+                    }                
                     break;
 
                 case "9":

@@ -1,6 +1,9 @@
 package com.mycompany.model.Usuarios;
 
+import com.mycompany.model.Vehiculos.Estado;
 import com.mycompany.model.Vehiculos.Vehiculo;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,7 +35,14 @@ public class Supervisor extends Usuario{
         return solicitudes;
     }
 
-    public void mostrarSolicitudes(ArrayList<Usuario> usuarios){         
+    public void consultarStock(ArrayList<Vehiculo> vehiculos){                
+        for(Vehiculo vh : vehiculos){            
+            System.out.println(vh.mostrarDatos());
+            System.out.println();
+        }
+    }
+
+    public void mostrarSolicitudes(ArrayList<Usuario> usuarios, ArrayList<Vehiculo> vehiculos){
         Scanner sc = new Scanner ( System.in);
 
         String op= "";
@@ -58,6 +68,10 @@ public class Supervisor extends Usuario{
                             if(opc.equals("1")){
                                 clientes.get(indice-1).agregarCompra(solicitudes.get(indice-1));
                                 clientes.get(indice-1).agregarMensaje("Ha comprado el vehiculo: "+"\n"+solicitudes.get(indice-1).toString()+"\nPor favor, acerquese al taller para retirarlo");
+                                if(vehiculos.contains(solicitudes.get(indice-1))){
+                                    int i = vehiculos.indexOf(solicitudes.get(indice-1));
+                                    vehiculos.get(i).setDisponibilidad(Estado.Solicitado);
+                                }
                                 for(Usuario us : usuarios){
                                     if(us instanceof JefedeTaller){
                                         JefedeTaller jdt = (JefedeTaller) us;
@@ -93,41 +107,6 @@ public class Supervisor extends Usuario{
             }
         }  
     }  
-
-
-
-
-
-
-    
-    
-
-
-
-
-    public ArrayList<Cliente> getClientes(){
-        return clientes;
-    }
-
-
-    public Vehiculo solicitarSolicitudes(int indice, ArrayList<Vehiculo>arreglo){
-        return arreglo.get(indice-1);
-    }
-    
-    public void enviarSolicitudAprobada(Vehiculo vh , ArrayList<Usuario>arrayusuarios,Supervisor sp){
-        for(Usuario us: arrayusuarios){
-            if(us.getTipo().equals("Jefe de Taller"));
-                JefedeTaller jtaller= (JefedeTaller)us;
-                System.out.println("se ha enviado al taller la solicitud de compra");
-                jtaller.agregarSolicitud(vh, sp);                        
-        }      
-    }
-                
-    
-
-
-
-
 
 
     /*

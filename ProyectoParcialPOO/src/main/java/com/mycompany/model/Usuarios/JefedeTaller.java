@@ -1,5 +1,6 @@
 package com.mycompany.model.Usuarios;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import com.mycompany.model.Vehiculos.Vehiculo; 
 
@@ -39,19 +40,47 @@ public class JefedeTaller extends Usuario{
         clientesmantenimiento.add(cl);
     }
 
-    
-
-
-    
-
-
-    private ArrayList<Vehiculo> Ventas= new ArrayList<>();
-    private ArrayList<Supervisor> clientes = new ArrayList<>();    
-    public void agregarSolicitud(Vehiculo vh, Supervisor sp){
-        Ventas.add(vh);
-        clientes.add(sp);    
+    public ArrayList<Vehiculo> getentregarVehiculos(){
+        return entregarvehiculos;
     }
+    
+    public void mostrarEntregas( ArrayList<Vehiculo>vehiculos){
 
+        Scanner sc = new Scanner ( System.in);
+        
+        String opc= "";
+        
+        if(clientesentregar.size()>0){                
+            for( int i=0 ; i<clientesentregar.size(); i++){
+                System.out.println((i+1)+ ". El cliente "+clientesentregar.get(i).getNombre()+" Se le ha aprobado la compra del vehiculo de la marca "+ entregarvehiculos.get(i).getMarca()+" y modelo "+entregarvehiculos.get(i).getModelo());
+                while(!(opc.equals("2"))){
+                    System.out.print("\n1. Entregar vehiculo\n2. Salir\nElija una opcion: ");
+                    opc = sc.nextLine();
+                    if(opc.equals("1")){
+                        System.out.println("\nEl vehiculo ha sido entregado\n");
+                        if(vehiculos.contains(entregarvehiculos.get(i))){
+                            vehiculos.remove(entregarvehiculos.get(i));
+                        }                                                        
+                    }else if(opc.equals("2")){
+                        System.out.println("\nSaliendo de la entrega de vehiculos\n");
+                    }else{
+                        System.out.println("\nElija una opcion correcta\n");
+                    }
+                }
+            }
+        }else{
+            System.out.println("\nNo tiene entregas que realizar\n");
+        }
+   }
+    
+
+
+
+
+
+
+
+    
     /*
     public ArrayList<JefedeTaller> getMantenimientoVehiculos() {
         return MantenimientoVehiculos;

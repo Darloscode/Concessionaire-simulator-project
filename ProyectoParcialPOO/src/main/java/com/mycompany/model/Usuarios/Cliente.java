@@ -162,16 +162,7 @@ public class Cliente extends Usuario{
     public void cotizacionesAprobadas(Vehiculo vh){
         cotizaciones.add(vh);
     }
-
-
    
-    
-
-
-
-
-
-
     public void agregarCompra (Vehiculo vh){
         vehiculos.add(vh);
     }

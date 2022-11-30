@@ -38,7 +38,6 @@ public class ProyectoParcialPOO {
             System.out.println(a.getClass());            
             System.out.println();
         }
-
         
         ArrayList<Vehiculo> vehiculos = cargarVehiculos();
         for(Vehiculo v:vehiculos){
@@ -271,29 +270,35 @@ public class ProyectoParcialPOO {
                     }
                     break;
                 case "3":
-                     Usuario spv = usuarios.get(user);
+                    System.out.println("\n************Supervisor************");
+                    tipo = "Supervisor";
+            
+                    System.out.print("Usuario: ");
+                    usuario = entrada.nextLine();
+            
+                    System.out.print("Contraseña: ");
+                    password = entrada.nextLine();
+                
+                    user = login(usuario, password, tipo);  
+
+                    if(user!=-1){
+                        Usuario spv = usuarios.get(user);
                         Supervisor usersupervisor = (Supervisor) spv;
                         op = "";
 
                         if(usersupervisor.getSolicitudes().size()>0){
                             usersupervisor.mostrarSolicitudes(usuarios);
-                        }else{
-                            System.out.println("\nPor ahora no tiene solicitudes de compra\n");
                         }
 
-                        while(!op.equals("2")){
-                            System.out.println("\n1. Consultar Stock\n2. Salir\nElija una opcion: ");
-                            op = entrada.nextLine();
-                            if(op.equals("1")){
-                            }else if(op.equals("2")){
-
-                            }else{
-                                System.out.println("\nElija una opcion valida\n");
-                            }
-                        }                                                                        
-                    }                                                                                                                               
+                       
+                        
+                        
+                        
+                     }  
+                                                                 
+                    else  System.out.println("no tiene solicitudes de compra");
+                                          
                     break;
-                   
                 case "4":
                     System.out.println("\n************Jefe de Taller************");
                     tipo = "Vendedor";

@@ -30,24 +30,6 @@ public class ProyectoParcialPOO {
 
         boolean cotizar=false;
 
-        
-        //ArrayList<Usuario> usuarios = inicializarSistema();
-
-        /*
-        //ArrayList<Usuario> usuarios = inicializarSistema();
-        for(Usuario a:usuarios){
-            System.out.println(a.getClass());            
-            System.out.println();
-        }
-
-        
-        ArrayList<Vehiculo> vehiculos = cargarVehiculos();
-        for(Vehiculo v:vehiculos){
-            System.out.println(v.mostrarDatos());
-            System.out.println(v.getDisponible());
-        } 
-        */   
-
         while(!salir){
             System.out.println("*********************************");   
             System.out.println("**Bienvenido**");
@@ -78,6 +60,10 @@ public class ProyectoParcialPOO {
                     if(user != -1){                        
                         Usuario cl = usuarios.get(user);                    
                         Cliente usercliente = (Cliente) cl;  
+                        usercliente.agregarMensaje("PORUEEEEE");
+                        usercliente.agregarMensaje("FASDFADFA");
+                        usercliente.agregarMensaje("fasdasdfaF2323fafda");
+                        usercliente.agregarMensaje("fasdfafda2331");
                         
                         //Quitar esto
                         usercliente.agregarCompra(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, true, false, 940));
@@ -85,56 +71,12 @@ public class ProyectoParcialPOO {
 
                         op = "";                        
 
-                        if(usercliente.getMensajes().size()>0){
-                            System.out.println("\nTiene mensajes por leer\n");
-                            int i = 1;
-                            for(String msj : usercliente.getMensajes()){
-                                System.out.println(i+". "+msj);
-                                i++;
-                            }
-                            System.out.println();
-                            String continuar = "";
-                            while (!continuar.equals("c")){
-                                System.out.print("\nEscriba (c) para continuar: ");
-                                continuar = entrada.nextLine();
-                            }     
-                            usercliente.getMensajes().clear();
-                        }
-                        else System.out.println("No tiene mesajes en su bandeja de mensajes");
+                       
                         
-                        if(usercliente.getCotizaciones().size()>0){
-                            System.out.println("\nTiene mensajes por leer\n");
-                            String indi = "";
-                            System.out.println("\nCotizaciones aprobadas");
-                            while(!indi.equals("s")){
-                                int i = 1;
-                                System.out.println();
-                                for(Vehiculo vh : usercliente.getCotizaciones()){
-                                    System.out.println(i+". "+vh.toString());
-                                    i++;
-                                }
-                                System.out.print("\nElija el vehiculo que quiere comprar, para salir escriba (s): ");
-                                indi = entrada.nextLine();
-                                if(isNumeric(indi)){
-                                    int indicoti = Integer.parseInt(indi);
-                                    if((indicoti>0)&(indicoti<=usercliente.getCotizaciones().size())){                                                                                                                                                                                                        
-                                        Vehiculo compra = usercliente.solicitarCompra(usercliente.getCotizaciones().get(indicoti-1), vehiculos);
-                                        usercliente.enviarCompra(compra, usuarios, usercliente);
-                                        System.out.println("\nSu solicitud de compra ha sido enviada\n");
-
-                                    }else{
-                                        System.out.println("\nElija un vehiculo de la lista\n");
-                                    }                                    
-                                }else if(op.equals("s")){
-                                    break;
-                                    
-                                }else{
-                                    System.out.println("\nElija una opcion correcta\n");
-                                }
-                            }
-                            
-                        }
-                        else System.out.println("No tiene solicitudes de cotizaciones\n");
+                        usercliente.mostrarMensajes();
+                        
+                        usercliente.mostrarCotizacionesAprobadas(usuarios, usercliente);
+                        
 
                         if((usercliente.getVehiculos().size()!=0)){
                             op = "";
@@ -425,13 +367,23 @@ public class ProyectoParcialPOO {
                     for(Usuario t: usuarios){
                         if(t instanceof Cliente){
                             Cliente cd = (Cliente) t;
-                            cd.setCedula("AVER");
+                            System.out.println(cd.getVehiculos().size());
+                            for(Vehiculo vh : cd.getVehiculos()){
+                                System.out.println(vh.getDisponibilidad());
+                                System.out.println(vh.getEstadoMantenimiento());
+                                System.out.println(vh.getMantenimiento());
+                            }
                         }
                     }
-
-                    Cliente ddf = (Cliente) usuarios.get(0);
-                    ddf.setCedula("NUEVO");
-
+                    break;
+                case "p":
+                    for(Usuario t: usuarios){
+                        if(t instanceof Cliente){
+                            Cliente cd = (Cliente) t;
+                            cd.cotizacionesAprobadas(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, true, false, 940));  
+                            cd.cotizacionesAprobadas(new Motocicleta("Tuczoo", "Epica", 2008, Motor.Diesel, Categoria.Deportiva, 400));                
+                        }
+                    }
                     break;
                 case "l":                    
                     for(Usuario a:usuarios){

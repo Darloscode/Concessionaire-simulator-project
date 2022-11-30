@@ -170,7 +170,7 @@ public class ProyectoParcialPOO {
                                         }
                                     }
                                 }else if(op.equals("4")){
-
+                                    usercliente.consultarMantenimiento();
                                 }else if(op.equals("5")){
                                                                 
                                 }else{

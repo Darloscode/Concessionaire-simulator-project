@@ -190,7 +190,7 @@ public class Cliente extends Usuario{
             if(isNumeric(opc)){
                 int indice = Integer.parseInt(opc);
                 if((indice>0)&(indice<=vehiculos.size())){
-                    if(vehiculos.get(indice-1).getMantenimiento()==null){                                                
+                    if(vehiculos.get(indice-1).getMantenimiento()==Mantenimiento.Ninguno){                                                
                         String mant = "";
                         boolean salir = false;
 
@@ -271,7 +271,7 @@ public class Cliente extends Usuario{
         System.out.println();
         for(int i = 0; i<arreglovehiculos.size(); i++){
             if(arreglovehiculos.get(i).getDisponibilidad().equals(Estado.Disponible)){
-                System.out.println(i+". Marca: "+arreglovehiculos.get(i).getMarca()+", Modelo: "+arreglovehiculos.get(i).getModelo()+", Año: "+arreglovehiculos.get(i).getYear());                
+                System.out.println((i+1)+". Marca: "+arreglovehiculos.get(i).getMarca()+", Modelo: "+arreglovehiculos.get(i).getModelo()+", Año: "+arreglovehiculos.get(i).getYear());                
             }
 
         }        

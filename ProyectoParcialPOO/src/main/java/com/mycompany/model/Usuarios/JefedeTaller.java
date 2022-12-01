@@ -83,10 +83,13 @@ public class JefedeTaller extends Usuario{
                         System.out.print("\n1. Entregar vehiculo\n2. Salir\nElija una opcion: ");
                         opc = sc.nextLine();
                         if(opc.equals("1")){
-                            clientesentregar.get(i).agregarCompra(entregarvehiculos.get(i));                            
+                            Vehiculo vh = entregarvehiculos.get(i);
+                            clientesentregar.get(i).agregarCompra(entregarvehiculos.get(i)); 
+                            int ivh = clientesentregar.get(i).getVehiculos().indexOf(vh);
+                            clientesentregar.get(i).getVehiculos().get(ivh).setMantenimiento(Mantenimiento.Ninguno);
                             System.out.println("\nEl vehiculo ha sido entregado\n");
                             
-                            Vehiculo vh = entregarvehiculos.get(i);
+                            
                             System.out.println(vehiculos.contains(vh));
                             vehiculos.remove(vh); 
                             

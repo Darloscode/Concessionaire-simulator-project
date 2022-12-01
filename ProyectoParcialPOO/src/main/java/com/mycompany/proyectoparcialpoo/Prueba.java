@@ -63,21 +63,10 @@ public class Prueba {
             n++;
         }                
         */
-        Cliente cl1 = new Cliente(null, null, null, null, null, null, 0);
-        Automovil au1 = new Automovil(null, null, 0, null, 0, false, false, 0);
-        ArrayList arreglo = new ArrayList<>();
-        ArrayList prueba = new ArrayList<>();
-        prueba.add(cl1);
-        prueba.add(au1);
-        arreglo.add(prueba);
-        prueba.add(cl1);
-        prueba.add(au1);
-        arreglo.add(prueba);
-        prueba.add(cl1);
-        prueba.add(au1);
-        arreglo.add(prueba);
-        System.out.println(arreglo.size());
 
+        System.out.println(isNumeric("2323"));
+        System.out.println(Integer.valueOf("sadads"));
+        System.out.println();        
 
     }
     private static boolean isNumeric(String cadena){
@@ -89,3 +78,4 @@ public class Prueba {
         }
     }
 }
+

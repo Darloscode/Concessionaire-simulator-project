@@ -71,16 +71,15 @@ public class ProyectoParcialPOO {
 
                         op = "";                        
 
-                       
-                        
+                                                                       
                         usercliente.mostrarMensajes();
-                        
-                        usercliente.mostrarCotizacionesAprobadas(usuarios, usercliente);
+
+                        usercliente.mostrarCotizacionesAprobadas(usuarios, usercliente);                         
                         
 
                         if((usercliente.getVehiculos().size()!=0)){
                             op = "";
-                            System.out.print("Bienvenido Sr(a)"+" "+usercliente.getTipo()+": "+usercliente.getNombre()+" "+usercliente.getApellido()); // muestra los datos del cliente al iniciar el sistema
+                            System.out.print("\nBienvenido Sr(a)"+" "+usercliente.getTipo()+": "+usercliente.getNombre()+" "+usercliente.getApellido()); // muestra los datos del cliente al iniciar el sistema
                             while(!op.equals("5")){
                                 System.out.print("\n1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar un mantenimiento\n4. Consultar mantenimiento\n5. Salir\n \nElija una opcion: ");
                                  op = entrada.nextLine();

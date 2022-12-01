@@ -19,44 +19,34 @@ public class Cliente extends Usuario{
     private ArrayList<String> mensajes = new ArrayList<String>();
     private ArrayList<Vehiculo> cotizaciones = new ArrayList<>();
     
+
+    //Constructor
     public Cliente(String nombre, String apellido, String usuario, String password, String cedula, String ocupacion, double ingresos){
         super(nombre, apellido,usuario, password);        
         this.cedula =cedula;
         this.ingresos = ingresos;
         this.ocupacion = ocupacion;                        
     }
-
-    @Override
-    public String mostrarDatos(){
-        return "Usuario:\n " +tipo+super.mostrarDatos()+"\nCedula: "+cedula+"\nOcupacion: "+ocupacion+"\nIngresos: "+ingresos;
+               
+    //Métodos getters
+    public String getTipo(){
+        return tipo;
     }
-       
 
     public ArrayList<Vehiculo> getVehiculos(){
         return vehiculos;
     }
 
-    public String getTipo(){
-        return tipo;
-    }
-
-    public void setCedula(String cedula){
-        this.cedula = cedula; 
-    }
-
-   
-    
-     public ArrayList<String> getMensajes(){
+    public ArrayList<String> getMensajes(){
         return mensajes;
     }
-
  
     public ArrayList<Vehiculo> getCotizaciones(){
         return cotizaciones;
     }
 
 
-    //Métodos
+    //Métodos en uso
     public void mostrarMensajes(){
         Scanner rd = new Scanner(System.in);
         String continuar = "";
@@ -77,7 +67,7 @@ public class Cliente extends Usuario{
         }        
     }
 
-    public void mostrarCotizacionesAprobadas(ArrayList<Usuario> usuarios, Cliente usercliente){
+    public void mostrarCotizacionesAprobadas(ArrayList<Usuario> usuarios, Cliente usercliente, ArrayList<Vehiculo> arreglovh){
         Scanner rd = new Scanner(System.in);       
 
         if(cotizaciones.size()>0){                      
@@ -95,8 +85,8 @@ public class Cliente extends Usuario{
                     op = rd.nextLine();
                     switch(op){
                         case "1":
-                            Vehiculo compra = solicitarCompra(vehiculos.get(i-1), vehiculos);
-                            usercliente.enviarCompra(compra, usuarios, usercliente);
+                            Vehiculo compra = solicitarCompra(vh, arreglovh);
+                            enviarCompra(compra, usuarios, usercliente);
                             System.out.println("\nSu solicitud de compra ha sido enviada\n");
                             salir = true;
                             break;
@@ -118,52 +108,151 @@ public class Cliente extends Usuario{
         } 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void cotizacionesAprobadas(Vehiculo vh){
-        cotizaciones.add(vh);
+    public void solicitarCotizacion(ArrayList<Vehiculo> arreglo, ArrayList<Usuario> usuarios, Cliente usercliente){
+        Scanner rd = new Scanner(System.in);
+        String indcoti = "";
+        boolean salir = false;
+        
+        System.out.println("\nVehiculos disponibles para cotizar");
+        while(!salir){            
+            consultarStock(arreglo);
+            System.out.print("\nElija un numero del stock de vehiculos para cotizar o escriba (s) para salir: ");
+            indcoti = rd.nextLine();
+            if(isNumeric(indcoti)){
+                int indicoti = Integer.parseInt(indcoti);
+                if((indicoti>0) & (indicoti<=arreglo.size())){                                                    
+                    Vehiculo vhcotiza = arreglo.get(indicoti-1);
+                    enviarCotizacion(vhcotiza, usuarios, usercliente);
+                    System.out.println("\nSu cotización ha sido enviada\n");
+                    salir = true;
+                }else{
+                    System.out.println("\nElija un vehiculo de la lista\n");
+                }
+            }else if(indcoti.equals("s")){
+                salir = true;                    
+            }else{
+                System.out.println("\nEscoja una opcion correcta\n");
+            }                                      
+        }           
     }
     
-     public void agregarMensaje(String mensaje){
-        mensajes.add(mensaje);
-    }
-
-    public void agregarCompra (Vehiculo vh){  // agrega el vehiculo con las carateristicas de la solicitud de compra aceptada a la lista
-        vehiculos.add(vh);
-    }
-    
-    
-     public void consultarStock(ArrayList<Vehiculo> vehiculos){
-        int i = 1;
-        System.out.println();
+    public void consultarMantenimiento(){
+        Scanner rd = new Scanner(System.in);
+        ArrayList<Vehiculo> mantenimiento = new ArrayList<>();
         for(Vehiculo vh : vehiculos){
-            if(vh.getDisponibilidad().equals(Estado.Disponible)){
-                System.out.println(i+". Marca: "+vh.getMarca()+", Modelo: "+vh.getModelo()+", Año: "+vh.getYear());
+            if(vh.getMantenimiento()!=Mantenimiento.Ninguno){
+                System.out.println(vh.getMantenimiento());
+                mantenimiento.add(vh);
             }
-            i++;
         }
+
+        if(mantenimiento.size()>0){            
+            String opc = "";
+            boolean exit = false;
+
+            while(!exit){
+                System.out.println("\nSus vehiculos en mantenimiento son:\n");                
+                for(int i=0; i<mantenimiento.size(); i++){
+                    System.out.println((i+1)+". "+mantenimiento.get(i).toString());                         
+                }
+                System.out.print("\nElija un vehiculo para consultar mantenimiento o escriba (s) para salir: ");
+                opc = rd.nextLine();
+                if(isNumeric(opc)){
+                    int indice = Integer.parseInt(opc);
+                    if((indice>0) & (indice<=mantenimiento.size())){                    
+                        System.out.println("\nSu vehiculo esta en mantenimiento "+vehiculos.get(indice-1).getMantenimiento()+" y se encuentra "+vehiculos.get(indice-1).getEstadoMantenimiento());                
+                    }else{
+                        System.out.println("\nElija una opcion de la lista\n");
+                    }
+                }else if(opc.equals("s")){
+                    exit = true;
+                }else{
+                    System.out.println("\nElija una opcion correcta\n");
+                }
+            }
+        }else{
+            System.out.println("\nNo tiene vehiculos en mantenimiento\n");
+        }        
     }
-    
+
+    public void solicitarMantenimiento(Cliente usercliente, ArrayList<Usuario> usuarios){
+        Scanner rd = new Scanner(System.in);
+        String opc = "";
+        boolean exit = false;
+        while(!exit){
+            System.out.println("\nSus vehiculos son:\n");
+            for(int i=0; i<vehiculos.size(); i++){
+                System.out.println((i+1)+". "+vehiculos.get(i).toString());
+            }
+            System.out.print("\nElija un vehiculo para mandar a mantenimiento o escriba (s) para salir: ");
+            opc = rd.nextLine();
+
+            if(isNumeric(opc)){
+                int indice = Integer.parseInt(opc);
+                if((indice>0)&(indice<=vehiculos.size())){
+                    if(vehiculos.get(indice-1).getMantenimiento()==null){                                                
+                        String mant = "";
+                        boolean salir = false;
+
+                        while(!salir){                            
+                            System.out.print("\n1. Solicitar mantenimiento preventivo\n2. Solicitar mantenimiento de emergencia\n3. Salir\nElija una opcion: ");
+                            mant = rd.nextLine();
+                            if(mant.equals("1")){
+                                System.out.print("\nIngrese los km recorridos del vehiculo(cada km costara 10 centavos de dolar): ");
+                                String km = rd.nextLine();
+                                if(isNumeric(km)){
+                                    int ikm = Integer.parseInt(km);
+                                    double total = ikm*0.10;
+                                    System.out.println("\nEl valor a pagar por mantenimiento preventido es de: $"+total);
+                                    boolean ext = false;
+                                    while(!ext){
+                                        System.out.print("\n1. Aceptar\n2. Salir\nElija una opcion: ");
+                                        String op = rd.nextLine();
+                                        if(op.equals("1")){
+                                            System.out.println("\nSu solicitud esta siendo enviada....");
+                                            vehiculos.get(indice-1).setMantenimiento(Mantenimiento.Preventivo);
+                                            Vehiculo vh = vehiculos.get(indice-1);                                            
+                                            usercliente.enviarMantenimiento(vh, usuarios, usercliente);
+                                            System.out.println("\nSolicitud ha sido envida con exito!!");
+                                            salir = true;
+                                            ext = true;
+                                        }else if(op.equals("2")){
+                                            System.out.println("\nHa cancelado la solicitud\n");                                                                            
+                                            ext = true;
+                                        }else{                                                                            
+                                            System.out.println("\nElija una opcion correcta\n");                                                                    
+                                        }  
+                                    }
+                                }else{
+                                    System.out.println("\nIngrese los km correctos\n");
+                                }
+                            }else if(mant.equals("2")){
+                                System.out.println("\nEl costo del mantenimiento lo validará el jefe de taller, le llegará el costo a su bandeja de mensajes");
+                                vehiculos.get(indice-1).setMantenimiento(Mantenimiento.Emergencia);
+                                Vehiculo vh = vehiculos.get(indice-1);                
+                                usercliente.enviarMantenimiento(vh, usuarios, usercliente);
+                                System.out.println("\nSolicitud ha sido envida con exito!!");
+                                salir = true;
+                            }else if(mant.equals("3")){
+                                salir = true;                              
+                            }else{
+                                System.out.println("Elija una opcion correcta");
+                            }   
+                        }
+                    }else{
+                        System.out.println("\nSu vehiculo ya ha sido adminitido en mantenimiento\n");
+                    }                                               
+                }else{
+                    System.out.println("\nElija un numero de la lista de sus vehiculos\n");
+                }                                           
+            }else if(opc.equals("s")){
+                exit = true;                
+            }else{
+                System.out.println("\nElija una opción correcta\n");
+            }
+        }  
+    }
+
     public void enviarCotizacion(Vehiculo vh, ArrayList<Usuario> arrayusuarios, Cliente cl){
         Random rnd = new Random();
         boolean verificar = false;
@@ -171,11 +260,21 @@ public class Cliente extends Usuario{
             int indice = rnd.nextInt(arrayusuarios.size());
             if(arrayusuarios.get(indice).getTipo().equals("Vendedor")){                                
                 Vendedor uservendedor = (Vendedor) arrayusuarios.get(indice);
-                uservendedor.agregarCotizacion(vh, cl);                
-                //uservendedor.getVehiculos().add(vh); PUEDES USAR ESTO SIN NECESIDAD DEL METODO AGREGARVEHICULO                          
+                uservendedor.agregarCotizacion(vh, cl);                                
                 verificar = true;
             }         
         }
+    }
+
+    public void consultarStock(ArrayList<Vehiculo> arreglovehiculos){
+        System.out.print("\n*****************LISTA DE VEHICULOS*****************\n");        
+        System.out.println();
+        for(int i = 0; i<arreglovehiculos.size(); i++){
+            if(arreglovehiculos.get(i).getDisponibilidad().equals(Estado.Disponible)){
+                System.out.println(i+". Marca: "+arreglovehiculos.get(i).getMarca()+", Modelo: "+arreglovehiculos.get(i).getModelo()+", Año: "+arreglovehiculos.get(i).getYear());                
+            }
+
+        }        
     }
 
     public void enviarCompra(Vehiculo vh, ArrayList<Usuario> arrayusuarios, Cliente cl){   // envia desde el main la compra hacia l supervisor
@@ -196,154 +295,29 @@ public class Cliente extends Usuario{
         }
     }
 
-    public Vehiculo solicitarCotizacion(int indice, ArrayList<Vehiculo> arreglo){        
-        return arreglo.get(indice-1);
-    }
-    
     public Vehiculo solicitarCompra(Vehiculo vh, ArrayList<Vehiculo> arreglo){
         int indice = arreglo.indexOf(vh);
         return arreglo.get(indice);
     }
-    
-    
 
 
-
-
-
-
-
-    public void eliminarMensaje(String mensaje){
-        mensajes.remove(mensaje);
-    }
-
-    public void eliminarCotizacion(Vehiculo vh){
-        cotizaciones.remove(vh);
-    }
-
-    
-
-    public void solicitarMantenimiento(Cliente usercliente, int indice, ArrayList<Usuario> usuarios){
-        Scanner rd = new Scanner(System.in);
-        String mant = "";
-        while(!mant.equals("3")){
-            System.out.print("\n1. Solicitar mantenimiento preventivo\n2. Solicitar mantenimiento de emergencia\n3. Salir\nElija una opcion: ");
-            mant = rd.nextLine();
-            if(mant.equals("1")){
-                boolean exit = true;
-                while(exit){
-                    System.out.print("\nIngrese los km recorridos del vehiculo(cada km costara 10 centavos): ");
-                    String km = rd.nextLine();
-                    if(isNumeric(km)){
-                        int ikm = Integer.parseInt(km);
-                        double total = ikm*0.10;
-                        System.out.println("\nEl valor a pagar por mantenimiento preventido es de: $"+total);
-                        String ext = "";
-                        while(!(ext.equals("2"))){
-                            System.out.print("\n1. Aceptar\n2. Salir\nElija una opcion: ");
-                            ext = rd.nextLine();
-                            if(ext.equals("1")){
-                                System.out.println("\nSu solicitud esta siendo enviada....");
-                                Vehiculo vh = usercliente.getVehiculos().get(indice-1);
-                                vh.setMantenimiento(Mantenimiento.Preventivo);
-                                usercliente.enviarMantenimiento(vh, usuarios, usercliente);
-                                System.out.println("\nSolicitud ha sido envida con exito!!");                                                                            
-                                exit = false;                                                                            
-                                break;                                                                                                                                                    
-                            }else if(ext.equals("2")){                                                                            
-                                System.out.println("\nHa cancelado la solicitud\n");                                                                            
-                                exit = false;                                                                        
-                            }else{                                                                            
-                                System.out.println("\nElija una opcion correcta\n");                                                                    
-                            }                                                                
-                        }                                                            
-                    }else{                                                                    
-                        System.out.println("\nIngrese los km correctos\n");                                                                                      
-                    }                                                                                                                                        
-                }                                                                                                                                        
-            }else if(mant.equals("2")){
-                System.out.println("El costo del mantenimiento lo validará el jefe de taller, le llegará el costo a su bandeja de mensajes");
-                Vehiculo vh = usercliente.getVehiculos().get(indice-1);
-                vh.setMantenimiento(Mantenimiento.Emergencia);
-                usercliente.enviarMantenimiento(vh, usuarios, usercliente);                
-            }else if(mant.equals("3")){                
-                
-            }else{
-                System.out.println("Elija una opcion correcta");
-            }   
-        }
+    //Posible uso
+    public void cotizacionesAprobadas(Vehiculo vh){
+        cotizaciones.add(vh);
     }
     
-    public void consultarMantenimiento(){
-        Scanner rd = new Scanner(System.in);
-        ArrayList<Vehiculo> mantenimiento = new ArrayList<>();
-        for(Vehiculo vh : vehiculos){
-            if(vh.getMantenimiento()!=Mantenimiento.Ninguno){
-                mantenimiento.add(vh);
-            }
-        }
-
-        if(mantenimiento.size()>0){            
-            String opc = "";
-            while(!opc.equals("s")){
-                System.out.println("\nSus vehiculos en mantenimiento son:\n");
-                for(int i=0; i<mantenimiento.size(); i++){                
-                    System.out.println((i+1)+mantenimiento.get(i).toString());                         
-                }
-                System.out.print("Elija un vehiculo para consultar mantenimiento: ");
-                opc = rd.nextLine();
-                if(isNumeric(opc)){
-                    int indice = Integer.parseInt(opc);
-                    if((indice>0) & (indice<=mantenimiento.size())){                    
-                        System.out.println("Su vehiculo esta en mantenimiento "+vehiculos.get(indice-1).getMantenimiento()+" y se encuentra "+vehiculos.get(indice-1).getEstadoMantenimiento());                
-                    }else{
-                        System.out.println("\nElija una opcion de la lista\n");
-                    }
-                }else{
-                    System.out.println("\nElija una opcion correcta\n");
-                }
-            }
-        }else{
-            System.out.println("\nNo tiene vehiculos en mantenimiento\n");
-        }        
-    }
-    
-   
-    
-
-    /*
-    public String getCategoria() {
-        return Categoria;
+    public void agregarMensaje(String mensaje){
+        mensajes.add(mensaje);
     }
 
-    public String getCedula() {
-        return Cedula;
+    public void agregarCompra (Vehiculo vh){  // agrega el vehiculo con las carateristicas de la solicitud de compra aceptada a la lista
+        vh.setMantenimiento(Mantenimiento.Ninguno);
+        vehiculos.add(vh);
     }
-
-    public String getOcupacion() {
-        return Ocupacion;
-    }
-
-    public double getIngresos() {
-        return Ingresos;
-    }
-
-    public void setCategoria(String Categoria) {
-        this.Categoria = Categoria;
-    }
-
-    public void setCedula(String Cedula) {
-        this.Cedula = Cedula;
-    }
-
-    public void setOcupacion(String Ocupacion) {
-        this.Ocupacion = Ocupacion;
-    }
-
-    public void setIngresos(int Ingresos) {
-        this.Ingresos = Ingresos;
-    }
-    */
-    
-    
+        
+    //Método para mostrar información del vehiculo
+    @Override
+    public String mostrarDatos(){
+        return "Usuario:\n " +tipo+super.mostrarDatos()+"\nCedula: "+cedula+"\nOcupacion: "+ocupacion+"\nIngresos: "+ingresos;
+    }            
 }

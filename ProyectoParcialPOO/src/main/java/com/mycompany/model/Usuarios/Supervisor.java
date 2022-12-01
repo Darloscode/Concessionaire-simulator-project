@@ -8,25 +8,25 @@ public class Supervisor extends Usuario{
 
     private String tipo = "Supervisor";
     private ArrayList<Vehiculo> solicitudes = new ArrayList<>();
-    private ArrayList<Cliente> clientes = new ArrayList<>();
-    
+    private ArrayList<Cliente> clientes = new ArrayList<>();    
     private ArrayList<String> certificaciones= new ArrayList<>();   
-
     
+    //Constructor
     public Supervisor(String nombre, String apellido, String usuario, String password){
-        super(nombre, apellido,usuario, password); 
-        
+        super(nombre, apellido,usuario, password);         
     }
 
+    //Método para mostar informacion del supervisor
+    @Override
     public String mostrarDatos(){
         return "Usuario: "+tipo+super.mostrarDatos();
-    }
+    }    
 
+    //Métodos getters
     public String getTipo(){
         return tipo;
     }
     
-
     public ArrayList<Vehiculo> getSolicitudes() {
         return solicitudes;
     }
@@ -38,48 +38,55 @@ public class Supervisor extends Usuario{
     public ArrayList<String> getCertificaciones() {
         return certificaciones;
     }
-
-    public void setCertificaciones(ArrayList<String> certificaciones) {
-        this.certificaciones = certificaciones;
-    }
-    
-    
-  
-     public void agregarSolicitud(Vehiculo vh, Cliente cl){  // agrega las solicitudes que son enviadas desde clientes en 
-                                                             // el metodo  compra
+         
+    //Métodos en uso
+    public void agregarSolicitud(Vehiculo vh, Cliente cl){  // agrega las solicitudes que son enviadas desde clientes en el metodo  compra                                                             
         solicitudes.add(vh);
         clientes.add(cl);
     }
 
-    /*
-    public void mostrarSolicitudes(ArrayList<Usuario> usuarios){         
+    public void consultarStock(ArrayList<Vehiculo> vehiculos){    
+        System.out.println("\n*************************************");            
+        for(Vehiculo vh : vehiculos){            
+            System.out.println(vh.mostrarDatos());
+            System.out.println();
+        }
+        System.out.println("*************************************");
+    }
+ 
+    public void mostrarSolicitudes(ArrayList<Usuario> usuarios, ArrayList<Vehiculo> vehiculos){       
         Scanner sc = new Scanner ( System.in);
 
         String op= "";
         String opc= "";
+        boolean salir = false;
+        boolean exit = false;
 
-        while(!op.equals("s")){
-            if(solicitudes.size()>0){ 
-                
-                for( int i=0 ; i<solicitudes.size(); i++){
-                    System.out.println((i+1)+ ". El cliente "+clientes.get(i).getNombre()+" ha solicitado comprar un vehiculo de la marca "+ solicitudes.get(i).getMarca()+" y modelo "+solicitudes.get(i).getModelo());
-                    System.out.println(clientes.get(i).mostrarDatos());
-                }   
+        if(solicitudes.size()>0){
 
+            while(!salir){
+                System.out.println();
+                for(int i=0 ; i<solicitudes.size(); i++){
+                    System.out.println((i+1)+ ". El cliente "+clientes.get(i).getNombre()+" ha solicitado comprar el siguiente vehiculo");
+                    System.out.println("   "+solicitudes.get(i)+"\n");
+                }
                 System.out.print("\nElija una solicitud para responder o escriba (s) para salir: ");
                 op = sc.nextLine();
-
                 if(isNumeric(op)){
                     int indice = Integer.parseInt(op);            
                     if((indice>0)&(indice<=solicitudes.size())){
-                        opc = "";
-                        while(!(opc.equals("3"))){
+                        exit = false;
+                        while(!exit){
                             System.out.println("\n¿Aprobar o Rechazar la solicitud?");
                             System.out.print("\n1. Aprobar\n2. Rechazar\n3. Salir\nElija una opcion: ");
                             opc = sc.nextLine();
                             if(opc.equals("1")){
-                                clientes.get(indice-1).agregarCompra(solicitudes.get(indice-1));
                                 clientes.get(indice-1).agregarMensaje("Ha comprado el vehiculo: "+"\n"+solicitudes.get(indice-1).toString()+"\nPor favor, acerquese al taller para retirarlo");
+                                System.out.println("\nEl mensaje ha sido enviado al comprador");
+                                System.out.println(vehiculos.contains(solicitudes.get(indice-1)));                               
+                                int i = vehiculos.indexOf(solicitudes.get(indice-1));
+                                vehiculos.get(i).setDisponibilidad(Estado.Solicitado);                                
+
                                 for(Usuario us : usuarios){
                                     if(us instanceof JefedeTaller){
                                         JefedeTaller jdt = (JefedeTaller) us;
@@ -88,109 +95,54 @@ public class Supervisor extends Usuario{
                                 }
                                 solicitudes.remove(indice-1);
                                 clientes.remove(indice-1);
+                                exit = true;
+                                salir = true;
                             }else if(opc.equals("2")){
-                                System.out.println("\nEstimado " + getNombre() +", escriba los motivos del rechazo de solicitud de la compra");
+                                System.out.println("\nEstimado supervisor " + getNombre() +", escriba los motivos del rechazo de solicitud de la compra");
                                 System.out.print("\nRespuesta: ");
-                                String respuesta = sc.nextLine();
-                                String mensaje = "Estimado "+clientes.get(indice-1).getNombre()+" la solicitud de compra del vehiculo de la marca "+solicitudes.get(indice-1).getMarca()+" y modelo "+solicitudes.get(indice-1).getModelo()+" ha sido rechazada debido a que: ";
+                                String respuesta = sc.nextLine();                                
+                                String mensaje = "Estimado cliente "+clientes.get(indice-1).getNombre()+" la solicitud de compra del vehiculo de la marca "+solicitudes.get(indice-1).getMarca()+" y modelo "+solicitudes.get(indice-1).getModelo()+" ha sido rechazada debido a que: ";
                                 clientes.get(indice-1).agregarMensaje(mensaje+respuesta);
-                                solicitudes.remove(indice-1);
-                                clientes.remove(indice-1);                                
-                            }else if(op.equals("3")){
-
-                            }else{
-                                System.out.println("\nElija una opcion correcta\n");
-                            }
-                        }    
-                    }else{
-                    System.out.println("\nElija una opción de la lista de solicitudes\n");
-                    }                
-                }else if(op.equals("s")){
-                    break;
-                }else{
-                    System.out.println("Elija una opcion correcta");
-                }
-            }else{            
-                break;
-            }
-        }  
-    }  
-    */
-
-    public void mostrarSolicitudes(ArrayList<Usuario> usuarios, ArrayList<Vehiculo> vehiculos){
-        Scanner sc = new Scanner ( System.in);
-
-        String op= "";
-        String opc= "";
-
-        while(!op.equals("s")){
-            if(solicitudes.size()>0){                
-                for( int i=0 ; i<solicitudes.size(); i++){
-                    System.out.println((i+1)+ ". El cliente "+clientes.get(i).getNombre()+" ha solicitado comprar un vehiculo de la marca "+ solicitudes.get(i).getMarca()+" y modelo "+solicitudes.get(i).getModelo());
-                }
-
-                System.out.print("\nElija una solicitud para responder o escriba (s) para salir: ");
-                op = sc.nextLine();
-
-                if(isNumeric(op)){
-                    int indice = Integer.parseInt(op);            
-                    if((indice>0)&(indice<=solicitudes.size())){
-                        opc = "";
-                        while(!(opc.equals("3"))){
-                            System.out.println("\n¿Aprobar o Rechazar la solicitud?");
-                            System.out.print("\n1. Aprobar\n2. Rechazar\n3. Salir\nElija una opcion: ");
-                            opc = sc.nextLine();
-                            if(opc.equals("1")){                                
-                                clientes.get(indice-1).agregarMensaje("Ha comprado el vehiculo: "+"\n"+solicitudes.get(indice-1).toString()+"\nPor favor, acerquese al taller para retirarlo");
-                                if(vehiculos.contains(solicitudes.get(indice-1))){
-                                    int i = vehiculos.indexOf(solicitudes.get(indice-1));
-                                    vehiculos.get(i).setDisponibilidad(Estado.Solicitado);
-                                }
-                                for(Usuario us : usuarios){
-                                    if(us instanceof JefedeTaller){
-                                        JefedeTaller jdt = (JefedeTaller) us;
-                                        jdt.agregarEntregas(solicitudes.get(indice-1), clientes.get(indice-1));
-                                    }
-                                }
-                                solicitudes.remove(indice-1);
-                                clientes.remove(indice-1);
-                            }else if(opc.equals("2")){
-                                System.out.println("\nEstimado " + getNombre() +", escriba los motivos del rechazo de solicitud de la compra");
-                                System.out.print("\nRespuesta: ");
-                                String respuesta = sc.nextLine();
-                                String mensaje = "Estimado "+clientes.get(indice-1).getNombre()+" la solicitud de compra del vehiculo de la marca "+solicitudes.get(indice-1).getMarca()+" y modelo "+solicitudes.get(indice-1).getModelo()+" ha sido rechazada debido a que: ";
-                                clientes.get(indice-1).agregarMensaje(mensaje+respuesta);
+                                System.out.println("\nEl mensaje se enviado al comprador"); 
                                 if(vehiculos.contains(solicitudes.get(indice-1))){
                                     int indi = vehiculos.indexOf(solicitudes.get(indice-1));
                                     vehiculos.get(indi).setDisponibilidad(Estado.Disponible);
                                 }
                                 solicitudes.remove(indice-1);
-                                clientes.remove(indice-1);                                
+                                clientes.remove(indice-1);
                             }else if(op.equals("3")){
-
+                                exit = true;
                             }else{
                                 System.out.println("\nElija una opcion correcta\n");
                             }
-                        }    
+                        }
                     }else{
-                    System.out.println("\nElija una opción de la lista de solicitudes\n");
-                    }                
+                        System.out.println("\nElija una opción de la lista de solicitudes\n");
+                    }
                 }else if(op.equals("s")){
-                    break;
+                    salir = true;
                 }else{
-                    System.out.println("Elija una opcion correcta");
+                    System.out.println("\nElija un opcion correcta\n");
                 }
-            }else{            
-                break;
             }
-        }  
+        }else{
+            System.out.println("\nPor ahora no tiene solicitudes de compra\n");
+        }                                
     }  
-    public void consultarStock(ArrayList<Vehiculo> vehiculos){                
-        for(Vehiculo vh : vehiculos){            
-            System.out.println(vh.mostrarDatos());
-            System.out.println();
-        }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
     
         
    
@@ -205,10 +157,7 @@ public class Supervisor extends Usuario{
 
     
 
-    @Override
-    public String toString() {
-        return "Supervisor{" + "Certificaciones=" + certificaciones + '}';
-    }
+  
     
     
    

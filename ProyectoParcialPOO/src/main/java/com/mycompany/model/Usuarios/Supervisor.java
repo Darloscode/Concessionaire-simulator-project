@@ -188,7 +188,8 @@ public class Supervisor extends Usuario{
                 }
             }
         }  
-    }  
+    }
+}
     public void consultarStock(ArrayList<Vehiculo> vehiculos){                
         for(Vehiculo vh : vehiculos){            
             System.out.println(vh.mostrarDatos());

@@ -73,13 +73,14 @@ public class Supervisor extends Usuario{
                     int indice = Integer.parseInt(op);            
                     if((indice>0)&(indice<=solicitudes.size())){
                         opc = "";
-                        while(!(opc.equals("3"))){
+                        while(!(opc.equals("3"))&& solicitudes.size()>0){
                             System.out.println("\n¿Aprobar o Rechazar la solicitud?");
                             System.out.print("\n1. Aprobar\n2. Rechazar\n3. Salir\nElija una opcion: ");
                             opc = sc.nextLine();
                             if(opc.equals("1")){
                                 clientes.get(indice-1).agregarCompra(solicitudes.get(indice-1));
                                 clientes.get(indice-1).agregarMensaje("Ha comprado el vehiculo: "+"\n"+solicitudes.get(indice-1).toString()+"\nPor favor, acerquese al taller para retirarlo");
+                                System.out.println("la solicitud se enviado al comprador \n "); 
                                 for(Usuario us : usuarios){
                                     if(us instanceof JefedeTaller){
                                         JefedeTaller jdt = (JefedeTaller) us;
@@ -88,10 +89,11 @@ public class Supervisor extends Usuario{
                                 }
                                 solicitudes.remove(indice-1);
                                 clientes.remove(indice-1);
-                            }else if(opc.equals("2")){
+                            }else if(opc.equals("2")&& solicitudes.size()>0){
                                 System.out.println("\nEstimado " + getNombre() +", escriba los motivos del rechazo de solicitud de la compra");
                                 System.out.print("\nRespuesta: ");
                                 String respuesta = sc.nextLine();
+                                System.out.println("la solicitud se enviado al comprador \n ");
                                 String mensaje = "Estimado "+clientes.get(indice-1).getNombre()+" la solicitud de compra del vehiculo de la marca "+solicitudes.get(indice-1).getMarca()+" y modelo "+solicitudes.get(indice-1).getModelo()+" ha sido rechazada debido a que: ";
                                 clientes.get(indice-1).agregarMensaje(mensaje+respuesta);
                                 solicitudes.remove(indice-1);
@@ -136,12 +138,13 @@ public class Supervisor extends Usuario{
                     int indice = Integer.parseInt(op);            
                     if((indice>0)&(indice<=solicitudes.size())){
                         opc = "";
-                        while(!(opc.equals("3"))){
+                        while(!(opc.equals("3"))&& solicitudes.size()>0){
                             System.out.println("\n¿Aprobar o Rechazar la solicitud?");
                             System.out.print("\n1. Aprobar\n2. Rechazar\n3. Salir\nElija una opcion: ");
                             opc = sc.nextLine();
                             if(opc.equals("1")){                                
                                 clientes.get(indice-1).agregarMensaje("Ha comprado el vehiculo: "+"\n"+solicitudes.get(indice-1).toString()+"\nPor favor, acerquese al taller para retirarlo");
+                                System.out.println("El mensaje se enviado al comprador "); 
                                 if(vehiculos.contains(solicitudes.get(indice-1))){
                                     int i = vehiculos.indexOf(solicitudes.get(indice-1));
                                     vehiculos.get(i).setDisponibilidad(Estado.Solicitado);
@@ -158,6 +161,7 @@ public class Supervisor extends Usuario{
                                 System.out.println("\nEstimado " + getNombre() +", escriba los motivos del rechazo de solicitud de la compra");
                                 System.out.print("\nRespuesta: ");
                                 String respuesta = sc.nextLine();
+                                System.out.println("El mensaje se enviado al comprador "); 
                                 String mensaje = "Estimado "+clientes.get(indice-1).getNombre()+" la solicitud de compra del vehiculo de la marca "+solicitudes.get(indice-1).getMarca()+" y modelo "+solicitudes.get(indice-1).getModelo()+" ha sido rechazada debido a que: ";
                                 clientes.get(indice-1).agregarMensaje(mensaje+respuesta);
                                 if(vehiculos.contains(solicitudes.get(indice-1))){
@@ -175,13 +179,13 @@ public class Supervisor extends Usuario{
                     }else{
                     System.out.println("\nElija una opción de la lista de solicitudes\n");
                     }                
-                }else if(op.equals("s")){
-                    break;
+                }else if(op.equals("s")&& solicitudes.size()>0){
+                   
+                }else if(op.equals("s")&& solicitudes.size()=0){
+                
                 }else{
                     System.out.println("Elija una opcion correcta");
                 }
-            }else{            
-                break;
             }
         }  
     }  

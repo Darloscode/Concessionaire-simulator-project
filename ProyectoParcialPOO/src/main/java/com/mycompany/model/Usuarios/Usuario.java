@@ -42,9 +42,19 @@ public abstract class Usuario {
     public static boolean isNumeric(String cadena){
         try {
             Integer.parseInt(cadena);
+            Double.parseDouble(cadena);
             return true;
         } catch (NumberFormatException e){
             return false;
+        }
+    }
+
+    public static boolean isDecimal(String cadena){
+        try {            
+            Double.parseDouble(cadena);
+            return true;
+        } catch (NumberFormatException e){
+            return false;        
         }
     }
 }

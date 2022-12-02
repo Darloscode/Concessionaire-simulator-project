@@ -197,10 +197,11 @@ public class Cliente extends Usuario{
                             if(mant.equals("1")){
                                 System.out.print("\nIngrese los km recorridos del vehiculo(cada km costara 10 centavos de dolar): ");
                                 String km = rd.nextLine();
-                                if(isNumeric(km)){
-                                    int ikm = Integer.parseInt(km);
-                                    double total = ikm*0.10;
-                                    System.out.println("\nEl valor a pagar por mantenimiento preventido es de: $"+total);
+                                if(isDecimal(km)){
+                                    double ikm = Double.parseDouble(km);                                    
+                                    double total = ikm*0.10;            
+                                    String valor = String.format("%.2f", total);                        
+                                    System.out.println("\nEl valor a pagar por mantenimiento preventido es de: $"+valor);
                                     boolean ext = false;
                                     while(!ext){
                                         System.out.print("\n1. Aceptar\n2. Salir o Rechazar\nElija una opcion: ");
@@ -222,7 +223,7 @@ public class Cliente extends Usuario{
                                         }  
                                     }
                                 }else{
-                                    System.out.println("\nIngrese los km correctos\n");
+                                    System.out.println("\nIngrese un kilometraje valido\n");
                                 }
                             }else if(mant.equals("2")){
                                 System.out.println("\nEl costo del mantenimiento lo validará el jefe de taller, le llegará el costo a su bandeja de mensajes");

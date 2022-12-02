@@ -152,6 +152,8 @@ public class JefedeTaller extends Usuario{
                     if(opc.equals("1")){
                         int buscar = mantenimientovehiculos.indexOf(enespera.get(i));
                         mantenimientovehiculos.get(buscar).setEstadoMantenimiento(EstadoMantenimiento.Admitido);
+                        int buscarvh = clientesmantenimiento.get(buscar).getVehiculos().indexOf( mantenimientovehiculos.get(buscar));
+                        clientesmantenimiento.get(buscar).getVehiculos().get(buscarvh).setEstadoMantenimiento(EstadoMantenimiento.Admitido);                                                        
                         salir = true;
                     }else if(opc.equals("2")){
                         System.out.println("\nSaliendo de mantenimiento de vehiculos\n");
@@ -187,7 +189,7 @@ public class JefedeTaller extends Usuario{
         if(vhman.size()>0){            
             while(!salir){
                 int i = 1;
-                for(Vehiculo vh : mantenimientovehiculos){
+                for(Vehiculo vh : vhman){
                     System.out.println("\n"+i+". "+vh.toString()+" - Designado como: "+vh.getEstadoMantenimiento());
                     i++;
                 }
@@ -196,26 +198,33 @@ public class JefedeTaller extends Usuario{
 
                 if(isNumeric(opc)){                    
                     int indice = Integer.parseInt(opc);
-                    if((indice>0) & (indice<=mantenimientovehiculos.size())){
+                    if((indice>0) & (indice<=vhman.size())){
                         boolean exit = false;                        
                         while(!exit){
                             System.out.print("\n1. En reparacion\n2. En etapa de prueba\n3. Dar de alta\n4. Salir\nElija una opcion: ");
                             adm = sc.nextLine();
                             if(adm.equals("1")){
-                                mantenimientovehiculos.get(indice-1).setEstadoMantenimiento(EstadoMantenimiento.En_Reparacion);
+                                int buscar = mantenimientovehiculos.indexOf(vhman.get(indice-1));
+                                mantenimientovehiculos.get(buscar).setEstadoMantenimiento(EstadoMantenimiento.En_Reparacion);
+                                int buscarvh = clientesmantenimiento.get(buscar).getVehiculos().indexOf( mantenimientovehiculos.get(buscar));
+                                clientesmantenimiento.get(buscar).getVehiculos().get(buscarvh).setEstadoMantenimiento(EstadoMantenimiento.En_Reparacion);
                                 System.out.println("\nEl vehiculo esta siendo revisado\n");
                                 exit = true;
                             }else if(adm.equals("2")){
-                                mantenimientovehiculos.get(indice-1).setEstadoMantenimiento(EstadoMantenimiento.En_Etapa_De_Prueba);
+                                int buscar = mantenimientovehiculos.indexOf(vhman.get(indice-1));
+                                mantenimientovehiculos.get(buscar).setEstadoMantenimiento(EstadoMantenimiento.En_Etapa_De_Prueba);                                
+                                int buscarvh = clientesmantenimiento.get(buscar).getVehiculos().indexOf( mantenimientovehiculos.get(buscar));
+                                clientesmantenimiento.get(buscar).getVehiculos().get(buscarvh).setEstadoMantenimiento(EstadoMantenimiento.En_Etapa_De_Prueba);
                                 System.out.println("\nRevisando correcto funcionamiento del vehiculo\n");
                                 exit = true;
                                 
                             }else if(adm.equals("3")){
-                                mantenimientovehiculos.get(indice-1).setMantenimiento(Mantenimiento.Ninguno);
-                                clientesmantenimiento.get(indice-1).agregarMensaje("Su vehiculo ha sido reparado, puede acercarse a retirar su vehiculo: \n"+mantenimientovehiculos.get(indice-1).mostrarDatos());
-                                mantenimientovehiculos.get(indice-1).setEstadoMantenimiento(null);
-                                clientesmantenimiento.remove(indice-1);
-                                mantenimientovehiculos.remove(indice-1);
+                                int buscar = mantenimientovehiculos.indexOf(vhman.get(indice-1));
+                                mantenimientovehiculos.get(buscar).setMantenimiento(Mantenimiento.Ninguno);                                
+                                clientesmantenimiento.get(buscar).agregarMensaje("Su vehiculo ha sido reparado, puede acercarse a retirar su vehiculo: \n"+mantenimientovehiculos.get(indice-1).mostrarDatos());
+                                mantenimientovehiculos.get(buscar).setEstadoMantenimiento(null);
+                                clientesmantenimiento.remove(buscar);
+                                mantenimientovehiculos.remove(buscar);
                                 exit = true;
                                 salir = true;
                             }else if(adm.equals("4")){                                

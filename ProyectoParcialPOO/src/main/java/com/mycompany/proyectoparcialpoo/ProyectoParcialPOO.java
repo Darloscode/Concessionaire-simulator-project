@@ -16,9 +16,8 @@ public class ProyectoParcialPOO {
     public static ArrayList<Vehiculo> vehiculos = new ArrayList<>();
 
     public static void main(String[] args) {
-        inicializarSistema();        
-        
         Scanner entrada = new Scanner(System.in);
+        inicializarSistema();     
 
         boolean salir = false;
         boolean exit = false;
@@ -30,8 +29,8 @@ public class ProyectoParcialPOO {
         boolean cotizar=false;
 
         while(!salir){
-            System.out.println("\n*********************************");   
-            System.out.println("**Bienvenido**");
+            System.out.println("\n************************************************");   
+            System.out.println("------------------Bienvenido------------------");
             System.out.println("1. Cliente ");
             System.out.println("2. Vendedor");
             System.out.println("3. Supervisor");
@@ -40,11 +39,11 @@ public class ProyectoParcialPOO {
             
             System.out.print("Elija una opcion: ");
             opcion = entrada.nextLine();            
-            System.out.println("*********************************");   
+            System.out.println("************************************************\n");   
             
             switch(opcion){
                 case "1":              
-                    System.out.println("\n************Cliente************");
+                    System.out.println("\n******************Cliente******************");
                     tipo = "Cliente";
 
                     System.out.print("Usuario: ");
@@ -61,17 +60,20 @@ public class ProyectoParcialPOO {
                         Cliente usercliente = (Cliente) cl;                                                  
 
                         op = "";                        
+                        System.out.println("\n------------------------------------------------------");
+                        System.out.println("Bienvenido Sr(a) "+usercliente.getTipo()+": "+usercliente.getNombre()+" "+usercliente.getApellido());
+                        System.out.println("------------------------------------------------------\n");
 
                         usercliente.mostrarMensajes();
 
                         usercliente.mostrarCotizacionesAprobadas(usuarios, usercliente, vehiculos);                         
                         
+                        System.out.println("\n-------------------------------------------------------------------\n");
 
                         if((usercliente.getVehiculos().size()!=0)){
                             exit = false;
                             op = "";
-
-                            System.out.print("\nBienvenido Sr(a) "+usercliente.getTipo()+": "+usercliente.getNombre()+" "+usercliente.getApellido()); // muestra los datos del cliente al iniciar el sistema
+                            
                             while(!exit){                                
                                 System.out.print("\n1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar un mantenimiento\n4. Consultar mantenimiento\n5. Salir\n \nElija una opcion: ");
                                 op = entrada.nextLine();
@@ -111,7 +113,7 @@ public class ProyectoParcialPOO {
                     break;
 
                 case "2":
-                    System.out.println("\n************Vendedor************");
+                    System.out.println("\n******************Vendedor******************");
                     tipo = "Vendedor";
                     
                     System.out.print("Usuario: ");
@@ -121,12 +123,19 @@ public class ProyectoParcialPOO {
                     password = entrada.nextLine();
                     
                     user = login(usuario, password, tipo);    
-                                                                                                    
+
+                
                     if(user!=-1){
                         Usuario vd = usuarios.get(user);
                         Vendedor uservendedor = (Vendedor) vd;
                         op = "";
 
+                        System.out.println("\n------------------------------------------------------");
+                        System.out.println("Bienvenido Sr(a) "+uservendedor.getTipo()+": "+uservendedor.getNombre()+" "+uservendedor.getApellido());
+                        System.out.println("------------------------------------------------------\n");
+                      
+                        uservendedor.consultarCotizaciones();
+                        System.out.println("\n-------------------------------------------------------------------\n");
                         exit = false;
                         while(!exit){
                             System.out.print("\n1. Consultar Stock\n2. Solicitudes de cotizacion\n3. Salir\nElija una opcion: ");
@@ -146,7 +155,7 @@ public class ProyectoParcialPOO {
                     break;
 
                 case "3":
-                    System.out.println("\n************Supervisor************");
+                    System.out.println("\n******************Supervisor******************");
                     tipo = "Supervisor";
             
                     System.out.print("Usuario: ");
@@ -161,18 +170,22 @@ public class ProyectoParcialPOO {
                         Usuario spv = usuarios.get(user);
                         Supervisor usersupervisor = (Supervisor) spv;
                         op = "";
+                        System.out.println("\n------------------------------------------------------");
+                        System.out.println("Bienvenido Sr(a) "+usersupervisor.getTipo()+": "+usersupervisor.getNombre()+" "+usersupervisor.getApellido());
+                        System.out.println("------------------------------------------------------\n");
                                          
                         usersupervisor.mostrarSolicitudes(usuarios, vehiculos);
-                        
+
+                        System.out.println("\n-------------------------------------------------------------------\n");
                         exit = false;
                         while(!exit){
-                            System.out.print("\n1. Consultar Stock\n2. Adminitrar compras\n3. Salir\nElija una opcion: ");
+                            System.out.print("\n1. Consultar Stock\n2. Adminitrar ventas\n3. Salir\nElija una opcion: ");
                             op = entrada.nextLine();                            
                             if(op.equals("1")){                                
                                 usersupervisor.consultarStock(vehiculos);
                             }else if(op.equals("2")){
-                                usersupervisor.mostrarSolicitudes(usuarios, vehiculos);                            
-                            }else if(op.equals("3")){
+                                usersupervisor.mostrarSolicitudes(usuarios, vehiculos);                               
+                            }else if (op.equals("3")){
                                 exit = true;
                             }else{
                                 System.out.println("\nElija una opcion valida\n");
@@ -182,7 +195,7 @@ public class ProyectoParcialPOO {
                     break;
 
                 case "4":
-                    System.out.println("\n************Jefe de Taller************");
+                    System.out.println("\n******************Jefe de Taller******************");
                     tipo = "Jefe de Taller";
                     
                     System.out.print("Usuario: ");
@@ -197,14 +210,18 @@ public class ProyectoParcialPOO {
                         Usuario spv = usuarios.get(user);
                         JefedeTaller userjefetaller = (JefedeTaller) spv;
                         op = "";
+                        System.out.println("\n------------------------------------------------------");
+                        System.out.println("Bienvenido Sr(a) "+userjefetaller.getTipo()+": "+userjefetaller.getNombre()+" "+userjefetaller.getApellido());
+                        System.out.println("------------------------------------------------------\n");
+
+                        userjefetaller.verificarSolicitudes();
+                        userjefetaller.verificarEntregas();
 
                         exit = false;
                         while(!exit){
+                            System.out.println("\n-------------------------------------------------------------------\n");
 
-                            userjefetaller.verificarSolicitudes();
-                            userjefetaller.verificarEntregas();
-
-                            System.out.print("\n1. Mostrar entregas\n2. Admitir vehiculos para mantenimiento\n3. Administrar mantenimiento\n4. Salir\nElija una opcion: ");
+                            System.out.print("\n1. Mostrar entregas de vehiculos\n2. Admitir vehiculos a mantenimiento\n3. Administrar vehiculos en mantenimiento\n4. Consultar cantidad de vehiculos en REPARACION\n5. Salir\nElija una opcion: ");
                             op = entrada.nextLine();
 
                             if (op.equals("1")){
@@ -214,6 +231,8 @@ public class ProyectoParcialPOO {
                             }else if(op.equals("3")){
                                 userjefetaller.administrarVehiculos();
                             }else if(op.equals("4")){
+                                userjefetaller.consultarReparacion(usuarios);
+                            }else if(op.equals("5")){
                                 exit = true;
                             }else{
                                 System.out.println("\nEscoja una opcion correcta\n");
@@ -222,62 +241,21 @@ public class ProyectoParcialPOO {
                     }                                                         
                     break;
 
-                case "9":
-                    for(Usuario u: usuarios){
-                        if(u.getTipo().equals("Vendedor")){
-                            Vendedor v = (Vendedor) u;
-                            System.out.println(v.getCotizaciones().size());
-                        }
-                    }
-                    break;
-                case "7":
-                    for(Vehiculo vh : vehiculos){
-                        System.out.println(vh.getDisponibilidad());
-                        System.out.println(vh.getMantenimiento());
-                        System.out.println(vh.getEstadoMantenimiento());
-                    }
-                    break;              
-                case "k":
-                    for(Usuario t: usuarios){
-                        if(t instanceof Cliente){
-                            Cliente cd = (Cliente) t;
-                            System.out.println(cd.getVehiculos().size());
-                            for(Vehiculo vh : cd.getVehiculos()){
-                                System.out.println(vh.getDisponibilidad());
-                                System.out.println(vh.getEstadoMantenimiento());
-                                System.out.println(vh.getMantenimiento());
-                            }
-                        }
-                    }
-                    break;
-                case "p":
-                    for(Usuario t: usuarios){
-                        if(t instanceof Cliente){
-                            Cliente cd = (Cliente) t;
-                            cd.cotizacionesAprobadas(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, true, false, 940));  
-                            cd.cotizacionesAprobadas(new Motocicleta("Tuczoo", "Epica", 2008, Motor.Diesel, Categoria.Deportiva, 400));                
-                        }
-                    }
-                    break;
-                case "l":                    
-                    for(Usuario a:usuarios){
-                        if(a instanceof Supervisor){
-                            Supervisor c = (Supervisor) a;
-                            for(Vehiculo vh : c.getSolicitudes()){
-                                vh.mostrarDatos();
-                            }
-                        }
-                        System.out.println();            
-                        System.out.println();
-                    }                    
-                    break;
                 case "5":
                     salir = true;
                     break;
 
+                case "6":
+                    Cliente cl = (Cliente) usuarios.get(0);
+                    cl.agregarCompra(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, false, true, 9400.00));
+                    cl.agregarCompra(new Automovil("Chevrolet", "Familiar-Grande", 2019, Motor.Gasolina, 6, false, true, 2331.00));
+                    cl.agregarCompra(new Automovil("Suzuki", "DRE1", 2016, Motor.Diesel, 4, true, false, 1230.00));
+                    cl.agregarCompra(new Tractor("Ebro", "TE52", 2010, false, Transmision.Hidraulica,23313.00));                    
+                    break;
                 default:
                     System.out.println("\nIngrese una opción valida\n");
-            }
+                
+            }            
         }
     }  
 
@@ -295,7 +273,9 @@ public class ProyectoParcialPOO {
         int verificar=verificarLogin(user, password, tipo, usuarios);
         
         if(verificar != -1){
-            System.out.println("\nHas iniciado sección\n");
+            System.out.println("\n------------------------------");
+            System.out.println("*Has iniciado sección*");
+            System.out.println("------------------------------\n");
             return verificar;
         }else{
             while((verificar == -1)){
@@ -316,13 +296,15 @@ public class ProyectoParcialPOO {
                     verificar=verificarLogin(usuario, passw, tipo, usuarios);
 
                     if(verificar != -1){
-                        System.out.println("\nHas iniciado sección\n");
+                        System.out.println("\n------------------------------");
+                        System.out.println("*Has iniciado sección*");
+                        System.out.println("------------------------------\n");
                         return verificar;
                     }
                 }else if(op.equals("2")){
                     return -1;
                 }else{
-                    System.out.println("Elija una opción correcta");
+                    System.out.println("\nElija una opción correcta");
                 }
             }
         }
@@ -340,13 +322,65 @@ public class ProyectoParcialPOO {
     }
 
     private static void inicializarSistema(){
-        usuarios.add(new Cliente("Marcos", "Veliz", "ca", "ca", "0123456789", "Administrador de empresas", 900));
-        usuarios.add(new Vendedor("Alejandro", "Muñoz", "ta", "ta", 001));
-        usuarios.add(new JefedeTaller("Jose", "Alvarez", "je", "je"));
-        usuarios.add(new Supervisor("Michel", "Michelina", "mi", "mi"));        
-        vehiculos.add(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, true, false, 940));        
-        vehiculos.add(new Motocicleta("Tuczoo", "Epica", 2008, Motor.Diesel, Categoria.Deportiva, 400));
-        usuarios.add(new Supervisor("juan","Maca", "ju","ju"));
+        //Clientes
+        usuarios.add(new Cliente("Marcos", "Rodriguez", "mar", "mar", "0123456789", "Administrador de empresas", 980));
+        usuarios.add(new Cliente("Jose", "Solis", "jos", "jos", "0987654321", "Jefe de tienda", 1400));        
+        //usuarios.add(new Cliente("Maria", "Michilena", "mar", "mar", "0875384927", "Abogado", 800));
+        //usuarios.add(new Cliente("Daniel", "Lopez", "dan", "dan", "093716542", "Doctor", 1200));
+        //usuarios.add(new Cliente("Benjamin", "Veliz", "ben", "ben", "024718276", "Enfermero", 900));
+
+        //Vendedores
+        usuarios.add(new Vendedor("Alejandro", "Muñoz", "ale", "ale", "850584"));
+        //usuarios.add(new Vendedor("Manuel", "Guaman", "man", "man", "843324"));
+        //usuarios.add(new Vendedor("Roberto", "Hulloa", "rob", "rob", "858912"));
+        //usuarios.add(new Vendedor("Sebastian", "Figueroa", "seb", "seb", "889283"));
+
+        //Jefes de talleres    
+        ArrayList<String> certificacionestecnicas = new ArrayList<>();    
+        certificacionestecnicas.add("Diplomado en hidráulica");
+        certificacionestecnicas.add("Certificado en Seguridad Industrial");
+        certificacionestecnicas.add("Certificado en Seguro Vehicular");
+        certificacionestecnicas.add("Certificado en Capacitacion Tecnica Vehicular");       
+
+        usuarios.add(new JefedeTaller("Aaron", "Macias", "aar", "aar", certificacionestecnicas));
+        //usuarios.add(new JefedeTaller("Cristhian", "Rodriguez", "cri", "cri", certificacionestecnicas));
+        //usuarios.add(new JefedeTaller("Carlos", "Flores", "car", "car", certificacionestecnicas));
+
+        //Supervisores
+        ArrayList<String> certificacionesacademicas = new ArrayList<>();
+        certificacionesacademicas.add("Maestría en Administración de Empresas");
+        certificacionesacademicas.add("Diplomado en Contaduría Pública");
+        certificacionesacademicas.add("Certificado en Marketing");
+
+        usuarios.add(new Supervisor("Genesis", "Michelina", "gen", "gen", certificacionesacademicas));
+        //usuarios.add(new Supervisor("Gerald", "Salazar", "gel", "gel", certificacionesacademicas));
+        //usuarios.add(new Supervisor("Javier", "Dorado", "jav", "jav", certificacionesacademicas));
+
+
+        //Vehiculos
+        vehiculos.add(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, false, true, 9400.00));
+        vehiculos.add(new Automovil("Suzuki", "DRE1", 2016, Motor.Diesel, 4, true, false, 1230.00));
+        vehiculos.add(new Automovil("Chevrolet", "Familiar-Grande", 2019, Motor.Gasolina, 6, false, true, 2331.00));
+        vehiculos.add(new Tractor("Ebro", "TE52", 2010, false, Transmision.Hidraulica,23313.00));
+        vehiculos.add(new Tractor("Kubota", "TE32", 2019, true, Transmision.Hidraulica,2331.00));
+        vehiculos.add(new Tractor("Class", "TF22", 2003, false, Transmision.Mecanica, 32222.00));
+        vehiculos.add(new Camion("Iveco", "E31", 2000, Motor.Gasolina, 4, 233.12, 8910.00));
+        vehiculos.add(new Camion("Mercedez", "F91", 2009, Motor.Diesel, 8, 231.56, 3445.00));
+        vehiculos.add(new Camion("Peterbilt", "G51", 2007, Motor.Diesel, 8, 120.23, 1345.00));
+        vehiculos.add(new Motocicleta("Harley Davidson", "H4", 2019, Motor.Diesel, Categoria.Todo_Terreno, 231.00));
+        vehiculos.add(new Motocicleta("Suzuki", "B5", 2003, Motor.Gasolina, Categoria.Scotter, 700.00));
+        vehiculos.add(new Motocicleta("Kawasaki", "A7", 2010, Motor.Gasolina, Categoria.Deportiva, 690.00));
         
-    }          
+    }  
+
+  // public static void dibujos() { 
+  //   File archivo1 = new File("Dibujos\\moto1.txt");
+  //       Scanner sc = new Scanner(archivo1);
+  //       while(sc.hasNextLine()){
+  //           String line = sc.nextLine();
+  //           System.out.println(line);
+          
+  //       }  
+  //}
 }
+

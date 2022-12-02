@@ -3,17 +3,19 @@ package com.mycompany.model.Usuarios;
 import com.mycompany.model.Vehiculos.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Supervisor extends Usuario{
 
     private String tipo = "Supervisor";
     private ArrayList<Vehiculo> solicitudes = new ArrayList<>();
     private ArrayList<Cliente> clientes = new ArrayList<>();    
-    private ArrayList<String> certificaciones= new ArrayList<>();   
+    private ArrayList<String> certificacionesacademicas = new ArrayList<>();   
     
     //Constructor
-    public Supervisor(String nombre, String apellido, String usuario, String password){
+    public Supervisor(String nombre, String apellido, String usuario, String password, ArrayList<String> crtacademicas){
         super(nombre, apellido,usuario, password);         
+        this.certificacionesacademicas = crtacademicas;
     }
 
     //Método para mostar informacion del supervisor
@@ -35,8 +37,8 @@ public class Supervisor extends Usuario{
         return clientes;
     }
 
-    public ArrayList<String> getCertificaciones() {
-        return certificaciones;
+    public ArrayList<String> getCertificacionesAcademicas(){
+        return certificacionesacademicas;
     }
          
     //Métodos en uso
@@ -82,17 +84,11 @@ public class Supervisor extends Usuario{
                             opc = sc.nextLine();
                             if(opc.equals("1")){
                                 clientes.get(indice-1).agregarMensaje("Ha comprado el vehiculo: "+"\n"+solicitudes.get(indice-1).toString()+"\nPor favor, acerquese al taller para retirarlo");
-                                System.out.println("\nEl mensaje ha sido enviado al comprador");
-                                System.out.println(vehiculos.contains(solicitudes.get(indice-1)));                               
+                                System.out.println("\nLe llegará un mensaje al cliente de su compra");
+                                System.out.println("\nSe enviará la aprobación de entrega al jefe de taller");
                                 int i = vehiculos.indexOf(solicitudes.get(indice-1));
                                 vehiculos.get(i).setDisponibilidad(Estado.Solicitado);                                
-
-                                for(Usuario us : usuarios){
-                                    if(us instanceof JefedeTaller){
-                                        JefedeTaller jdt = (JefedeTaller) us;
-                                        jdt.agregarEntregas(solicitudes.get(indice-1), clientes.get(indice-1));
-                                    }
-                                }
+                                enviarVehiculo(usuarios, solicitudes.get(indice-1), clientes.get(indice-1));                                
                                 solicitudes.remove(indice-1);
                                 clientes.remove(indice-1);
                                 exit = true;
@@ -129,7 +125,19 @@ public class Supervisor extends Usuario{
         }else{
             System.out.println("\nPor ahora no tiene solicitudes de compra\n");
         }                                
-    }         
+    }      
+    public void enviarVehiculo(ArrayList<Usuario> arrayusuarios, Vehiculo vh, Cliente cl){
+        Random rnd = new Random();
+        boolean verificar = false;
+        while(!verificar){
+            int indice = rnd.nextInt(arrayusuarios.size());
+            if(arrayusuarios.get(indice).getTipo().equals("Jefe de Taller")){
+                JefedeTaller uservendedor = (JefedeTaller) arrayusuarios.get(indice);
+                uservendedor.agregarEntregas(vh, cl);
+                verificar = true;
+            }         
+        }
+    }   
 }
        
         

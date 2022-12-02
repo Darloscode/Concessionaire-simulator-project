@@ -79,3 +79,56 @@ public class Prueba {
     }
 }
 
+
+/*
+case "9":
+for(Usuario u: usuarios){
+    if(u.getTipo().equals("Vendedor")){
+        Vendedor v = (Vendedor) u;
+        System.out.println(v.getCotizaciones().size());
+    }
+}
+break;
+case "7":
+for(Vehiculo vh : vehiculos){
+    System.out.println(vh.getDisponibilidad());
+    System.out.println(vh.getMantenimiento());
+    System.out.println(vh.getEstadoMantenimiento());
+}
+break;              
+case "k":
+for(Usuario t: usuarios){
+    if(t instanceof Cliente){
+        Cliente cd = (Cliente) t;
+        System.out.println(cd.getVehiculos().size());
+        for(Vehiculo vh : cd.getVehiculos()){
+            System.out.println(vh.getDisponibilidad());
+            System.out.println(vh.getEstadoMantenimiento());
+            System.out.println(vh.getMantenimiento());
+        }
+    }
+}
+
+break;
+case "p":
+for(Usuario t: usuarios){
+    if(t instanceof Cliente){
+        Cliente cd = (Cliente) t;
+        cd.cotizacionesAprobadas(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, true, false, 940));  
+        cd.cotizacionesAprobadas(new Motocicleta("Tuczoo", "Epica", 2008, Motor.Diesel, Categoria.Deportiva, 400));                
+    }
+}
+break;
+case "l":                    
+for(Usuario a:usuarios){
+    if(a instanceof Supervisor){
+        Supervisor c = (Supervisor) a;
+        for(Vehiculo vh : c.getSolicitudes()){
+            vh.mostrarDatos();
+        }
+    }
+    System.out.println();            
+    System.out.println();
+}                    
+break;
+ */

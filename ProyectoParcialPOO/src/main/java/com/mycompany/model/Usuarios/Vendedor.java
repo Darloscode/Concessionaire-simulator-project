@@ -9,12 +9,12 @@ import com.mycompany.model.Vehiculos.Vehiculo;
 public class Vendedor extends Usuario{
 
     private String tipo = "Vendedor";
-    private int id;
+    private String id;
     private ArrayList<Vehiculo> cotizaciones = new ArrayList<>();
     private ArrayList<Cliente> clientes = new ArrayList<>();
     
     //Constructor
-    public Vendedor(String nombre, String apellido, String usuario, String password, int id){
+    public Vendedor(String nombre, String apellido, String usuario, String password, String id){
         super(nombre, apellido,usuario, password);
         this.id=id;
     }
@@ -29,6 +29,13 @@ public class Vendedor extends Usuario{
     }
     
     //Métodos en uso
+    public void consultarCotizaciones(){
+      if(cotizaciones.size()>0){
+        System.out.println("\nTiene solicitudes de cotizaciones, elija la opcion 2 para administrar\n");
+      }else{
+        System.out.println("\nPor ahora no tiene solicitudes de cotizaciones\n");
+      }
+    }
     public void consultarStock(ArrayList<Vehiculo> vehiculos){    
         System.out.println("\n*************************************");            
         for(Vehiculo vh : vehiculos){            
@@ -50,7 +57,7 @@ public class Vendedor extends Usuario{
             while(!salir){
                 for(int i=0; i<cotizaciones.size(); i++){
                     System.out.println((i+1)+". "+clientes.get(i).getNombre()+" ha solicitado una cotazación del vehiculo del siguiente vehiculo: ");
-                    System.out.println(cotizaciones.get(i).toString());                    
+                    System.out.println("--"+cotizaciones.get(i).toString());                    
                 }
                 System.out.print("\nElija una cotización para responder, escriba (s) para salir: ");
                 op = rd.nextLine();

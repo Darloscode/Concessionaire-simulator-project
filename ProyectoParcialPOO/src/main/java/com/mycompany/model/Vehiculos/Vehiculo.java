@@ -39,9 +39,6 @@ public class Vehiculo {
     public void setEstadoMantenimiento(EstadoMantenimiento estadomant){
         this.estadomant = estadomant;
     }
-
-
-
     
     public Estado getDisponibilidad(){
         return disponibilidad;
@@ -51,14 +48,11 @@ public class Vehiculo {
         this.disponibilidad = disponibilidad;
     }
 
+
+
     public Motor getMotor(){
         return mtr;
-    }
-    
-    public void setMotor(Motor mtr){
-        this.mtr = mtr;
-    }
-
+    }        
 
     public String getMarca() {
         return marca;        

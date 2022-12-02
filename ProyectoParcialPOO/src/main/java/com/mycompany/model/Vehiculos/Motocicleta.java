@@ -12,6 +12,10 @@ public class Motocicleta extends Vehiculo{
 
     public String getTipo() {
         return tipo;
+    }
+
+    public Categoria getCategoria(){
+        return ctg;
     }    
 
     @Override

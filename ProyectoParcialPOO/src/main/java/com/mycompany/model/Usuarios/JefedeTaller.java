@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import com.mycompany.model.Vehiculos.*; 
 import java.util.Scanner;
 
+
 public class JefedeTaller extends Usuario{
 
     private String tipo = "Jefe de Taller";
 
-    private ArrayList<String> CertifiacionesTecnicas = new ArrayList<>();
+    private ArrayList<String> certifiacionestecnicas = new ArrayList<>();
 
-    private ArrayList<Vehiculo> mantenimientoVehiculos = new ArrayList<>();
+    private ArrayList<Vehiculo> mantenimientovehiculos = new ArrayList<>();
     private ArrayList<Cliente> clientesmantenimiento = new ArrayList<>();
 
     private ArrayList<Vehiculo> entregarvehiculos = new ArrayList<>();
@@ -18,8 +19,9 @@ public class JefedeTaller extends Usuario{
 
              
     //Constructor
-    public JefedeTaller(String nombre, String apellido, String usuario, String password){
+    public JefedeTaller(String nombre, String apellido, String usuario, String password, ArrayList<String> crttecnicas){
         super(nombre, apellido, usuario, password);        
+        this.certifiacionestecnicas = crttecnicas;
     }
 
     //Método para mostrar informacion del jefe de taller
@@ -33,8 +35,15 @@ public class JefedeTaller extends Usuario{
         return tipo;
     }
     
+    public ArrayList<String> getCertificacionesTecnicas(){
+        return certifiacionestecnicas;
+    }
+
     public ArrayList<Vehiculo> getEntregarVehiculos(){
         return entregarvehiculos;
+    }
+    public ArrayList<Vehiculo> getMantenimientoVehiculos(){
+        return mantenimientovehiculos;
     }
         
     //Métodos en uso
@@ -44,25 +53,29 @@ public class JefedeTaller extends Usuario{
     }
 
     public void agregarMantenimientos(Vehiculo auto, Cliente cl){
-        mantenimientoVehiculos.add(auto);
+        mantenimientovehiculos.add(auto);
         clientesmantenimiento.add(cl);
     }
 
     public void verificarSolicitudes(){
         int i = 0;
-        for(Vehiculo vh : mantenimientoVehiculos){
+        for(Vehiculo vh : mantenimientovehiculos){
             if(vh.getEstadoMantenimiento()==null){
                 i++;
             }
         }
         if(i>0){
             System.out.println("\nTiene solicitudes de mantenimiento, elija la opcion 2 para admitir vehiculos a mantenimiento\n");
+        }else{
+            System.out.println("\nNo tiene solicitudes de mantenimiento\n");
         }
     }
 
     public void verificarEntregas(){
         if(entregarvehiculos.size()>0){
             System.out.println("\nTiene vehiculos por entregar, escoja la opcion 1 para entregar vehiculos\n");
+        }else{
+            System.out.println("\nNo tiene solicitudes de entrega\n");
         }
     }
        
@@ -116,17 +129,29 @@ public class JefedeTaller extends Usuario{
 
         String opc = "";
         boolean salir = false;
+                
 
-        if(mantenimientoVehiculos.size()>0){
-            for(int i=0; i<mantenimientoVehiculos.size(); i++){
-                System.out.println("\n"+(i+1)+". El cliente "+clientesmantenimiento.get(i).getNombre()+" solicita un mantenimiento "+mantenimientoVehiculos.get(i).getMantenimiento()+" del vehiculo :");
-                System.out.println("-"+mantenimientoVehiculos.get(i).toString());
+        ArrayList<Vehiculo> enespera = new ArrayList<>();
+        ArrayList<Usuario> userespera = new ArrayList<>();
 
+        for(int j=0; j<mantenimientovehiculos.size(); j++){
+            if(mantenimientovehiculos.get(j).getEstadoMantenimiento() == null){
+                enespera.add(mantenimientovehiculos.get(j));
+                userespera.add(clientesmantenimiento.get(j));
+            }
+        }        
+
+        if(enespera.size()>0){
+            for(int i=0; i<enespera.size(); i++){
+                System.out.println("\n"+(i+1)+". El cliente "+userespera.get(i).getNombre()+" solicita un mantenimiento "+enespera.get(i).getMantenimiento()+" del vehiculo :");
+                System.out.println("-"+enespera.get(i).toString());
+                salir = false;
                 while(!salir){
                     System.out.print("\n1. Aceptar\n2. Salir\nElija una opcion: ");
                     opc = sc.nextLine();
-                    if(opc.equals("1")){                                          
-                        mantenimientoVehiculos.get(i).setEstadoMantenimiento(EstadoMantenimiento.ADMI);
+                    if(opc.equals("1")){
+                        int buscar = mantenimientovehiculos.indexOf(enespera.get(i));
+                        mantenimientovehiculos.get(buscar).setEstadoMantenimiento(EstadoMantenimiento.Admitido);
                         salir = true;
                     }else if(opc.equals("2")){
                         System.out.println("\nSaliendo de mantenimiento de vehiculos\n");
@@ -135,7 +160,7 @@ public class JefedeTaller extends Usuario{
                         System.out.println("\nElija una opcion correcta\n");
                     }
                 }
-            }
+            }                      
         }else{
             System.out.println("\nNo tiene solicitudes de mantenimiento\n");
         }
@@ -148,38 +173,49 @@ public class JefedeTaller extends Usuario{
         String adm;
         boolean salir = false;
 
-        if(mantenimientoVehiculos.size()>0){            
+        
+        ArrayList<Vehiculo> vhman = new ArrayList<>();
+        ArrayList<Usuario> userman = new ArrayList<>();
+
+        for(int j=0; j<mantenimientovehiculos.size(); j++){
+            if(mantenimientovehiculos.get(j).getEstadoMantenimiento() == EstadoMantenimiento.Admitido){
+                vhman.add(mantenimientovehiculos.get(j));
+                userman.add(clientesmantenimiento.get(j));
+            }
+        }    
+
+        if(vhman.size()>0){            
             while(!salir){
                 int i = 1;
-                for(Vehiculo vh : mantenimientoVehiculos){
+                for(Vehiculo vh : mantenimientovehiculos){
                     System.out.println("\n"+i+". "+vh.toString()+" - Designado como: "+vh.getEstadoMantenimiento());
                     i++;
                 }
-                System.out.print("\nElija un vehiculo para cambiar estado de mantenimiento: ");
+                System.out.print("\nElija un vehiculo para cambiar estado de mantenimiento o esciba (s) para salir: ");
                 opc = sc.nextLine();
 
                 if(isNumeric(opc)){                    
                     int indice = Integer.parseInt(opc);
-                    if((indice>0) & (indice<=mantenimientoVehiculos.size())){
+                    if((indice>0) & (indice<=mantenimientovehiculos.size())){
                         boolean exit = false;                        
                         while(!exit){
                             System.out.print("\n1. En reparacion\n2. En etapa de prueba\n3. Dar de alta\n4. Salir\nElija una opcion: ");
                             adm = sc.nextLine();
                             if(adm.equals("1")){
-                                mantenimientoVehiculos.get(indice-1).setEstadoMantenimiento(EstadoMantenimiento.Reparacion);
+                                mantenimientovehiculos.get(indice-1).setEstadoMantenimiento(EstadoMantenimiento.En_Reparacion);
                                 System.out.println("\nEl vehiculo esta siendo revisado\n");
                                 exit = true;
                             }else if(adm.equals("2")){
-                                mantenimientoVehiculos.get(indice-1).setEstadoMantenimiento(EstadoMantenimiento.Prueba);
+                                mantenimientovehiculos.get(indice-1).setEstadoMantenimiento(EstadoMantenimiento.En_Etapa_De_Prueba);
                                 System.out.println("\nRevisando correcto funcionamiento del vehiculo\n");
                                 exit = true;
                                 
                             }else if(adm.equals("3")){
-                                mantenimientoVehiculos.get(indice-1).setMantenimiento(Mantenimiento.Ninguno);
-                                clientesmantenimiento.get(indice-1).agregarMensaje("Su vehiculo ha sido reparado, puede acercarse a retirar su vehiculo: \n"+mantenimientoVehiculos.get(indice-1).mostrarDatos());
-                                mantenimientoVehiculos.get(indice-1).setEstadoMantenimiento(null);
+                                mantenimientovehiculos.get(indice-1).setMantenimiento(Mantenimiento.Ninguno);
+                                clientesmantenimiento.get(indice-1).agregarMensaje("Su vehiculo ha sido reparado, puede acercarse a retirar su vehiculo: \n"+mantenimientovehiculos.get(indice-1).mostrarDatos());
+                                mantenimientovehiculos.get(indice-1).setEstadoMantenimiento(null);
                                 clientesmantenimiento.remove(indice-1);
-                                mantenimientoVehiculos.remove(indice-1);
+                                mantenimientovehiculos.remove(indice-1);
                                 exit = true;
                                 salir = true;
                             }else if(adm.equals("4")){                                
@@ -199,6 +235,21 @@ public class JefedeTaller extends Usuario{
         }else{
             System.out.println("\nNo tiene vehiculos en mantenimiento\n");
         }
+    }
+
+    public void consultarReparacion(ArrayList<Usuario> usuarios){
+        int i = 0;
+        for(Usuario us : usuarios){
+            if(us instanceof JefedeTaller){
+                JefedeTaller jdt = (JefedeTaller) us;
+                for(Vehiculo vh : jdt.getMantenimientoVehiculos()){
+                    if(vh.getEstadoMantenimiento()==EstadoMantenimiento.En_Reparacion){
+                        i++;
+                    }
+                }
+            }
+        }
+        System.out.println("\nEn la concesionaria hay "+i+" vehiculos que se encuentran en REPARACION\n");
     }
 
 }

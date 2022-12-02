@@ -6,8 +6,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 import com.mycompany.model.Vehiculos.Estado;
+import com.mycompany.model.Vehiculos.EstadoMantenimiento;
 import com.mycompany.model.Vehiculos.Mantenimiento;
 import com.mycompany.model.Vehiculos.Vehiculo;
+
 
 public class Cliente extends Usuario{ 
 
@@ -79,27 +81,23 @@ public class Cliente extends Usuario{
             for(Vehiculo vh : cotizaciones){
                 System.out.println("\n"+i+". Especificaciones del vehiculo:");
                 System.out.println(vh.mostrarDatos());
+              
+          
                 salir = false;
                 while(!salir){
                     System.out.print("\n¿Quiere comprar el vehiculo?\n1. Si\n2. No\nElija una opcion: ");
                     op = rd.nextLine();
-                    switch(op){
-                        case "1":
-                            Vehiculo compra = solicitarCompra(vh, arreglovh);
-                            enviarCompra(compra, usuarios, usercliente);
-                            System.out.println("\nSu solicitud de compra ha sido enviada\n");
-                            salir = true;
-                            break;
-    
-                        case "2":
-                            System.out.println("\nEl vehiculo sera eliminado de su lista de cotizaciones\n");                            
-                            salir = true;
-                            break;
-           
-                        default:
-                            System.out.println("\nIngrese una opción valida\n");
-                    }
-                    
+                    if(op.equals("1")){
+                        Vehiculo compra = solicitarCompra(vh, arreglovh);
+                        enviarCompra(compra, usuarios, usercliente);
+                        System.out.println("\nSu solicitud de compra ha sido enviada\n");
+                        salir = true;                                
+                    }else if(op.equals("2")){
+                        System.out.println("\nEl vehiculo sera eliminado de su lista de cotizaciones\n");                            
+                        salir = true;
+                    }else{
+                        System.out.println("\nIngrese una opción valida\n");
+                    }                    
                 }
             }
             cotizaciones.clear();                               
@@ -140,8 +138,7 @@ public class Cliente extends Usuario{
         Scanner rd = new Scanner(System.in);
         ArrayList<Vehiculo> mantenimiento = new ArrayList<>();
         for(Vehiculo vh : vehiculos){
-            if(vh.getMantenimiento()!=Mantenimiento.Ninguno){
-                System.out.println(vh.getMantenimiento());
+            if(vh.getEstadoMantenimiento()!=null){
                 mantenimiento.add(vh);
             }
         }
@@ -171,7 +168,7 @@ public class Cliente extends Usuario{
                 }
             }
         }else{
-            System.out.println("\nNo tiene vehiculos en mantenimiento\n");
+            System.out.println("\nNo tiene vehiculos en mantenimiento admitidos\n");
         }        
     }
 
@@ -206,7 +203,7 @@ public class Cliente extends Usuario{
                                     System.out.println("\nEl valor a pagar por mantenimiento preventido es de: $"+total);
                                     boolean ext = false;
                                     while(!ext){
-                                        System.out.print("\n1. Aceptar\n2. Salir\nElija una opcion: ");
+                                        System.out.print("\n1. Aceptar\n2. Salir o Rechazar\nElija una opcion: ");
                                         String op = rd.nextLine();
                                         if(op.equals("1")){
                                             System.out.println("\nSu solicitud esta siendo enviada....");
@@ -216,6 +213,7 @@ public class Cliente extends Usuario{
                                             System.out.println("\nSolicitud ha sido envida con exito!!");
                                             salir = true;
                                             ext = true;
+                                            exit = true;
                                         }else if(op.equals("2")){
                                             System.out.println("\nHa cancelado la solicitud\n");                                                                            
                                             ext = true;
@@ -240,7 +238,7 @@ public class Cliente extends Usuario{
                             }   
                         }
                     }else{
-                        System.out.println("\nSu vehiculo ya ha sido adminitido en mantenimiento\n");
+                        System.out.println("\nUsted ya ha solicitado mantenimiento a su vehiculo\n");
                     }                                               
                 }else{
                     System.out.println("\nElija un numero de la lista de sus vehiculos\n");
@@ -273,26 +271,34 @@ public class Cliente extends Usuario{
             if(arreglovehiculos.get(i).getDisponibilidad().equals(Estado.Disponible)){
                 System.out.println((i+1)+". Marca: "+arreglovehiculos.get(i).getMarca()+", Modelo: "+arreglovehiculos.get(i).getModelo()+", Año: "+arreglovehiculos.get(i).getYear());                
             }
-
-        }        
+        }    
+        System.out.print("\n*****************************************************\n");            
     }
 
     public void enviarCompra(Vehiculo vh, ArrayList<Usuario> arrayusuarios, Cliente cl){   // envia desde el main la compra hacia l supervisor
-        for(Usuario us : arrayusuarios){
-            if(us.getTipo().equals("Supervisor")){
-                Supervisor spvisor = (Supervisor) us;                
-                spvisor.agregarSolicitud(vh, cl);
-            }
-        }
+        Random rnd = new Random();
+        boolean verificar = false;
+        while(!verificar){
+            int indice = rnd.nextInt(arrayusuarios.size());
+            if(arrayusuarios.get(indice).getTipo().equals("Supervisor")){                                
+                Supervisor spvisor = (Supervisor)arrayusuarios.get(indice);
+                spvisor.agregarSolicitud(vh, cl);                
+                verificar = true;
+            }         
+        }        
     }
 
     public void enviarMantenimiento(Vehiculo vh, ArrayList<Usuario> arrayusuarios, Cliente cl){
-        for(Usuario us : arrayusuarios){
-            if(us instanceof JefedeTaller){
-                JefedeTaller jft = (JefedeTaller) us;
-                jft.agregarMantenimientos(vh, cl);
-            }
-        }
+        Random rnd = new Random();
+        boolean verificar = false;
+        while(!verificar){
+            int indice = rnd.nextInt(arrayusuarios.size());
+            if(arrayusuarios.get(indice).getTipo().equals("Jefe de Taller")){                                
+                JefedeTaller jdt = (JefedeTaller) arrayusuarios.get(indice);
+                jdt.agregarMantenimientos(vh, cl);
+                verificar = true;
+            }         
+        }        
     }
 
     public Vehiculo solicitarCompra(Vehiculo vh, ArrayList<Vehiculo> arreglo){

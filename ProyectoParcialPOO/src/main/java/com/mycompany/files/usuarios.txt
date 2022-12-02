@@ -1,5 +1,0 @@
-Usuarios
-Cliente,Manuel Carlos,Cabezas Guerreo,ca,ca,0912121116,Supervisor,1230
-Vendedor,Carlos Manuel,Cabezas Esterlla,ta,ta,849
-Supervisor,Marcos Jair,Estrada Napa,tr,tr
-Jefe Taller,Jair Cristhian,Lopez Napa,JLopez,Nap12Cr

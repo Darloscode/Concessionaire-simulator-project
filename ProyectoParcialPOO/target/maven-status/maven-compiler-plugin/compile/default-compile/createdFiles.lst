@@ -1,0 +1,17 @@
+com\mycompany\proyectoparcialpoo\model\usuarios\Cliente.class
+com\mycompany\proyectoparcialpoo\model\usuarios\Supervisor.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\Automovil.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\Transmision.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\EstadoMantenimiento.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\Motor.class
+com\mycompany\proyectoparcialpoo\model\usuarios\Vendedor.class
+com\mycompany\proyectoparcialpoo\ProyectoParcialPOO.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\Mantenimiento.class
+com\mycompany\proyectoparcialpoo\model\usuarios\JefedeTaller.class
+com\mycompany\proyectoparcialpoo\model\usuarios\Usuario.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\Tractor.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\Estado.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\Motocicleta.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\Vehiculo.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\Camion.class
+com\mycompany\proyectoparcialpoo\model\vehiculos\Categoria.class

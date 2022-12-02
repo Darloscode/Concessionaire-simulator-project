@@ -1,32 +1,34 @@
 package com.mycompany.proyectoparcialpoo;
 
-import java.io.*;
+import com.mycompany.proyectoparcialpoo.model.usuarios.*;
+import com.mycompany.proyectoparcialpoo.model.vehiculos.*;
+
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
-import java.util.random.*;
 
-
-import com.mycompany.model.Usuarios.*;
-import com.mycompany.model.Vehiculos.*;
+/**
+ * @author Aaron Macias Catagua
+ * @author Cristhian Rodriguez Villegas
+ * @author Carlos Flores Gonzalez
+ */
 
 public class ProyectoParcialPOO {
-     
+    
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
     public static ArrayList<Vehiculo> vehiculos = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
+        
         inicializarSistema();     
 
         boolean salir = false;
-        boolean exit = false;
+        boolean exit;
 
         int user = -1;
 
-        String opcion = "", usuario, password, tipo = "", op ="";
-
-        boolean cotizar=false;
+        String opcion, usuario, password, tipo, op;
+        
 
         while(!salir){
             System.out.println("\n************************************************");   
@@ -57,7 +59,7 @@ public class ProyectoParcialPOO {
                     
                     if(user != -1){                        
                         Usuario cl = usuarios.get(user);                    
-                        Cliente usercliente = (Cliente) cl;                                                  
+                        Cliente usercliente = (Cliente) cl;                                                   
 
                         op = "";                        
                         System.out.println("\n------------------------------------------------------");
@@ -78,7 +80,7 @@ public class ProyectoParcialPOO {
                                 System.out.print("\n1. Consultar Stock\n2. Solicitar cotizacion\n3. Solicitar un mantenimiento\n4. Consultar mantenimiento\n5. Salir\n \nElija una opcion: ");
                                 op = entrada.nextLine();
                                 if(op.equals("1")){
-                                    usercliente.consultarStock(vehiculos);    // llama a la lista de vehiculos (STOCK)                                      
+                                    usercliente.consultarStock(vehiculos);
                                 }
                                 else if(op.equals("2")){
                                     usercliente.solicitarCotizacion(vehiculos, usuarios, usercliente);
@@ -244,14 +246,7 @@ public class ProyectoParcialPOO {
                 case "5":
                     salir = true;
                     break;
-
-                case "6":
-                    Cliente cl = (Cliente) usuarios.get(0);
-                    cl.agregarCompra(new Automovil("Chevrolet", "Familiar", 2012, Motor.Gasolina, 4, false, true, 9400.00));
-                    cl.agregarCompra(new Automovil("Chevrolet", "Familiar-Grande", 2019, Motor.Gasolina, 6, false, true, 2331.00));
-                    cl.agregarCompra(new Automovil("Suzuki", "DRE1", 2016, Motor.Diesel, 4, true, false, 1230.00));
-                    cl.agregarCompra(new Tractor("Ebro", "TE52", 2010, false, Transmision.Hidraulica,23313.00));                    
-                    break;
+                
                 default:
                     System.out.println("\nIngrese una opción valida\n");
                 
@@ -259,15 +254,8 @@ public class ProyectoParcialPOO {
         }
     }  
 
-    public static boolean isNumeric(String cadena){
-        try {
-            Integer.parseInt(cadena);
-            return true;
-        } catch (NumberFormatException nfe){
-            return false;
-        }
-    }
-
+    //Método que realiza una validación para verificar si los datos propocionados son los correcto
+    //y tambien si el tipo de usuario correcto a las credenciales ingresadas
     private static int login(String user, String password, String tipo){        
         Scanner rd = new Scanner(System.in);        
         int verificar=verificarLogin(user, password, tipo, usuarios);
@@ -278,7 +266,7 @@ public class ProyectoParcialPOO {
             System.out.println("------------------------------\n");
             return verificar;
         }else{
-            while((verificar == -1)){
+            while(verificar == -1){
                 String op="";
                 System.out.println("\n¿Quiere volver a intentarlo?");
                 System.out.println("1. Reintentar");
@@ -311,6 +299,7 @@ public class ProyectoParcialPOO {
         return -1;
     }
 
+    //Método que retornará el indice del usuario que desea iniciar sesión
     private static int verificarLogin(String user, String passw, String tipo, ArrayList<Usuario> usuarios){
         for(Usuario u : usuarios){
             if((u.getUsuario().equals(user)) & (u.getPassword().equals(passw)) & (u.getTipo().equals(tipo))){                        
@@ -322,6 +311,11 @@ public class ProyectoParcialPOO {
     }
 
     private static void inicializarSistema(){
+        //El programa asigna de forma aleatoria un vendedor, supervisor y jefe de taller cuando 
+        //se realiza una cotización, una compra o entrega de vehiculo, por ende se ha comentado algunos
+        //usuarios para mayor facilidad de sustentación, cabe recalcar que agregar mas usuarios no afecta
+        //el funcionamiento del programa.
+        
         //Clientes
         usuarios.add(new Cliente("Marcos", "Rodriguez", "mar", "mar", "0123456789", "Administrador de empresas", 980));
         usuarios.add(new Cliente("Jose", "Solis", "jos", "jos", "0987654321", "Jefe de tienda", 1400));        
@@ -353,8 +347,7 @@ public class ProyectoParcialPOO {
         certificacionesacademicas.add("Certificado en Marketing");
 
         usuarios.add(new Supervisor("Genesis", "Michelina", "gen", "gen", certificacionesacademicas));
-        //usuarios.add(new Supervisor("Gerald", "Salazar", "gel", "gel", certificacionesacademicas));
-        //usuarios.add(new Supervisor("Javier", "Dorado", "jav", "jav", certificacionesacademicas));
+        //usuarios.add(new Supervisor("Gerald", "Salazar", "gel", "gel", certificacionesacademicas));        
 
 
         //Vehiculos
@@ -371,16 +364,5 @@ public class ProyectoParcialPOO {
         vehiculos.add(new Motocicleta("Suzuki", "B5", 2003, Motor.Gasolina, Categoria.Scotter, 700.00));
         vehiculos.add(new Motocicleta("Kawasaki", "A7", 2010, Motor.Gasolina, Categoria.Deportiva, 690.00));
         
-    }  
-
-  // public static void dibujos() { 
-  //   File archivo1 = new File("Dibujos\\moto1.txt");
-  //       Scanner sc = new Scanner(archivo1);
-  //       while(sc.hasNextLine()){
-  //           String line = sc.nextLine();
-  //           System.out.println(line);
-          
-  //       }  
-  //}
+    }                                    
 }
-
